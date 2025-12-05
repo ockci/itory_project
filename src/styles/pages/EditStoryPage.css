@@ -1,0 +1,820 @@
+/* ============================================
+   🌳 아이토리 - 동화 편집 페이지 CSS (New Design System)
+   전체 화면 활용 레이아웃 (태블릿 최적화)
+   ============================================ */
+
+.edit-story-page {
+  min-height: 100vh;
+  background: transparent;
+  /* Global background from index.css */
+  font-family: var(--font-family);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   ☁️ 배경 구름 장식
+   ============================================ */
+.edit-story-page__bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.edit-story-page__cloud {
+  position: absolute;
+  background: white;
+  border-radius: 100px;
+  filter: blur(4px);
+  opacity: 0.85;
+  animation: floatCloud 25s infinite linear;
+}
+
+.edit-story-page__cloud::before,
+.edit-story-page__cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+@keyframes floatCloud {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.edit-story-page__cloud--1 {
+  width: 140px;
+  height: 55px;
+  top: 8%;
+  left: 5%;
+  animation-duration: 28s;
+}
+
+.edit-story-page__cloud--1::before {
+  width: 65px;
+  height: 65px;
+  top: -32px;
+  left: 24px;
+}
+
+.edit-story-page__cloud--1::after {
+  width: 50px;
+  height: 50px;
+  top: -22px;
+  left: 60px;
+}
+
+.edit-story-page__cloud--2 {
+  width: 160px;
+  height: 60px;
+  top: 12%;
+  right: 8%;
+  animation-duration: 32s;
+  animation-delay: -5s;
+}
+
+.edit-story-page__cloud--2::before {
+  width: 72px;
+  height: 72px;
+  top: -36px;
+  left: 30px;
+}
+
+.edit-story-page__cloud--2::after {
+  width: 55px;
+  height: 55px;
+  top: -26px;
+  left: 75px;
+}
+
+.edit-story-page__cloud--3 {
+  width: 110px;
+  height: 42px;
+  top: 25%;
+  left: 12%;
+  animation-duration: 24s;
+  animation-delay: -10s;
+}
+
+.edit-story-page__cloud--3::before {
+  width: 48px;
+  height: 48px;
+  top: -24px;
+  left: 18px;
+}
+
+.edit-story-page__cloud--3::after {
+  width: 38px;
+  height: 38px;
+  top: -16px;
+  left: 46px;
+}
+
+.edit-story-page__cloud--4 {
+  width: 120px;
+  height: 46px;
+  top: 20%;
+  right: 15%;
+  animation-duration: 30s;
+  animation-delay: -15s;
+}
+
+.edit-story-page__cloud--4::before {
+  width: 52px;
+  height: 52px;
+  top: -26px;
+  left: 20px;
+}
+
+.edit-story-page__cloud--4::after {
+  width: 40px;
+  height: 40px;
+  top: -18px;
+  left: 50px;
+}
+
+/* ============================================
+   📦 메인 콘텐츠 - 전체 화면
+   ============================================ */
+.edit-story-page__main--fullscreen {
+  position: relative;
+  z-index: 1;
+  padding: 16px 24px;
+  padding-bottom: 140px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
+}
+
+/* ============================================
+   📊 미니 진행 표시 (상단)
+   ============================================ */
+.edit-story-page__mini-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px 24px;
+  background: white;
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-story-page__mini-step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edit-story-page__mini-step:not(:last-child)::after {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: #E0D8CC;
+  margin-left: 6px;
+}
+
+.edit-story-page__mini-step.completed::after {
+  background: #8BC34A;
+}
+
+.edit-story-page__mini-step.active::after {
+  background: var(--color-primary);
+}
+
+.edit-story-page__mini-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #E8E0D4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.edit-story-page__mini-step.active .edit-story-page__mini-dot {
+  background: var(--gradient-primary);
+  box-shadow: 0 3px 10px rgba(245, 166, 35, 0.4);
+}
+
+.edit-story-page__mini-step.completed .edit-story-page__mini-dot {
+  background: linear-gradient(135deg, #8BC34A 0%, #7CB342 100%);
+  color: white;
+}
+
+.edit-story-page__mini-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-tertiary);
+}
+
+.edit-story-page__mini-step.active .edit-story-page__mini-label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-black);
+}
+
+.edit-story-page__mini-step.completed .edit-story-page__mini-label {
+  color: #7CB342;
+}
+
+/* ============================================
+   🎬 영상 영역 - 전체 폭
+   ============================================ */
+.edit-story-page__fullscreen-video {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+.edit-story-page__video-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #FFF5E1 0%, #FFE4C4 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  overflow: hidden;
+  border: 4px solid white;
+}
+
+.edit-story-page__video-playing,
+.edit-story-page__video-complete,
+.edit-story-page__video-ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.edit-story-page__video-emoji {
+  font-size: 120px;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+}
+
+.edit-story-page__video-status {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.edit-story-page__video-ready-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.edit-story-page__complete-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.edit-story-page__complete-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 로딩 */
+.edit-story-page__loading {
+  text-align: center;
+}
+
+.edit-story-page__loading-emoji {
+  font-size: 100px;
+  margin-bottom: 24px;
+  animation: pulse 1.5s infinite;
+}
+
+.edit-story-page__loading-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.edit-story-page__loading-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin-bottom: 28px;
+}
+
+.edit-story-page__loading-bar {
+  width: 320px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.edit-story-page__loading-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.edit-story-page__loading-percent {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* ============================================
+   📖 줄거리 텍스트
+   ============================================ */
+.edit-story-page__story-text {
+  width: 100%;
+  padding: 20px 28px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  margin-bottom: 16px;
+  border: 2px solid white;
+}
+
+.edit-story-page__story-label {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.edit-story-page__story-text p {
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ============================================
+   🔘 하단 버튼
+   ============================================ */
+.edit-story-page__bottom-action {
+  padding: 16px 0;
+  width: 100%;
+}
+
+.edit-story-page__big-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 22px 40px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--color-primary-dark), var(--shadow-lg);
+  transition: var(--transition-base);
+}
+
+.edit-story-page__big-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 var(--color-primary-dark), 0 16px 40px rgba(245, 166, 35, 0.45);
+}
+
+.edit-story-page__big-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 var(--color-primary-dark), var(--shadow-sm);
+}
+
+/* ============================================
+   💡 힌트
+   ============================================ */
+.edit-story-page__hint {
+  text-align: center;
+  padding: 16px;
+}
+
+.edit-story-page__hint p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   ❓ 질문 카드 (선택 화면)
+   ============================================ */
+.edit-story-page__question-card {
+  width: 100%;
+  margin-bottom: 32px;
+  padding: 32px 40px;
+  background: white;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  border: 4px solid white;
+}
+
+.edit-story-page__stage-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.edit-story-page__question-text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ============================================
+   🎯 선택지 영역
+   ============================================ */
+.edit-story-page__choice-area {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-story-page__choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.edit-story-page__choice-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  text-align: center;
+  border: 3px solid transparent;
+  cursor: pointer;
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  transition: var(--transition-base);
+}
+
+.edit-story-page__choice-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+}
+
+.edit-story-page__choice-card:active {
+  transform: translateY(2px);
+  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
+}
+
+.edit-story-page__choice-icon {
+  font-size: 72px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.edit-story-page__choice-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.edit-story-page__choice-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   ✏️ 직접 쓰기 버튼
+   ============================================ */
+.edit-story-page__custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 32px;
+  background: white;
+  border: 2px dashed #8BC34A;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: #7CB342;
+  cursor: pointer;
+  transition: var(--transition-base);
+  margin: 0 auto;
+}
+
+.edit-story-page__custom-btn:hover {
+  background: #F5FFF0;
+  border-style: solid;
+}
+
+/* ============================================
+   ✏️ 직접 쓰기 모드
+   ============================================ */
+.edit-story-page__custom-area {
+  width: 100%;
+  flex: 1;
+}
+
+.edit-story-page__custom-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  border: 4px solid white;
+}
+
+.edit-story-page__custom-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #7CB342;
+  margin-bottom: 20px;
+}
+
+.edit-story-page__custom-input {
+  width: 100%;
+  height: 160px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border);
+  font-size: var(--font-size-lg);
+  font-family: inherit;
+  resize: none;
+  margin-bottom: 20px;
+  background: #FAFAFA;
+}
+
+.edit-story-page__custom-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.15);
+}
+
+.edit-story-page__custom-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.edit-story-page__custom-cancel {
+  flex: 1;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: #F0EBE3;
+  border: none;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.edit-story-page__custom-cancel:hover {
+  background: #E8E0D4;
+}
+
+.edit-story-page__custom-submit {
+  flex: 2;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  border: none;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--color-primary-dark);
+  transition: var(--transition-base);
+}
+
+.edit-story-page__custom-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--color-primary-dark);
+}
+
+.edit-story-page__custom-submit:disabled {
+  background: var(--color-text-tertiary);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================
+   🎞️ 애니메이션
+   ============================================ */
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ============================================
+   🌳 하단 풍경 장식
+   ============================================ */
+.edit-story-page__landscape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.edit-story-page__grass {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  right: -5%;
+  height: 70px;
+  background: linear-gradient(180deg, #8BC34A 0%, #7CB342 50%, #689F38 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* 나무 */
+.edit-story-page__tree {
+  position: absolute;
+  bottom: 55px;
+}
+
+.edit-story-page__tree::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 28px;
+  background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
+  border-radius: 4px;
+}
+
+.edit-story-page__tree::after {
+  content: '';
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(180deg, #81C784 0%, #66BB6A 50%, #4CAF50 100%);
+  border-radius: 50%;
+  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-story-page__tree--1 {
+  left: 5%;
+}
+
+.edit-story-page__tree--2 {
+  right: 8%;
+}
+
+.edit-story-page__tree--2::after {
+  width: 48px;
+  height: 48px;
+  bottom: 20px;
+}
+
+.edit-story-page__tree--2::before {
+  height: 24px;
+  width: 12px;
+}
+
+.edit-story-page__tree--3 {
+  left: 15%;
+}
+
+.edit-story-page__tree--3::after {
+  width: 42px;
+  height: 42px;
+  bottom: 18px;
+}
+
+.edit-story-page__tree--3::before {
+  height: 22px;
+  width: 10px;
+}
+
+/* 집 */
+.edit-story-page__house {
+  position: absolute;
+  bottom: 55px;
+  right: 20%;
+  width: 50px;
+  height: 40px;
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFECB3 100%);
+  border-radius: 4px;
+  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.edit-story-page__house::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 31px solid transparent;
+  border-right: 31px solid transparent;
+  border-bottom: 28px solid #FF8A65;
+}
+
+.edit-story-page__house::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 20px;
+  background: #8D6E63;
+  border-radius: 2px 2px 0 0;
+}
+
+.edit-story-page__house-window {
+  position: absolute;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background: #81D4FA;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.edit-story-page__house-window--left {
+  left: 6px;
+}
+
+.edit-story-page__house-window--right {
+  right: 6px;
+}
+
+/* 덤불 */
+.edit-story-page__bush {
+  position: absolute;
+  bottom: 55px;
+  background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-story-page__bush--1 {
+  left: 25%;
+  width: 40px;
+  height: 30px;
+}
+
+.edit-story-page__bush--2 {
+  right: 28%;
+  width: 35px;
+  height: 25px;
+}

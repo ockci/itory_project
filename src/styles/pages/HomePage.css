@@ -1,0 +1,545 @@
+/* ============================================
+   🌳 아이토리 - Home Page CSS (New Design System)
+   ============================================ */
+
+/* ============================================
+   🌈 베이스 & 배경
+   ============================================ */
+.home-page {
+  min-height: 100vh;
+  /* 배경은 index.css의 body에서 전역으로 관리되므로 투명하게 설정하거나 생략 가능 */
+  background: transparent;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   ☁️ 배경 구름 장식 (애니메이션 추가)
+   ============================================ */
+.home-page__bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.home-page__cloud {
+  position: absolute;
+  background: white;
+  border-radius: 100px;
+  opacity: 0.8;
+  filter: blur(4px);
+  animation: floatCloud 20s infinite linear;
+}
+
+.home-page__cloud::before,
+.home-page__cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+@keyframes floatCloud {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.home-page__cloud--1 {
+  width: 140px;
+  height: 60px;
+  top: 10%;
+  left: 5%;
+  animation-duration: 25s;
+}
+
+.home-page__cloud--1::before {
+  width: 70px;
+  height: 70px;
+  top: -35px;
+  left: 25px;
+}
+
+.home-page__cloud--1::after {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  left: 65px;
+}
+
+.home-page__cloud--2 {
+  width: 160px;
+  height: 70px;
+  top: 15%;
+  right: 8%;
+  animation-duration: 30s;
+  animation-delay: -5s;
+}
+
+.home-page__cloud--2::before {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  left: 30px;
+}
+
+.home-page__cloud--2::after {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 80px;
+}
+
+.home-page__cloud--3 {
+  width: 120px;
+  height: 50px;
+  top: 25%;
+  left: 15%;
+  animation-duration: 28s;
+  animation-delay: -10s;
+}
+
+.home-page__cloud--3::before {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 20px;
+}
+
+.home-page__cloud--3::after {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 50px;
+}
+
+/* ============================================
+   📦 메인 콘텐츠
+   ============================================ */
+.home-page__main {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--spacing-xl);
+  padding-bottom: 200px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   👋 상단 섹션 (환영 + 사용량)
+   ============================================ */
+.home-page__top-section {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) 0 var(--spacing-2xl);
+  flex-wrap: wrap;
+}
+
+/* 환영 카드 (Clay Style) */
+.home-page__welcome-card {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  background: white;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  border: 4px solid white;
+  transition: var(--transition-base);
+}
+
+.home-page__welcome-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+}
+
+.home-page__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  flex-shrink: 0;
+  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.1);
+  border: 4px solid white;
+}
+
+.home-page__welcome-text {
+  text-align: left;
+}
+
+.home-page__greeting {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.home-page__sub-greeting {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* 사용량 카드 (Clay Style) */
+.home-page__usage-card {
+  flex: 0 0 auto;
+  min-width: 280px;
+  background: white;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  border: 4px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-page__usage-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.home-page__usage-bar {
+  width: 100%;
+  height: 14px;
+  background: #F0F0F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.home-page__usage-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.home-page__usage-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-bold);
+  text-align: right;
+}
+
+.home-page__usage-text strong {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-black);
+}
+
+/* ============================================
+   🎴 카드 그리드 - 이미지 위 + 텍스트 아래 연결
+   ============================================ */
+.home-page__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.home-page__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  border: 4px solid white;
+  cursor: pointer;
+  overflow: hidden;
+  background: white;
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  transition: var(--transition-base);
+  position: relative;
+}
+
+.home-page__card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  z-index: 10;
+}
+
+.home-page__card:active {
+  transform: translateY(-4px) scale(0.98);
+}
+
+/* 상단: 이미지 영역 */
+.home-page__card-image-area {
+  width: 100%;
+  height: 220px;
+  background: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-page__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.home-page__card:hover .home-page__card-image {
+  transform: scale(1.1);
+}
+
+/* 하단: 텍스트 영역 */
+.home-page__card-text-area {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  text-align: center;
+  background: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-page__card-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.home-page__card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.home-page__card-count {
+  margin-top: auto;
+  padding: 6px 16px;
+  background: var(--color-bg-base);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-tertiary);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   📖 가이드 버튼
+   ============================================ */
+.home-page__guide-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.home-page__guide-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: white;
+  border: 4px solid white;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  transition: var(--transition-base);
+}
+
+.home-page__guide-btn:hover {
+  transform: translateY(-4px);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+}
+
+.home-page__guide-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  box-shadow: 0 4px 8px rgba(255, 159, 77, 0.3);
+}
+
+/* ============================================
+   🌳 하단 풍경 장식 (색감 조정)
+   ============================================ */
+.home-page__landscape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-page__grass {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  right: -5%;
+  height: 100px;
+  background: linear-gradient(180deg, #B2E0A2 0%, #9CCC65 100%);
+  /* Softer Green */
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* 나무, 집 등 요소들은 기존 구조 유지하되 색감만 부드럽게 */
+.home-page__tree-top {
+  background: linear-gradient(180deg, #C5E1A5 0%, #AED581 100%);
+  box-shadow: inset -4px -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.home-page__tree-trunk {
+  background: linear-gradient(90deg, #D7CCC8 0%, #BCAAA4 100%);
+}
+
+.home-page__house-roof {
+  border-bottom-color: #FFAB91;
+  /* Softer Orange */
+}
+
+.home-page__house-roof::after {
+  background: #FFCCBC;
+}
+
+.home-page__house-body {
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFE0B2 100%);
+}
+
+/* ============================================
+   📱 반응형 디자인 (Mobile First Approach 고려)
+   ============================================ */
+
+/* Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .home-page__main {
+    padding: 0 var(--spacing-lg);
+    padding-bottom: 180px;
+  }
+
+  .home-page__cards {
+    gap: var(--spacing-lg);
+  }
+
+  .home-page__card-image-area {
+    height: 180px;
+  }
+}
+
+/* Mobile Large (max-width: 768px) */
+@media (max-width: 768px) {
+  .home-page__top-section {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+  }
+
+  .home-page__welcome-card,
+  .home-page__usage-card {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .home-page__cards {
+    grid-template-columns: 1fr;
+    /* 1열로 변경 */
+    gap: var(--spacing-lg);
+  }
+
+  /* 모바일에서 카드 가로 배치 (이미지 왼쪽, 텍스트 오른쪽) */
+  .home-page__card {
+    flex-direction: row;
+    align-items: stretch;
+    height: 140px;
+  }
+
+  .home-page__card-image-area {
+    width: 140px;
+    height: 100%;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+
+  .home-page__card-text-area {
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--spacing-md);
+    justify-content: center;
+  }
+
+  .home-page__card-count {
+    margin-top: var(--spacing-xs);
+  }
+
+  .home-page__guide-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Mobile Small (max-width: 480px) */
+@media (max-width: 480px) {
+  .home-page__main {
+    padding: 0 var(--spacing-md);
+    padding-bottom: 160px;
+  }
+
+  .home-page__welcome-card {
+    padding: var(--spacing-md);
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .home-page__welcome-text {
+    text-align: center;
+  }
+
+  .home-page__card {
+    height: auto;
+    flex-direction: column;
+    /* 다시 세로 배치 (너무 좁아서) */
+  }
+
+  .home-page__card-image-area {
+    width: 100%;
+    height: 160px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .home-page__card-text-area {
+    align-items: center;
+    text-align: center;
+  }
+}
