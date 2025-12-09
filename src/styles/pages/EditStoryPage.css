@@ -1,12 +1,10 @@
 /* ============================================
-   🌳 아이토리 - 동화 편집 페이지 CSS (New Design System)
-   전체 화면 활용 레이아웃 (태블릿 최적화)
+   🌳 아이토리 - 동화 편집 페이지 CSS
    ============================================ */
 
 .edit-story-page {
   min-height: 100vh;
   background: transparent;
-  /* Global background from index.css */
   font-family: var(--font-family);
   position: relative;
   overflow-x: hidden;
@@ -149,8 +147,20 @@
 }
 
 /* ============================================
-   📦 메인 콘텐츠 - 전체 화면
+   📦 메인 콘텐츠
    ============================================ */
+.edit-story-page__main {
+  position: relative;
+  z-index: 1;
+  padding: 16px 24px;
+  padding-bottom: 140px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
+}
+
 .edit-story-page__main--fullscreen {
   position: relative;
   z-index: 1;
@@ -175,7 +185,7 @@
   padding: 12px 24px;
   background: white;
   border-radius: 50px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -200,7 +210,7 @@
 }
 
 .edit-story-page__mini-step.active::after {
-  background: var(--color-primary);
+  background: #F5A623;
 }
 
 .edit-story-page__mini-dot {
@@ -215,7 +225,7 @@
 }
 
 .edit-story-page__mini-step.active .edit-story-page__mini-dot {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
   box-shadow: 0 3px 10px rgba(245, 166, 35, 0.4);
 }
 
@@ -225,14 +235,14 @@
 }
 
 .edit-story-page__mini-label {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-tertiary);
+  font-size: 12px;
+  font-weight: 700;
+  color: #999;
 }
 
 .edit-story-page__mini-step.active .edit-story-page__mini-label {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-black);
+  color: #333;
+  font-weight: 800;
 }
 
 .edit-story-page__mini-step.completed .edit-story-page__mini-label {
@@ -240,118 +250,156 @@
 }
 
 /* ============================================
-   🎬 영상 영역 - 전체 폭
+   🎬 콘텐츠 프레임 (영상/로딩 영역)
    ============================================ */
-.edit-story-page__fullscreen-video {
+.edit-story-page__content-frame {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 0;
-}
-
-.edit-story-page__video-container {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, #FFF5E1 0%, #FFE4C4 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  background: linear-gradient(135deg, #FFF8EE 0%, #FFEFD5 100%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  min-height: 400px;
+  margin-bottom: 20px;
   overflow: hidden;
-  border: 4px solid white;
+  position: relative;
 }
 
-.edit-story-page__video-playing,
-.edit-story-page__video-complete,
-.edit-story-page__video-ready {
+/* 중앙 콘텐츠 */
+.edit-story-page__center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 40px;
-}
-
-.edit-story-page__video-emoji {
-  font-size: 120px;
-  margin-bottom: 24px;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
-}
-
-.edit-story-page__video-status {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-bold);
-}
-
-.edit-story-page__video-ready-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-black);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
-}
-
-.edit-story-page__complete-title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-black);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
-}
-
-.edit-story-page__complete-subtitle {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  width: 100%;
 }
 
 /* 로딩 */
-.edit-story-page__loading {
-  text-align: center;
-}
-
 .edit-story-page__loading-emoji {
-  font-size: 100px;
-  margin-bottom: 24px;
+  font-size: 80px;
+  margin-bottom: 20px;
   animation: pulse 1.5s infinite;
 }
 
 .edit-story-page__loading-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
-}
-
-.edit-story-page__loading-subtitle {
-  font-size: var(--font-size-md);
-  color: var(--color-text-secondary);
-  margin-bottom: 28px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .edit-story-page__loading-bar {
-  width: 320px;
+  width: 280px;
+  max-width: 80%;
   height: 16px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   overflow: hidden;
-  margin: 0 auto 16px;
+  margin-bottom: 16px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .edit-story-page__loading-fill {
   height: 100%;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
   border-radius: 8px;
-  transition: width 0.3s ease;
+  transition: width 0.5s ease;
 }
 
 .edit-story-page__loading-percent {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 700;
+  color: #F5A623;
+}
+
+/* 완료 */
+.edit-story-page__complete-emoji {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.edit-story-page__complete-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+/* 다시 보기 버튼 */
+.edit-story-page__replay-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #F5A623;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #F5A623;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-story-page__replay-btn:hover {
+  background: #FFF8EE;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   🎥 비디오 플레이어
+   ============================================ */
+.edit-story-page__video-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #000;
+}
+
+.edit-story-page__video-player {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+/* 비디오 에러 */
+.edit-story-page__video-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 12px;
+}
+
+.edit-story-page__error-emoji {
+  font-size: 60px;
+}
+
+.edit-story-page__video-error p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.edit-story-page__error-sub {
+  font-size: 14px !important;
+  color: #aaa !important;
+  font-weight: 400 !important;
 }
 
 /* ============================================
@@ -361,33 +409,35 @@
   width: 100%;
   padding: 20px 28px;
   background: white;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   margin-bottom: 16px;
   border: 2px solid white;
 }
 
 .edit-story-page__story-label {
   display: inline-block;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  color: #F5A623;
   margin-bottom: 8px;
 }
 
 .edit-story-page__story-text p {
-  font-size: var(--font-size-md);
-  color: var(--color-text-primary);
+  font-size: 16px;
+  color: #333;
   line-height: 1.7;
   margin: 0;
 }
 
 /* ============================================
-   🔘 하단 버튼
+   ⬇️ 하단 액션 버튼
    ============================================ */
 .edit-story-page__bottom-action {
-  padding: 16px 0;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 16px;
 }
 
 .edit-story-page__big-btn {
@@ -395,70 +445,55 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 100%;
-  padding: 22px 40px;
-  background: var(--gradient-primary);
+  padding: 20px 48px;
+  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
   border: none;
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-black);
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 800;
   color: white;
   cursor: pointer;
-  box-shadow: 0 6px 0 var(--color-primary-dark), var(--shadow-lg);
-  transition: var(--transition-base);
+  box-shadow: 0 6px 0 #D4920F, 0 8px 24px rgba(245, 166, 35, 0.3);
+  transition: all 0.2s ease;
 }
 
 .edit-story-page__big-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 0 var(--color-primary-dark), 0 16px 40px rgba(245, 166, 35, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 #D4920F, 0 12px 32px rgba(245, 166, 35, 0.4);
 }
 
 .edit-story-page__big-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 3px 0 var(--color-primary-dark), var(--shadow-sm);
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #D4920F;
 }
 
 /* ============================================
-   💡 힌트
-   ============================================ */
-.edit-story-page__hint {
-  text-align: center;
-  padding: 16px;
-}
-
-.edit-story-page__hint p {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
-}
-
-/* ============================================
-   ❓ 질문 카드 (선택 화면)
+   ❓ 질문 카드
    ============================================ */
 .edit-story-page__question-card {
   width: 100%;
   margin-bottom: 32px;
   padding: 32px 40px;
   background: white;
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   text-align: center;
-  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border: 4px solid white;
 }
 
 .edit-story-page__stage-title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 700;
+  color: #F5A623;
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .edit-story-page__question-text {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-black);
-  color: var(--color-text-primary);
+  font-size: 24px;
+  font-weight: 800;
+  color: #333;
   margin: 0;
   line-height: 1.4;
 }
@@ -482,24 +517,24 @@
 
 .edit-story-page__choice-card {
   background: white;
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   padding: 40px 32px;
   text-align: center;
   border: 3px solid transparent;
   cursor: pointer;
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-  transition: var(--transition-base);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
 }
 
 .edit-story-page__choice-card:hover {
   transform: translateY(-8px);
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  border-color: #F5A623;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
 .edit-story-page__choice-card:active {
   transform: translateY(2px);
-  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .edit-story-page__choice-icon {
@@ -509,16 +544,16 @@
 }
 
 .edit-story-page__choice-title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-black);
-  color: var(--color-text-primary);
+  font-size: 20px;
+  font-weight: 800;
+  color: #333;
   margin-bottom: 8px;
 }
 
 .edit-story-page__choice-desc {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
 }
 
 /* ============================================
@@ -532,12 +567,12 @@
   padding: 18px 32px;
   background: white;
   border: 2px dashed #8BC34A;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
   color: #7CB342;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition: all 0.2s ease;
   margin: 0 auto;
 }
 
@@ -556,9 +591,9 @@
 
 .edit-story-page__custom-card {
   background: white;
-  border-radius: var(--radius-lg);
+  border-radius: 20px;
   padding: 32px;
-  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border: 4px solid white;
 }
 
@@ -566,8 +601,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-size: 20px;
+  font-weight: 700;
   color: #7CB342;
   margin-bottom: 20px;
 }
@@ -576,9 +611,9 @@
   width: 100%;
   height: 160px;
   padding: 20px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--color-border);
-  font-size: var(--font-size-lg);
+  border-radius: 12px;
+  border: 2px solid #E0D8CC;
+  font-size: 18px;
   font-family: inherit;
   resize: none;
   margin-bottom: 20px;
@@ -587,7 +622,7 @@
 
 .edit-story-page__custom-input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: #F5A623;
   background: white;
   box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.15);
 }
@@ -600,14 +635,14 @@
 .edit-story-page__custom-cancel {
   flex: 1;
   padding: 16px;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   background: #F0EBE3;
   border: none;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
+  font-size: 18px;
+  font-weight: 700;
+  color: #777;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition: all 0.2s ease;
 }
 
 .edit-story-page__custom-cancel:hover {
@@ -617,24 +652,24 @@
 .edit-story-page__custom-submit {
   flex: 2;
   padding: 16px;
-  border-radius: var(--radius-md);
-  background: var(--gradient-primary);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
   border: none;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+  font-size: 18px;
+  font-weight: 700;
   color: white;
   cursor: pointer;
-  box-shadow: 0 4px 0 var(--color-primary-dark);
-  transition: var(--transition-base);
+  box-shadow: 0 4px 0 #D4920F;
+  transition: all 0.2s ease;
 }
 
 .edit-story-page__custom-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 var(--color-primary-dark);
+  box-shadow: 0 6px 0 #D4920F;
 }
 
 .edit-story-page__custom-submit:disabled {
-  background: var(--color-text-tertiary);
+  background: #ccc;
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -679,7 +714,6 @@
   box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
-/* 나무 */
 .edit-story-page__tree {
   position: absolute;
   bottom: 55px;
@@ -744,7 +778,6 @@
   width: 10px;
 }
 
-/* 집 */
 .edit-story-page__house {
   position: absolute;
   bottom: 55px;
@@ -798,7 +831,6 @@
   right: 6px;
 }
 
-/* 덤불 */
 .edit-story-page__bush {
   position: absolute;
   bottom: 55px;
@@ -817,4 +849,93 @@
   right: 28%;
   width: 35px;
   height: 25px;
+}
+
+.edit-story-page__bush--3 {
+  left: 45%;
+  width: 30px;
+  height: 22px;
+}
+
+.edit-story-page__bush--4 {
+  right: 40%;
+  width: 28px;
+  height: 20px;
+}
+
+.edit-story-page__flower {
+  position: absolute;
+  bottom: 60px;
+  width: 12px;
+  height: 12px;
+  background: #FFEB3B;
+  border-radius: 50%;
+}
+
+.edit-story-page__flower::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: #689F38;
+}
+
+.edit-story-page__flower--1 {
+  left: 30%;
+  background: #FF80AB;
+}
+
+.edit-story-page__flower--2 {
+  left: 50%;
+  background: #FFEB3B;
+}
+
+.edit-story-page__flower--3 {
+  right: 35%;
+  background: #B388FF;
+}
+
+.edit-story-page__flower--4 {
+  right: 50%;
+  background: #80DEEA;
+}
+
+/* ============================================
+   📱 반응형
+   ============================================ */
+@media (max-width: 768px) {
+  .edit-story-page__content-frame {
+    min-height: 280px;
+  }
+
+  .edit-story-page__loading-emoji,
+  .edit-story-page__complete-emoji {
+    font-size: 60px;
+  }
+
+  .edit-story-page__loading-title,
+  .edit-story-page__complete-title {
+    font-size: 20px;
+  }
+
+  .edit-story-page__choice-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .edit-story-page__choice-card {
+    padding: 24px 20px;
+  }
+
+  .edit-story-page__choice-icon {
+    font-size: 48px;
+  }
+
+  .edit-story-page__big-btn {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
 }

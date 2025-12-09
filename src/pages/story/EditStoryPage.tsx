@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Play, ChevronRight, Check, Edit3 } from 'lucide-react'
 import { PageType, Tale, ArtStyle } from '../../App'
 import SimpleHeader from '../../components/common/SimpleHeader'
@@ -21,127 +21,121 @@ const STAGES = [
   { id: 'ending', name: '결말', step: 5, hasChoices: true }
 ]
 
-// 발단 영상 텍스트
-const introVideo = {
-  title: '이야기의 시작',
-  text: '옛날 옛날 어느 마을에 착하고 성실한 주인공이 살았어요. 어느 날, 평화롭던 마을에 신비로운 일이 일어나기 시작했답니다...'
+// ============================================
+// 하드코딩된 영상 경로
+// 로컬: '/videos/...'
+// GitHub Pages: '/itory_project/videos/...'
+// ============================================
+const STAGE_VIDEOS: Record<string, string> = {
+  intro: '/videos/stage1_intro.mp4',
+  development: '/videos/stage2_development.mp4',
+  crisis: '/videos/stage3_crisis.mp4',
+  climax: '/videos/stage4_climax.mp4',
+  ending: '/videos/stage5_ending.mp4'
 }
 
-// 전개~결말 선택지 데이터 (각 단계당 1번 선택) - 폴백용
-const stageChoices: { [key: string]: { question: string; choices: { id: string; icon: string; title: string; desc: string }[] }[] } = {
-  development: [
-    {
-      question: '주인공에게 어떤 일이 일어났나요?',
-      choices: [
-        { id: 'A', icon: '🌟', title: '신비한 것을 발견했어요', desc: '반짝이는 무언가를 찾았어요' },
-        { id: 'B', icon: '🤝', title: '새로운 친구를 만났어요', desc: '특별한 만남이 시작됐어요' }
-      ]
-    }
-  ],
-  crisis: [
-    {
-      question: '어떤 위기가 찾아왔나요?',
-      choices: [
-        { id: 'A', icon: '😤', title: '나쁜 사람이 나타났어요', desc: '욕심쟁이가 나타났어요' },
-        { id: 'B', icon: '🌪️', title: '어려운 상황이 생겼어요', desc: '예상치 못한 문제 발생' }
-      ]
-    }
-  ],
-  climax: [
-    {
-      question: '결정적인 순간! 어떻게 해결했나요?',
-      choices: [
-        { id: 'A', icon: '💪', title: '용기를 내서 해결했어요', desc: '두려움을 이겨냈어요' },
-        { id: 'B', icon: '🤝', title: '함께 힘을 모았어요', desc: '친구들과 협력했어요' }
-      ]
-    }
-  ],
-  ending: [
-    {
-      question: '이야기는 어떻게 끝이 났나요?',
-      choices: [
-        { id: 'A', icon: '👨‍👩‍👧‍👦', title: '모두 행복해졌어요', desc: '해피엔딩!' },
-        { id: 'B', icon: '🌈', title: '더 좋은 세상이 됐어요', desc: '모두가 웃는 결말' }
-      ]
-    }
-  ]
+// ============================================
+// 하드코딩된 각 단계별 스토리 텍스트
+// ============================================
+const STAGE_STORIES: Record<string, string> = {
+  intro: '옛날 옛날 어느 마을에 착하고 성실한 주인공이 살았어요. 어느 날, 평화롭던 마을에 신비로운 일이 일어나기 시작했답니다...',
+  development: '주인공은 신비한 것을 발견하고 모험을 시작했어요!',
+  crisis: '갑자기 위기가 찾아왔어요! 어떻게 해결할 수 있을까요?',
+  climax: '결정적인 순간! 주인공은 용기를 내어 문제를 해결했어요!',
+  ending: '모두가 행복해지는 결말이에요! 해피엔딩!'
+}
+
+// ============================================
+// 하드코딩된 선택지 데이터
+// ============================================
+interface Choice {
+  id: string
+  icon: string
+  title: string
+  desc: string
+}
+
+interface StageChoice {
+  question: string
+  choices: Choice[]
+}
+
+const stageChoices: Record<string, StageChoice> = {
+  development: {
+    question: '주인공에게 어떤 일이 일어났나요?',
+    choices: [
+      { id: 'A', icon: '🌟', title: '신비한 것을 발견했어요', desc: '반짝이는 무언가를 찾았어요' },
+      { id: 'B', icon: '🤝', title: '새로운 친구를 만났어요', desc: '특별한 만남이 시작됐어요' }
+    ]
+  },
+  crisis: {
+    question: '어떤 위기가 찾아왔나요?',
+    choices: [
+      { id: 'A', icon: '😤', title: '나쁜 사람이 나타났어요', desc: '욕심쟁이가 나타났어요' },
+      { id: 'B', icon: '🌪️', title: '어려운 상황이 생겼어요', desc: '예상치 못한 문제 발생' }
+    ]
+  },
+  climax: {
+    question: '결정적인 순간! 어떻게 해결했나요?',
+    choices: [
+      { id: 'A', icon: '💪', title: '용기를 내서 해결했어요', desc: '두려움을 이겨냈어요' },
+      { id: 'B', icon: '🤝', title: '함께 힘을 모았어요', desc: '친구들과 협력했어요' }
+    ]
+  },
+  ending: {
+    question: '이야기는 어떻게 끝이 났나요?',
+    choices: [
+      { id: 'A', icon: '👨‍👩‍👧‍👦', title: '모두 행복해졌어요', desc: '해피엔딩!' },
+      { id: 'B', icon: '🌈', title: '더 좋은 세상이 됐어요', desc: '모두가 웃는 결말' }
+    ]
+  }
 }
 
 // localStorage 키
 const STORAGE_KEY = 'itory_edit_story_state'
 
+interface Selection {
+  id: string
+  text: string
+}
+
 export default function EditStoryPage({
   onNavigate,
-  selectedTale: _selectedTale,
-  selectedStyle: _selectedStyle,
+  selectedTale,
+  selectedStyle,
   onGoBack,
   onMenuClick
 }: EditStoryPageProps) {
-  // 미사용 props 처리 (백엔드 연동 시 사용 예정)
-  void _selectedTale
-  void _selectedStyle
+  // 미사용 props 처리
+  console.log('Selected tale:', selectedTale?.id, 'Style:', selectedStyle)
+
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   // 현재 단계 (0: 발단, 1~4: 전개~결말)
   const [currentStage, setCurrentStage] = useState(0)
   // 각 단계별 선택 저장
-  const [selections, setSelections] = useState<{ [key: string]: { id: string; text: string }[] }>({})
+  const [selections, setSelections] = useState<Record<string, Selection[]>>({})
   // 직접 쓰기 입력값
   const [customInput, setCustomInput] = useState('')
   // 직접 쓰기 모드
   const [isCustomMode, setIsCustomMode] = useState(false)
 
-  // 발단 관련 상태
-  const [introLoading, setIntroLoading] = useState(true)
-  const [introLoadingProgress, setIntroLoadingProgress] = useState(0)
-  const [introVideoReady, setIntroVideoReady] = useState(false)
-  const [introVideoPlaying, setIntroVideoPlaying] = useState(false)
-  const [introVideoCompleted, setIntroVideoCompleted] = useState(false)
+  // 로딩 상태 (3초 로딩)
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadingProgress, setLoadingProgress] = useState(0)
 
-  // 단계 완료 후 통합 영상 + 줄거리 보기 모드
+  // 영상 상태
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+  const [isVideoCompleted, setIsVideoCompleted] = useState(false)
+  const [videoError, setVideoError] = useState(false)
+
+  // 선택지 화면 vs 결과 화면
   const [showStageResult, setShowStageResult] = useState(false)
-  const [stageLoading, setStageLoading] = useState(false)
-  const [stageLoadingProgress, setStageLoadingProgress] = useState(0)
-  const [currentStageVideoUrl, setCurrentStageVideoUrl] = useState<string | null>(null)
-  const [stageVideoPlaying, setStageVideoPlaying] = useState(false)
-  const [stageVideoCompleted, setStageVideoCompleted] = useState(false)
 
   const currentStageData = STAGES[currentStage]
-  const currentStageId = currentStageData?.id
-  const currentChoiceData = stageChoices[currentStageId]?.[0]
+  const currentStageId = currentStageData?.id || 'intro'
+  const currentChoiceData = stageChoices[currentStageId]
   const currentSelections = selections[currentStageId] || []
-
-  // 동적 선택지 상태 (백엔드에서 로드)
-  const [dynamicChoices, setDynamicChoices] = useState<string[]>([])
-  const [isChoicesLoading, setIsChoicesLoading] = useState(false)
-
-  // 선택지 로드 (2막 이상일 때) - 백엔드 API
-  useEffect(() => {
-    if (currentStage >= 1 && currentStage <= 4) {
-      const fetchOptions = async () => {
-        setIsChoicesLoading(true)
-        try {
-          const jobId = localStorage.getItem('current_job_id')
-          if (!jobId) return
-
-          const stageNo = currentStage + 1
-          const response = await fetch(`http://localhost:8000/api/story/options/${jobId}/${stageNo}`)
-
-          if (response.ok) {
-            const data = await response.json()
-            if (data.options && Array.isArray(data.options)) {
-              setDynamicChoices(data.options)
-            }
-          }
-        } catch (error) {
-          console.error("옵션 로드 실패:", error)
-        } finally {
-          setIsChoicesLoading(false)
-        }
-      }
-
-      fetchOptions()
-    }
-  }, [currentStage])
 
   // 새로고침 시 상태 복원
   useEffect(() => {
@@ -153,11 +147,9 @@ export default function EditStoryPage({
         setSelections(state.selections || {})
         setShowStageResult(state.showStageResult || false)
 
-        // 발단 이후 단계면 발단 완료 상태로 설정
-        if (state.currentStage > 0) {
-          setIntroLoading(false)
-          setIntroVideoReady(true)
-          setIntroVideoCompleted(true)
+        if (state.currentStage > 0 || state.showStageResult) {
+          setIsLoading(false)
+          setIsVideoCompleted(true)
         }
       } catch (e) {
         console.error('상태 복원 실패:', e)
@@ -167,143 +159,67 @@ export default function EditStoryPage({
 
   // 상태 변경 시 localStorage에 저장
   useEffect(() => {
-    const state = {
-      currentStage,
-      selections,
-      showStageResult
-    }
+    const state = { currentStage, selections, showStageResult }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
   }, [currentStage, selections, showStageResult])
 
-  // 발단 로딩 - 실제 API 폴링
+  // 3초 로딩 후 자동 영상 재생
   useEffect(() => {
-    if (currentStage === 0 && introLoading) {
-      const jobId = localStorage.getItem('current_job_id')
+    if (isLoading) {
+      let progress = 0
+      const interval = setInterval(() => {
+        progress += 33
+        setLoadingProgress(Math.min(progress, 100))
 
-      if (!jobId) {
-        console.error('job_id가 없습니다')
-        setIntroLoading(false)
-        return
-      }
-
-      const pollInterval = setInterval(async () => {
-        try {
-          const response = await fetch(`http://localhost:8000/api/story/status/${jobId}`)
-
-          if (!response.ok) {
-            throw new Error('상태 조회 실패')
-          }
-
-          const status = await response.json()
-          setIntroLoadingProgress(status.progress || 0)
-
-          if (status.status === 'stage1_complete') {
-            clearInterval(pollInterval)
-            setIntroLoading(false)
-            setIntroVideoReady(true)
-
-            if (status.video_url) {
-              localStorage.setItem('stage1_video', status.video_url)
-            }
-            if (status.story_text) {
-              localStorage.setItem('stage1_text', status.story_text)
-            }
-          }
-
-          if (status.status === 'error') {
-            clearInterval(pollInterval)
-            setIntroLoading(false)
-            alert(`오류가 발생했습니다: ${status.error || '알 수 없는 오류'}`)
-          }
-        } catch (error) {
-          console.error('API 폴링 오류:', error)
+        if (progress >= 100) {
+          clearInterval(interval)
+          setTimeout(() => {
+            setIsLoading(false)
+            setIsVideoPlaying(true)
+          }, 300)
         }
-      }, 2000)
+      }, 1000)
 
-      return () => clearInterval(pollInterval)
+      return () => clearInterval(interval)
     }
-  }, [currentStage, introLoading])
+  }, [isLoading])
 
-  // 단계별 로딩 폴링 (2막 이상) - 백엔드 API
+  // 영상 재생 시작 시 video 요소 play
   useEffect(() => {
-    if (showStageResult && stageLoading && currentStage >= 1) {
-      const jobId = localStorage.getItem('current_job_id')
-      if (!jobId) return
-
-      const pollInterval = setInterval(async () => {
-        try {
-          const response = await fetch(`http://localhost:8000/api/story/status/${jobId}`)
-          if (!response.ok) throw new Error('상태 조회 실패')
-
-          const status = await response.json()
-          setStageLoadingProgress(status.progress || 0)
-
-          const targetStatus = `stage${currentStage + 1}_complete`
-
-          if (status.status === targetStatus || status.status === 'complete') {
-            clearInterval(pollInterval)
-            setStageLoading(false)
-            if (status.video_url) {
-              setCurrentStageVideoUrl(status.video_url)
-            }
-          }
-
-          if (status.status === 'error') {
-            clearInterval(pollInterval)
-            setStageLoading(false)
-            alert(`오류 발생: ${status.error}`)
-          }
-        } catch (error) {
-          console.error('폴링 오류:', error)
-        }
-      }, 2000)
-
-      return () => clearInterval(pollInterval)
+    if (isVideoPlaying && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        setVideoError(true)
+      })
     }
-  }, [showStageResult, stageLoading, currentStage])
+  }, [isVideoPlaying])
 
-  // 영상 준비 완료 시 자동 재생 (발단)
+  // 영상 에러 시 3초 후 완료 처리
   useEffect(() => {
-    if (introVideoReady && !introVideoPlaying && !introVideoCompleted) {
+    if (videoError) {
       const timer = setTimeout(() => {
-        setIntroVideoPlaying(true)
-        setTimeout(() => {
-          setIntroVideoPlaying(false)
-          setIntroVideoCompleted(true)
-        }, 4000)
-      }, 500)
+        setIsVideoPlaying(false)
+        setIsVideoCompleted(true)
+        setVideoError(false)
+      }, 3000)
       return () => clearTimeout(timer)
     }
-  }, [introVideoReady, introVideoPlaying, introVideoCompleted])
+  }, [videoError])
 
-  // 영상 준비 완료 시 자동 재생 (단계별)
-  useEffect(() => {
-    if (showStageResult && !stageLoading && !stageVideoPlaying && !stageVideoCompleted) {
-      const timer = setTimeout(() => {
-        setStageVideoPlaying(true)
-        setTimeout(() => {
-          setStageVideoPlaying(false)
-          setStageVideoCompleted(true)
-        }, 3000)
-      }, 500)
-      return () => clearTimeout(timer)
-    }
-  }, [showStageResult, stageLoading, stageVideoPlaying, stageVideoCompleted])
-
-  // 발단 영상 후 전개로 이동
   const handleGoToDevelopment = () => {
     setCurrentStage(1)
+    setIsLoading(false)
+    setIsVideoPlaying(false)
+    setIsVideoCompleted(false)
+    setShowStageResult(false)
   }
 
-  // 뒤로 가기 핸들러 (단계별)
   const handleGoBack = () => {
     if (showStageResult) {
       setShowStageResult(false)
-      setStageVideoPlaying(false)
-      setStageVideoCompleted(false)
-      setStageLoading(false)
-      setStageLoadingProgress(0)
-      setCurrentStageVideoUrl(null)
+      setIsVideoPlaying(false)
+      setIsVideoCompleted(false)
+      setIsLoading(false)
+      setVideoError(false)
       setSelections(prev => {
         const newSelections = { ...prev }
         delete newSelections[currentStageId]
@@ -312,12 +228,13 @@ export default function EditStoryPage({
     } else if (currentStage > 0) {
       const prevStage = currentStage - 1
       setCurrentStage(prevStage)
-
+      setIsLoading(false)
+      setIsVideoCompleted(true)
+      setIsVideoPlaying(false)
       if (prevStage === 0) {
-        setIntroVideoCompleted(true)
+        setShowStageResult(false)
       } else {
         setShowStageResult(true)
-        setStageVideoCompleted(true)
       }
     } else {
       localStorage.removeItem(STORAGE_KEY)
@@ -325,65 +242,29 @@ export default function EditStoryPage({
     }
   }
 
-  // 선택지 선택 - 백엔드 API 호출
-  const handleChoiceSelect = async (choiceId: string, choiceText: string) => {
-    setSelections(prev => ({
-      ...prev,
-      [currentStageId]: [{ id: choiceId, text: choiceText }]
-    }))
+  const handleChoiceSelect = (choiceId: string, choiceText: string) => {
+    setSelections(prev => ({ ...prev, [currentStageId]: [{ id: choiceId, text: choiceText }] }))
     setShowStageResult(true)
-    setStageLoading(true)
-    setStageLoadingProgress(0)
-
-    // 백엔드에 선택 전송
-    try {
-      const jobId = localStorage.getItem('current_job_id')
-      if (jobId) {
-        const stageNo = currentStage + 1
-        await fetch(`http://localhost:8000/api/story/select/${jobId}/${stageNo}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ choice: choiceId, text: choiceText })
-        })
-      }
-    } catch (error) {
-      console.error('선택 전송 실패:', error)
-    }
+    setIsLoading(true)
+    setLoadingProgress(0)
+    setIsVideoPlaying(false)
+    setIsVideoCompleted(false)
+    setVideoError(false)
   }
 
-  // 직접 쓰기 제출
-  const handleCustomSubmit = async () => {
+  const handleCustomSubmit = () => {
     if (!customInput.trim()) return
-
-    setSelections(prev => ({
-      ...prev,
-      [currentStageId]: [{ id: 'custom', text: customInput.trim() }]
-    }))
-
-    const customText = customInput.trim()
+    setSelections(prev => ({ ...prev, [currentStageId]: [{ id: 'custom', text: customInput.trim() }] }))
     setCustomInput('')
     setIsCustomMode(false)
     setShowStageResult(true)
-    setStageLoading(true)
-    setStageLoadingProgress(0)
-
-    // 백엔드에 직접 쓰기 전송
-    try {
-      const jobId = localStorage.getItem('current_job_id')
-      if (jobId) {
-        const stageNo = currentStage + 1
-        await fetch(`http://localhost:8000/api/story/select/${jobId}/${stageNo}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ choice: 'custom', text: customText })
-        })
-      }
-    } catch (error) {
-      console.error('직접 쓰기 전송 실패:', error)
-    }
+    setIsLoading(true)
+    setLoadingProgress(0)
+    setIsVideoPlaying(false)
+    setIsVideoCompleted(false)
+    setVideoError(false)
   }
 
-  // 다음 단계로 이동
   const handleNextStage = () => {
     if (currentStage === STAGES.length - 1) {
       localStorage.removeItem(STORAGE_KEY)
@@ -391,21 +272,34 @@ export default function EditStoryPage({
     } else {
       setCurrentStage(prev => prev + 1)
       setShowStageResult(false)
-      setStageVideoPlaying(false)
-      setStageVideoCompleted(false)
-      setStageLoading(false)
-      setStageLoadingProgress(0)
-      setCurrentStageVideoUrl(null)
+      setIsLoading(false)
+      setIsVideoPlaying(false)
+      setIsVideoCompleted(false)
+      setVideoError(false)
     }
   }
 
+  const handleVideoEnded = () => {
+    setIsVideoPlaying(false)
+    setIsVideoCompleted(true)
+  }
+
+  const handleVideoError = () => {
+    setVideoError(true)
+  }
+
+  const handleReplay = () => {
+    setVideoError(false)
+    setIsVideoCompleted(false)
+    setIsVideoPlaying(true)
+  }
+
   // ============================================
-  // 1. 발단 화면 (로딩 → 영상 자동재생)
+  // 1. 발단 화면
   // ============================================
   if (currentStage === 0) {
     return (
       <div className="edit-story-page">
-        {/* 배경 구름 */}
         <div className="edit-story-page__bg-decorations">
           <div className="edit-story-page__cloud edit-story-page__cloud--1"></div>
           <div className="edit-story-page__cloud edit-story-page__cloud--2"></div>
@@ -413,91 +307,73 @@ export default function EditStoryPage({
           <div className="edit-story-page__cloud edit-story-page__cloud--4"></div>
         </div>
 
-        <SimpleHeader
-          onNavigate={onNavigate}
-          onGoBack={handleGoBack}
-          onMenuClick={onMenuClick}
-        />
+        <SimpleHeader onNavigate={onNavigate} onGoBack={handleGoBack} onMenuClick={onMenuClick} />
 
-        <main className="edit-story-page__main edit-story-page__main--fullscreen">
-          {/* 미니 진행 표시 - 상단 */}
+        <main className="edit-story-page__main">
           <div className="edit-story-page__mini-progress">
             {STAGES.map((s, index) => (
-              <div key={index} className={`edit-story-page__mini-step ${index === 0 ? 'active' : ''}`}>
-                <div className="edit-story-page__mini-dot"></div>
+              <div key={s.id} className={`edit-story-page__mini-step ${index === currentStage ? 'active' : index < currentStage ? 'completed' : ''}`}>
+                <div className="edit-story-page__mini-dot">{index < currentStage && <Check size={12} />}</div>
                 <span className="edit-story-page__mini-label">{s.name}</span>
               </div>
             ))}
           </div>
 
-          {/* 영상 영역 - 전체 폭 */}
-          <div className="edit-story-page__fullscreen-video">
-            <div className="edit-story-page__video-container">
-              {introLoading ? (
-                <div className="edit-story-page__loading">
-                  <div className="edit-story-page__loading-emoji">🎬</div>
-                  <p className="edit-story-page__loading-title">발단 영상 준비 중...</p>
-                  <p className="edit-story-page__loading-subtitle">잠시만 기다려주세요</p>
-                  <div className="edit-story-page__loading-bar">
-                    <div
-                      className="edit-story-page__loading-fill"
-                      style={{ width: `${Math.min(introLoadingProgress, 100)}%` }}
-                    />
+          <div className="edit-story-page__content-frame">
+            {isLoading ? (
+              <div className="edit-story-page__center-content">
+                <div className="edit-story-page__loading-emoji">🎬</div>
+                <h2 className="edit-story-page__loading-title">영상 생성 중...</h2>
+                <div className="edit-story-page__loading-bar">
+                  <div className="edit-story-page__loading-fill" style={{ width: `${loadingProgress}%` }}></div>
+                </div>
+                <p className="edit-story-page__loading-percent">{loadingProgress}%</p>
+              </div>
+            ) : isVideoPlaying ? (
+              <div className="edit-story-page__video-wrapper">
+                <video
+                  ref={videoRef}
+                  src={STAGE_VIDEOS.intro}
+                  controls
+                  onEnded={handleVideoEnded}
+                  onError={handleVideoError}
+                  className="edit-story-page__video-player"
+                />
+                {videoError && (
+                  <div className="edit-story-page__video-error">
+                    <div className="edit-story-page__error-emoji">😢</div>
+                    <p>영상을 불러올 수 없습니다</p>
+                    <p className="edit-story-page__error-sub">잠시 후 자동으로 넘어갑니다...</p>
                   </div>
-                  <p className="edit-story-page__loading-percent">
-                    {Math.min(Math.round(introLoadingProgress), 100)}%
-                  </p>
-                </div>
-              ) : introVideoPlaying ? (
-                <>
-                  <div className="edit-story-page__video-playing">
-                    <div className="edit-story-page__video-emoji">🎬</div>
-                    <div className="edit-story-page__video-status">발단 영상 재생 중...</div>
-                  </div>
-                </>
-              ) : introVideoCompleted ? (
-                <div className="edit-story-page__video-complete">
-                  <div className="edit-story-page__video-emoji">✨</div>
-                  <p className="edit-story-page__complete-title">발단 완료!</p>
-                  <p className="edit-story-page__complete-subtitle">이제 나만의 이야기를 만들어볼까요?</p>
-                </div>
-              ) : (
-                <div className="edit-story-page__video-ready">
-                  <div className="edit-story-page__video-emoji">🎥</div>
-                  <p className="edit-story-page__video-ready-title">영상 준비 완료!</p>
-                  <p className="edit-story-page__video-status">곧 자동 재생됩니다...</p>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            ) : isVideoCompleted ? (
+              <div className="edit-story-page__center-content">
+                <div className="edit-story-page__complete-emoji">✅</div>
+                <p className="edit-story-page__complete-title">발단 영상 완료!</p>
+                <button onClick={handleReplay} className="edit-story-page__replay-btn">
+                  <Play size={20} /> 다시 보기
+                </button>
+              </div>
+            ) : null}
           </div>
 
-          {/* 줄거리 - 영상 재생 중일 때 */}
-          {introVideoPlaying && (
+          {!isLoading && (
             <div className="edit-story-page__story-text">
               <span className="edit-story-page__story-label">📖 발단</span>
-              <p>{introVideo.text}</p>
+              <p>{STAGE_STORIES.intro}</p>
             </div>
           )}
 
-          {/* 다음 버튼 - 하단 고정 */}
-          {introVideoCompleted && (
+          {isVideoCompleted && (
             <div className="edit-story-page__bottom-action">
               <button onClick={handleGoToDevelopment} className="edit-story-page__big-btn">
-                전개로 가기 - 선택 시작!
-                <ChevronRight size={28} />
+                전개로 가기 <ChevronRight size={28} />
               </button>
-            </div>
-          )}
-
-          {/* 안내 팁 */}
-          {!introVideoCompleted && !introVideoPlaying && !introLoading && (
-            <div className="edit-story-page__hint">
-              <p>💡 발단 영상을 본 후, 전개부터 결말까지 선택을 하게 돼요!</p>
             </div>
           )}
         </main>
 
-        {/* 하단 풍경 장식 */}
         <div className="edit-story-page__landscape">
           <div className="edit-story-page__grass"></div>
           <div className="edit-story-page__tree edit-story-page__tree--1"></div>
@@ -521,19 +397,11 @@ export default function EditStoryPage({
   }
 
   // ============================================
-  // 2. 단계 결과 화면 (1번 선택 완료 후 통합 영상 + 줄거리)
+  // 2. 단계 결과 화면 (영상 + 스토리)
   // ============================================
   if (showStageResult) {
-    const stageColors: { [key: string]: string } = {
-      development: 'linear-gradient(135deg, #FFF5E1 0%, #FFE4C4 100%)',
-      crisis: 'linear-gradient(135deg, #FFE4E4 0%, #FFD4D4 100%)',
-      climax: 'linear-gradient(135deg, #E8F0FF 0%, #D4E4FF 100%)',
-      ending: 'linear-gradient(135deg, #E4F8EE 0%, #D4F0E4 100%)'
-    }
-
     return (
       <div className="edit-story-page">
-        {/* 배경 구름 */}
         <div className="edit-story-page__bg-decorations">
           <div className="edit-story-page__cloud edit-story-page__cloud--1"></div>
           <div className="edit-story-page__cloud edit-story-page__cloud--2"></div>
@@ -541,101 +409,65 @@ export default function EditStoryPage({
           <div className="edit-story-page__cloud edit-story-page__cloud--4"></div>
         </div>
 
-        <SimpleHeader
-          onNavigate={onNavigate}
-          onGoBack={handleGoBack}
-          onMenuClick={onMenuClick}
-        />
+        <SimpleHeader onNavigate={onNavigate} onGoBack={handleGoBack} onMenuClick={onMenuClick} />
 
-        <main className="edit-story-page__main edit-story-page__main--fullscreen">
-          {/* 미니 진행 표시 - 상단 */}
+        <main className="edit-story-page__main">
           <div className="edit-story-page__mini-progress">
             {STAGES.map((s, index) => (
-              <div key={index} className={`edit-story-page__mini-step ${index === currentStage ? 'active' : index < currentStage ? 'completed' : ''}`}>
-                <div className="edit-story-page__mini-dot">
-                  {index < currentStage && <Check size={12} />}
-                </div>
+              <div key={s.id} className={`edit-story-page__mini-step ${index === currentStage ? 'active' : index < currentStage ? 'completed' : ''}`}>
+                <div className="edit-story-page__mini-dot">{index < currentStage && <Check size={12} />}</div>
                 <span className="edit-story-page__mini-label">{s.name}</span>
               </div>
             ))}
           </div>
 
-          {/* 영상 영역 - 전체 폭 */}
-          <div className="edit-story-page__fullscreen-video">
-            <div
-              className="edit-story-page__video-container"
-              style={{ background: stageColors[currentStageId] || '#F5F0E8' }}
-            >
-              {stageLoading ? (
-                <div className="edit-story-page__loading">
-                  <div className="edit-story-page__loading-emoji">🎨</div>
-                  <p className="edit-story-page__loading-title">{currentStageData.name} 이야기를 만들고 있어요...</p>
-                  <p className="edit-story-page__loading-subtitle">잠시만 기다려주세요</p>
-                  <div className="edit-story-page__loading-bar">
-                    <div
-                      className="edit-story-page__loading-fill"
-                      style={{ width: `${Math.min(stageLoadingProgress, 100)}%` }}
-                    />
-                  </div>
-                  <p className="edit-story-page__loading-percent">
-                    {Math.min(Math.round(stageLoadingProgress), 100)}%
-                  </p>
+          <div className="edit-story-page__content-frame">
+            {isLoading ? (
+              <div className="edit-story-page__center-content">
+                <div className="edit-story-page__loading-emoji">🎬</div>
+                <h3 className="edit-story-page__loading-title">영상 생성 중...</h3>
+                <div className="edit-story-page__loading-bar">
+                  <div className="edit-story-page__loading-fill" style={{ width: `${loadingProgress}%` }}></div>
                 </div>
-              ) : stageVideoPlaying ? (
-                currentStageVideoUrl ? (
-                  <div className="edit-story-page__video-player-wrapper">
-                    <video
-                      src={`http://localhost:8000${currentStageVideoUrl}`}
-                      className="edit-story-page__video-player"
-                      controls
-                      autoPlay
-                      onEnded={() => {
-                        setStageVideoPlaying(false)
-                        setStageVideoCompleted(true)
-                      }}
-                    >
-                      브라우저가 비디오 재생을 지원하지 않습니다.
-                    </video>
+                <p className="edit-story-page__loading-percent">{loadingProgress}%</p>
+              </div>
+            ) : isVideoPlaying ? (
+              <div className="edit-story-page__video-wrapper">
+                <video
+                  ref={videoRef}
+                  src={STAGE_VIDEOS[currentStageId]}
+                  controls
+                  onEnded={handleVideoEnded}
+                  onError={handleVideoError}
+                  className="edit-story-page__video-player"
+                />
+                {videoError && (
+                  <div className="edit-story-page__video-error">
+                    <div className="edit-story-page__error-emoji">😢</div>
+                    <p>영상을 불러올 수 없습니다</p>
+                    <p className="edit-story-page__error-sub">잠시 후 자동으로 넘어갑니다...</p>
                   </div>
-                ) : (
-                  <div className="edit-story-page__video-playing">
-                    <div className="edit-story-page__video-emoji">🎬</div>
-                    <div className="edit-story-page__video-status">{currentStageData.name} 영상 재생 중...</div>
-                  </div>
-                )
-              ) : stageVideoCompleted ? (
-                <div className="edit-story-page__video-complete">
-                  <div className="edit-story-page__video-emoji">✨</div>
-                  <p className="edit-story-page__complete-title">{currentStageData.name} 완료!</p>
-                  <p className="edit-story-page__complete-subtitle">
-                    {currentStage === STAGES.length - 1 ? '동화가 완성됐어요!' : '다음 단계로 넘어갈까요?'}
-                  </p>
-                </div>
-              ) : (
-                <div className="edit-story-page__video-ready">
-                  <div className="edit-story-page__video-emoji">🎥</div>
-                  <p className="edit-story-page__video-ready-title">{currentStageData.name} 영상 준비 완료!</p>
-                  {currentStageVideoUrl ? (
-                    <button onClick={() => setStageVideoPlaying(true)} className="edit-story-page__play-btn">
-                      <Play size={24} />
-                      영상 보기
-                    </button>
-                  ) : (
-                    <p className="edit-story-page__video-status">곧 자동 재생됩니다...</p>
-                  )}
-                </div>
-              )}
+                )}
+              </div>
+            ) : isVideoCompleted ? (
+              <div className="edit-story-page__center-content">
+                <div className="edit-story-page__complete-emoji">✅</div>
+                <p className="edit-story-page__complete-title">{currentStageData.name} 영상 완료!</p>
+                <button onClick={handleReplay} className="edit-story-page__replay-btn">
+                  <Play size={20} /> 다시 보기
+                </button>
+              </div>
+            ) : null}
+          </div>
+
+          {!isLoading && (
+            <div className="edit-story-page__story-text">
+              <span className="edit-story-page__story-label">📖 {currentStageData.name}</span>
+              <p>{currentSelections[0]?.text || STAGE_STORIES[currentStageId]}</p>
             </div>
-          </div>
+          )}
 
-          {/* 줄거리 */}
-          <div className="edit-story-page__story-text">
-            <span className="edit-story-page__story-label">📖 {currentStageData.name}</span>
-            <p>{currentSelections[0]?.text || '선택한 내용이 반영된 이야기입니다.'}</p>
-          </div>
-
-          {/* 다음 버튼 - 하단 */}
-          {stageVideoCompleted && (
+          {isVideoCompleted && (
             <div className="edit-story-page__bottom-action">
               <button onClick={handleNextStage} className="edit-story-page__big-btn">
                 {currentStage === STAGES.length - 1 ? '동화 영상 보기 🎉' : `${STAGES[currentStage + 1].name}으로 가기`}
@@ -645,7 +477,6 @@ export default function EditStoryPage({
           )}
         </main>
 
-        {/* 하단 풍경 장식 */}
         <div className="edit-story-page__landscape">
           <div className="edit-story-page__grass"></div>
           <div className="edit-story-page__tree edit-story-page__tree--1"></div>
@@ -673,7 +504,6 @@ export default function EditStoryPage({
   // ============================================
   return (
     <div className="edit-story-page">
-      {/* 배경 구름 */}
       <div className="edit-story-page__bg-decorations">
         <div className="edit-story-page__cloud edit-story-page__cloud--1"></div>
         <div className="edit-story-page__cloud edit-story-page__cloud--2"></div>
@@ -681,76 +511,42 @@ export default function EditStoryPage({
         <div className="edit-story-page__cloud edit-story-page__cloud--4"></div>
       </div>
 
-      <SimpleHeader
-        onNavigate={onNavigate}
-        onGoBack={handleGoBack}
-        onMenuClick={onMenuClick}
-      />
+      <SimpleHeader onNavigate={onNavigate} onGoBack={handleGoBack} onMenuClick={onMenuClick} />
 
       <main className="edit-story-page__main edit-story-page__main--fullscreen">
-        {/* 미니 진행 표시 - 상단 */}
         <div className="edit-story-page__mini-progress">
           {STAGES.map((s, index) => (
-            <div key={index} className={`edit-story-page__mini-step ${index === currentStage ? 'active' : index < currentStage ? 'completed' : ''}`}>
-              <div className="edit-story-page__mini-dot">
-                {index < currentStage && <Check size={12} />}
-              </div>
+            <div key={s.id} className={`edit-story-page__mini-step ${index === currentStage ? 'active' : index < currentStage ? 'completed' : ''}`}>
+              <div className="edit-story-page__mini-dot">{index < currentStage && <Check size={12} />}</div>
               <span className="edit-story-page__mini-label">{s.name}</span>
             </div>
           ))}
         </div>
 
-        {/* 질문 카드 */}
         <div className="edit-story-page__question-card">
           <h2 className="edit-story-page__stage-title">{currentStageData.name}</h2>
           <p className="edit-story-page__question-text">💭 {currentChoiceData?.question || '다음 이야기를 선택해주세요:'}</p>
         </div>
 
-        {/* 선택지 (동적 또는 폴백) */}
         {!isCustomMode ? (
           <div className="edit-story-page__choice-area">
-            {isChoicesLoading ? (
-              <div className="edit-story-page__loading-choices">
-                <p>AI가 선택지를 고민하고 있어요... 🤔</p>
-              </div>
-            ) : (
-              <div className="edit-story-page__choice-grid">
-                {/* 동적 선택지가 있으면 사용, 없으면 폴백 */}
-                {(dynamicChoices.length > 0 ? dynamicChoices : currentChoiceData?.choices.map(c => c.title) || []).map((choiceText, index) => {
-                  const fallbackChoice = currentChoiceData?.choices[index]
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleChoiceSelect(String(index + 1), choiceText)}
-                      className="edit-story-page__choice-card"
-                    >
-                      <div className="edit-story-page__choice-icon">
-                        {dynamicChoices.length > 0 ? (index === 0 ? '1️⃣' : '2️⃣') : fallbackChoice?.icon}
-                      </div>
-                      <h3 className="edit-story-page__choice-title">{choiceText}</h3>
-                      {dynamicChoices.length === 0 && fallbackChoice?.desc && (
-                        <p className="edit-story-page__choice-desc">{fallbackChoice.desc}</p>
-                      )}
-                    </button>
-                  )
-                })}
-              </div>
-            )}
-
-            {/* 직접 쓰기 버튼 */}
+            <div className="edit-story-page__choice-grid">
+              {currentChoiceData?.choices.map((choice) => (
+                <button key={choice.id} onClick={() => handleChoiceSelect(choice.id, choice.title)} className="edit-story-page__choice-card">
+                  <div className="edit-story-page__choice-icon">{choice.icon}</div>
+                  <h3 className="edit-story-page__choice-title">{choice.title}</h3>
+                  <p className="edit-story-page__choice-desc">{choice.desc}</p>
+                </button>
+              ))}
+            </div>
             <button onClick={() => setIsCustomMode(true)} className="edit-story-page__custom-btn">
-              <Edit3 size={20} />
-              <span>직접 쓰기</span>
+              <Edit3 size={20} /> <span>직접 쓰기</span>
             </button>
           </div>
         ) : (
-          /* 직접 쓰기 모드 */
           <div className="edit-story-page__custom-area">
             <div className="edit-story-page__custom-card">
-              <h3 className="edit-story-page__custom-title">
-                <Edit3 size={20} />
-                직접 쓰기
-              </h3>
+              <h3 className="edit-story-page__custom-title"><Edit3 size={20} /> 직접 쓰기</h3>
               <textarea
                 value={customInput}
                 onChange={(e) => setCustomInput(e.target.value)}
@@ -758,26 +554,14 @@ export default function EditStoryPage({
                 className="edit-story-page__custom-input"
               />
               <div className="edit-story-page__custom-actions">
-                <button
-                  onClick={() => { setIsCustomMode(false); setCustomInput('') }}
-                  className="edit-story-page__custom-cancel"
-                >
-                  취소
-                </button>
-                <button
-                  onClick={handleCustomSubmit}
-                  disabled={!customInput.trim()}
-                  className="edit-story-page__custom-submit"
-                >
-                  확인
-                </button>
+                <button onClick={() => { setIsCustomMode(false); setCustomInput('') }} className="edit-story-page__custom-cancel">취소</button>
+                <button onClick={handleCustomSubmit} disabled={!customInput.trim()} className="edit-story-page__custom-submit">확인</button>
               </div>
             </div>
           </div>
         )}
       </main>
 
-      {/* 하단 풍경 장식 */}
       <div className="edit-story-page__landscape">
         <div className="edit-story-page__grass"></div>
         <div className="edit-story-page__tree edit-story-page__tree--1"></div>
