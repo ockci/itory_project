@@ -40,7 +40,7 @@ export default function ProfileSelectPage({
         {/* 로고 */}
         <div className="profile-select-page__logo">
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="profile-select-page__logo-img"
           />

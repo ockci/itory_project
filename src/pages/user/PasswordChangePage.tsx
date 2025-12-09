@@ -87,7 +87,7 @@ export default function PasswordChangePage({ onNavigate: _onNavigate, onGoBack, 
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="password-change-page__logo-img"
           />

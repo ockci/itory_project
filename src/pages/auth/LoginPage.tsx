@@ -68,7 +68,7 @@ export default function LoginPage({ onNavigate, onLogin, onGoBack }: LoginPagePr
           </button>
           <div className="login-page__logo">
             <img
-              src="/src/assets/images/logo.png"
+              src="/images/logo.png"
               alt="아이토리"
               className="login-page__logo-img"
             />

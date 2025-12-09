@@ -104,7 +104,7 @@ export default function FAQPage({ onNavigate: _onNavigate, onGoBack, onMenuClick
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="faq-page__logo-img"
           />

@@ -22,19 +22,19 @@ export default function HomePage({ onNavigate, onMenuClick, currentKid, userInfo
 
   const cards = [
     {
-      image: '/src/assets/images/home-fairytale.png',
+      image: '/images/home-fairytale.png',
       title: '동화 만들기',
       description: '나만의 동화를 만들어요',
       page: 'fairytale-selection' as PageType
     },
     {
-      image: '/src/assets/images/home-bookclub.png',
+      image: '/images/home-bookclub.png',
       title: '북클럽 보기',
       description: '친구들과 이야기 나누기',
       page: 'bookclub' as PageType
     },
     {
-      image: '/src/assets/images/home-bookshelf.png',
+      image: '/images/home-bookshelf.png',
       title: '내 책장',
       description: '내가 만든 동화 모음',
       count: '총 12권',

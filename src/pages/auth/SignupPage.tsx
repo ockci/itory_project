@@ -103,7 +103,7 @@ export default function SignupPage({ onNavigate, onGoBack }: SignupPageProps) {
           </button>
           <div className="signup-page__logo">
             <img
-              src="/src/assets/images/logo.png"
+              src="/images/logo.png"
               alt="아이토리"
               className="signup-page__logo-img"
             />

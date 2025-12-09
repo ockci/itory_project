@@ -19,18 +19,18 @@ const isImageUrl = (avatar: string | undefined): boolean => {
 
 // 아바타 이미지 옵션 (ProfileAddPage와 동일)
 const avatarOptions = [
-  { id: 'avatar1', src: '/src/assets/images/avatars/avatar1.png', alt: '아바타 1' },
-  { id: 'avatar2', src: '/src/assets/images/avatars/avatar2.png', alt: '아바타 2' },
-  { id: 'avatar3', src: '/src/assets/images/avatars/avatar3.png', alt: '아바타 3' },
-  { id: 'avatar4', src: '/src/assets/images/avatars/avatar4.png', alt: '아바타 4' },
-  { id: 'avatar5', src: '/src/assets/images/avatars/avatar5.png', alt: '아바타 5' },
-  { id: 'avatar6', src: '/src/assets/images/avatars/avatar6.png', alt: '아바타 6' },
-  { id: 'avatar7', src: '/src/assets/images/avatars/avatar7.png', alt: '아바타 7' },
-  { id: 'avatar8', src: '/src/assets/images/avatars/avatar8.png', alt: '아바타 8' },
-  { id: 'avatar9', src: '/src/assets/images/avatars/avatar9.png', alt: '아바타 9' },
-  { id: 'avatar10', src: '/src/assets/images/avatars/avatar10.png', alt: '아바타 10' },
-  { id: 'avatar11', src: '/src/assets/images/avatars/avatar11.png', alt: '아바타 11' },
-  { id: 'avatar12', src: '/src/assets/images/avatars/avatar12.png', alt: '아바타 12' },
+  { id: 'avatar1', src: '/images/avatars/avatar1.png', alt: '아바타 1' },
+  { id: 'avatar2', src: '/images/avatars/avatar2.png', alt: '아바타 2' },
+  { id: 'avatar3', src: '/images/avatars/avatar3.png', alt: '아바타 3' },
+  { id: 'avatar4', src: '/images/avatars/avatar4.png', alt: '아바타 4' },
+  { id: 'avatar5', src: '/images/avatars/avatar5.png', alt: '아바타 5' },
+  { id: 'avatar6', src: '/images/avatars/avatar6.png', alt: '아바타 6' },
+  { id: 'avatar7', src: '/images/avatars/avatar7.png', alt: '아바타 7' },
+  { id: 'avatar8', src: '/images/avatars/avatar8.png', alt: '아바타 8' },
+  { id: 'avatar9', src: '/images/avatars/avatar9.png', alt: '아바타 9' },
+  { id: 'avatar10', src: '/images/avatars/avatar10.png', alt: '아바타 10' },
+  { id: 'avatar11', src: '/images/avatars/avatar11.png', alt: '아바타 11' },
+  { id: 'avatar12', src: '/images/avatars/avatar12.png', alt: '아바타 12' },
 ]
 
 // 현재 아바타가 이미지면 그대로, 이모지면 기본 이미지로
@@ -95,7 +95,7 @@ export default function ProfileEditPage({
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="profile-edit-page__logo-img"
           />

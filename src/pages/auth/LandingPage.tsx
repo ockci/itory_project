@@ -23,7 +23,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
       <header className="landing-page__header">
         <div className="landing-page__logo">
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="landing-page__logo-img"
           />
@@ -81,7 +81,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           {/* 오른쪽: 히어로 이미지 */}
           <div className="landing-page__hero-visual">
             <img
-              src="/src/assets/images/landing-hero.png"
+              src="/images/landing-hero.png"
               alt="아이토리 메인 이미지"
               className="landing-page__hero-img"
             />

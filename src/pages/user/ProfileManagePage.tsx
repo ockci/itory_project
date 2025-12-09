@@ -44,7 +44,7 @@ export default function ProfileManagePage({
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="profile-manage-page__logo-img"
           />

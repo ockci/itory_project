@@ -53,7 +53,7 @@ export default function ServiceGuidePage({ onNavigate, onGoBack }: ServiceGuideP
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="service-guide-page__logo-img"
           />

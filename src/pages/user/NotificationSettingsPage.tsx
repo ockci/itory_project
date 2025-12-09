@@ -46,7 +46,7 @@ export default function NotificationSettingsPage({ onNavigate: _onNavigate, onGo
             <ChevronLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="notification-settings-page__logo-img"
           />

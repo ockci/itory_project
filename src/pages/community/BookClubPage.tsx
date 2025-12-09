@@ -11,11 +11,11 @@ interface BookClubPageProps {
 
 // 주간 인기 작가 랭킹
 const rankings = [
-  { rank: 1, name: '김교원', avatar: '/src/assets/images/avatars/avatar1.png', likes: 124, badge: '🏆' },
-  { rank: 2, name: '이수진', avatar: '/src/assets/images/avatars/avatar2.png', likes: 98, badge: '🥈' },
-  { rank: 3, name: '박민수', avatar: '/src/assets/images/avatars/avatar3.png', likes: 87, badge: '🥉' },
-  { rank: 4, name: '최지은', avatar: '/src/assets/images/avatars/avatar4.png', likes: 76, badge: '' },
-  { rank: 5, name: '정하늘', avatar: '/src/assets/images/avatars/avatar5.png', likes: 65, badge: '' }
+  { rank: 1, name: '김교원', avatar: '/images/avatars/avatar1.png', likes: 124, badge: '🏆' },
+  { rank: 2, name: '이수진', avatar: '/images/avatars/avatar2.png', likes: 98, badge: '🥈' },
+  { rank: 3, name: '박민수', avatar: '/images/avatars/avatar3.png', likes: 87, badge: '🥉' },
+  { rank: 4, name: '최지은', avatar: '/images/avatars/avatar4.png', likes: 76, badge: '' },
+  { rank: 5, name: '정하늘', avatar: '/images/avatars/avatar5.png', likes: 65, badge: '' }
 ]
 
 // 게시글 데이터 (동화 이미지 경로 사용)
@@ -24,13 +24,13 @@ const posts = [
     id: 1,
     author: '김교원',
     authorAge: 9,
-    avatar: '/src/assets/images/avatars/avatar1.png',
+    avatar: '/images/avatars/avatar1.png',
     time: '2시간 전',
     title: '나만의 특별한 흥부이야기',
     description: '착한 흥부가 제비를 도와주고 보물을 받는 이야기를 내 마음대로 바꿔봤어요!',
     baseTale: '흥부와 놀부',
     hashtags: ['#흥부와놀부', '#착한마음', '#제비'],
-    thumbnail: '/src/assets/images/tales/tale_003.png',
+    thumbnail: '/images/tales/tale_003.png',
     likes: 124,
     views: 456,
     isHot: true
@@ -134,7 +134,7 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
             <ArrowLeft size={24} />
           </button>
           <img
-            src="/src/assets/images/logo.png"
+            src="/images/logo.png"
             alt="아이토리"
             className="bookclub__logo-img"
             onClick={() => onNavigate('home')}
