@@ -1,17 +1,17 @@
 /* ============================================
-   📖 아이토리 - 동화 상세 페이지 CSS (New Design System)
+   📖 아이토리 - 동화 상세 페이지 CSS
+   FairyTaleSelectionPage 스타일 책 디자인
    ============================================ */
 
 .story-detail-page {
   min-height: 100vh;
   background: transparent;
-  /* Global background from index.css */
   position: relative;
   overflow-x: hidden;
 }
 
 /* ============================================
-   ☁️ 배경 구름 장식 (애니메이션 추가)
+   ☁️ 배경 구름 장식
    ============================================ */
 .story-detail-page__bg-decorations {
   position: fixed;
@@ -41,7 +41,6 @@
   border-radius: 50%;
 }
 
-/* Reuse keyframes from HomePage or define globally if possible, but defining here for safety */
 @keyframes floatCloud {
   0% {
     transform: translateX(0);
@@ -130,7 +129,7 @@
 .story-detail-page__main {
   position: relative;
   z-index: 1;
-  padding: 0 var(--spacing-xl);
+  padding: 0 32px;
   padding-bottom: 160px;
   max-width: 1200px;
   margin: 0 auto;
@@ -138,150 +137,228 @@
 
 .story-detail-page__container {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: var(--spacing-2xl);
+  grid-template-columns: 360px 1fr;
+  gap: 40px;
   align-items: start;
-  margin-top: var(--spacing-xl);
+  margin-top: 24px;
 }
 
 /* ============================================
-   📕 책 표지 카드
+   📕 3D 책 스타일 (FairyTaleSelectionPage)
    ============================================ */
 .story-detail-page__book-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: 24px;
 }
 
-.story-detail-page__cover {
+/* 3D 책 구조 */
+.story-detail-page__book-3d {
   position: relative;
   width: 280px;
-  height: 380px;
-  perspective: 1000px;
-}
-
-.story-detail-page__cover-inner {
-  width: 100%;
-  height: 100%;
-  background: var(--gradient-pink);
-  /* Use variable */
-  border-radius: 8px 20px 20px 8px;
-  padding: var(--spacing-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow:
-    8px 8px 0 rgba(0, 0, 0, 0.15),
-    inset -4px 0 12px rgba(0, 0, 0, 0.1),
-    inset 4px 0 8px rgba(255, 255, 255, 0.3);
-  transform: rotateY(-5deg);
+  height: 400px;
   transform-style: preserve-3d;
   transition: transform 0.4s ease;
+  cursor: pointer;
 }
 
-.story-detail-page__cover:hover .story-detail-page__cover-inner {
-  transform: rotateY(-10deg) translateX(-8px);
+.story-detail-page__book-3d:hover {
+  transform: rotateY(-15deg) rotateX(5deg) translateZ(20px);
 }
 
-/* 책 표지 광택 */
-.story-detail-page__cover-inner::before {
-  content: '';
+/* 책등 (Spine) - 왼쪽 */
+.story-detail-page__book-spine {
   position: absolute;
-  top: 0;
   left: 0;
-  width: 40%;
+  top: 0;
+  width: 45px;
   height: 100%;
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0.3) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      transparent 100%);
-  border-radius: 8px 0 0 8px;
-  pointer-events: none;
+  transform: translateX(-22px) rotateY(-90deg);
+  transform-origin: right center;
+  border-radius: 4px 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.2);
 }
 
-/* 책 테두리 장식 */
-.story-detail-page__cover-inner::after {
+/* 책등 장식 */
+.story-detail-page__book-spine::before {
   content: '';
   position: absolute;
-  inset: 12px;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  border-radius: 4px 16px 16px 4px;
-  pointer-events: none;
+  top: 15px;
+  bottom: 15px;
+  left: 8px;
+  right: 8px;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* 책 측면 (페이지) */
-.story-detail-page__cover-spine {
-  position: absolute;
-  left: -12px;
-  top: 8px;
-  bottom: 8px;
-  width: 14px;
-  background: linear-gradient(90deg, #F5F0E0 0%, #FFFEF8 30%, #F5F0E0 100%);
-  border-radius: 2px 0 0 2px;
-  box-shadow:
-    -2px 0 4px rgba(0, 0, 0, 0.1),
-    inset 2px 0 4px rgba(0, 0, 0, 0.05);
-  transform: rotateY(-5deg);
-}
-
-.story-detail-page__cover-spine::before {
-  content: '';
-  position: absolute;
-  inset: 10px 3px;
-  background: repeating-linear-gradient(180deg,
-      transparent 0px,
-      transparent 4px,
-      rgba(0, 0, 0, 0.04) 4px,
-      rgba(0, 0, 0, 0.04) 5px);
-}
-
-.story-detail-page__cover-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: #E91E63;
-  /* Keep specific color or use variable */
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-.story-detail-page__cover-emoji {
-  font-size: 100px;
-  margin-bottom: var(--spacing-md);
-  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
-}
-
-.story-detail-page__cover-title {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-black);
+.story-detail-page__spine-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14px;
+  font-weight: 700;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: var(--spacing-sm);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+}
+
+/* 페이지 두께 - 오른쪽 */
+.story-detail-page__book-pages {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 25px;
+  transform: translateX(25px) rotateY(90deg);
+  transform-origin: left center;
+  background: linear-gradient(90deg, #F5F0E0 0%, #FFFEF8 50%, #F5F0E0 100%);
+  border-radius: 0 3px 3px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px 4px;
+  box-shadow: inset 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.story-detail-page__page-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* 책 표지 */
+.story-detail-page__book-cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px 12px 12px 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow:
+    6px 6px 0 rgba(0, 0, 0, 0.15),
+    12px 12px 30px rgba(0, 0, 0, 0.2),
+    inset -3px 0 10px rgba(0, 0, 0, 0.1),
+    inset 3px 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* 표지 테두리 장식 */
+.story-detail-page__cover-border {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px 10px 10px 4px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 이미지 영역 */
+.story-detail-page__cover-image {
+  flex: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFF8EE;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.story-detail-page__cover-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.story-detail-page__book-3d:hover .story-detail-page__cover-image img {
+  transform: scale(1.05);
+}
+
+.story-detail-page__image-placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  opacity: 0.4;
+  background: linear-gradient(135deg, #FFF8EE 0%, #FFEFD5 100%);
+}
+
+/* 제목 영역 */
+.story-detail-page__cover-info {
+  padding-top: 14px;
   text-align: center;
 }
 
-.story-detail-page__cover-decoration {
-  display: flex;
-  gap: var(--spacing-sm);
-  font-size: var(--font-size-xl);
+.story-detail-page__book-label {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* 별점 (Clay Style) */
+.story-detail-page__book-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.story-detail-page__book-theme {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 스타일 뱃지 */
+.story-detail-page__style-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #E91E63;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+/* 광택 효과 */
+.story-detail-page__cover-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.15) 45%,
+      rgba(255, 255, 255, 0) 55%);
+  pointer-events: none;
+  z-index: 5;
+  border-radius: 4px 12px 12px 4px;
+}
+
+/* 별점 */
 .story-detail-page__rating {
   display: flex;
   gap: 6px;
   padding: 12px 24px;
   background: white;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-  border: 2px solid white;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 /* ============================================
@@ -290,156 +367,152 @@
 .story-detail-page__info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 20px;
 }
 
-/* 제목 섹션 (Clay Style) */
+/* 제목 섹션 */
 .story-detail-page__title-section {
-  padding: var(--spacing-lg) var(--spacing-xl);
+  padding: 24px 28px;
   background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-  border: 4px solid white;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .story-detail-page__title {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-black);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-sm);
+  font-size: 32px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 8px;
 }
 
 .story-detail-page__subtitle {
-  font-size: var(--font-size-md);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  font-size: 16px;
+  color: #8B7D6B;
+  font-weight: 500;
 }
 
 /* 메타 정보 */
 .story-detail-page__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-md);
+  gap: 12px;
 }
 
 .story-detail-page__meta-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 20px;
+  padding: 14px 18px;
   background: white;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  border: 2px solid white;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
 .story-detail-page__meta-item svg {
-  color: var(--color-primary);
+  color: #F5A623;
 }
 
 /* ============================================
-   🗺️ 선택한 여정 (Clay Style)
+   🗺️ 선택한 여정
    ============================================ */
 .story-detail-page__journey {
   background: white;
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-  border: 4px solid white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .story-detail-page__journey-title {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-lg);
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.story-detail-page__journey-icon {
+  font-size: 20px;
 }
 
 .story-detail-page__journey-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 10px;
 }
 
 .story-detail-page__journey-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--color-bg-base);
-  border-radius: var(--radius-md);
-  transition: var(--transition-base);
-  border: 2px solid transparent;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #F8F4ED;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 }
 
 .story-detail-page__journey-item:hover {
   transform: translateX(8px);
-  background: white;
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-sm);
+  background: #FFF8EE;
 }
 
 .story-detail-page__journey-step {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #F5A623 0%, #FF8C42 100%);
   border-radius: 50%;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-size: 12px;
+  font-weight: 700;
   color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
 }
 
 .story-detail-page__journey-label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-tertiary);
-  min-width: 40px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #999;
+  min-width: 36px;
 }
 
 .story-detail-page__journey-text {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
 /* ============================================
-   🔘 액션 버튼 (Clay Style)
+   📘 액션 버튼
    ============================================ */
 .story-detail-page__actions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
+  gap: 12px;
 }
 
 .story-detail-page__btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 18px 16px;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition: all 0.2s ease;
   color: white;
 }
 
 .story-detail-page__btn:hover {
   transform: translateY(-4px);
-  filter: brightness(1.05);
 }
 
 .story-detail-page__btn:active {
@@ -447,8 +520,12 @@
 }
 
 .story-detail-page__btn--play {
-  background: var(--gradient-primary);
-  box-shadow: 0 4px 0 #E68A00, 0 8px 16px rgba(255, 159, 77, 0.3);
+  background: linear-gradient(135deg, #F5A623 0%, #FF8C42 100%);
+  box-shadow: 0 4px 0 #D4820A, 0 8px 16px rgba(245, 166, 35, 0.3);
+}
+
+.story-detail-page__btn--play:hover {
+  box-shadow: 0 6px 0 #D4820A, 0 12px 24px rgba(245, 166, 35, 0.35);
 }
 
 .story-detail-page__btn--download {
@@ -456,9 +533,17 @@
   box-shadow: 0 4px 0 #1976D2, 0 8px 16px rgba(33, 150, 243, 0.3);
 }
 
+.story-detail-page__btn--download:hover {
+  box-shadow: 0 6px 0 #1976D2, 0 12px 24px rgba(33, 150, 243, 0.35);
+}
+
 .story-detail-page__btn--share {
   background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%);
   box-shadow: 0 4px 0 #AD1457, 0 8px 16px rgba(236, 64, 122, 0.3);
+}
+
+.story-detail-page__btn--share:hover {
+  box-shadow: 0 6px 0 #AD1457, 0 12px 24px rgba(236, 64, 122, 0.35);
 }
 
 /* ============================================
@@ -480,12 +565,11 @@
   left: -5%;
   right: -5%;
   height: 70px;
-  background: linear-gradient(180deg, #B2E0A2 0%, #9CCC65 100%);
+  background: linear-gradient(180deg, #8BC34A 0%, #7CB342 50%, #689F38 100%);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
-/* Reuse tree styles but scoped if needed, or rely on global if moved */
 .story-detail-page__tree {
   position: absolute;
   bottom: 55px;
@@ -499,7 +583,7 @@
   transform: translateX(-50%);
   width: 14px;
   height: 28px;
-  background: linear-gradient(180deg, #D7CCC8 0%, #BCAAA4 100%);
+  background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
   border-radius: 4px;
 }
 
@@ -511,7 +595,7 @@
   transform: translateX(-50%);
   width: 55px;
   height: 55px;
-  background: linear-gradient(180deg, #C5E1A5 0%, #AED581 100%);
+  background: linear-gradient(180deg, #81C784 0%, #66BB6A 50%, #4CAF50 100%);
   border-radius: 50%;
   box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -527,7 +611,7 @@
 .story-detail-page__bush {
   position: absolute;
   bottom: 55px;
-  background: linear-gradient(180deg, #C5E1A5 0%, #AED581 100%);
+  background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
   border-radius: 50% 50% 45% 45%;
   box-shadow: inset -3px -2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -579,84 +663,162 @@
    ============================================ */
 @media (max-width: 1024px) {
   .story-detail-page__container {
-    grid-template-columns: 280px 1fr;
-    gap: var(--spacing-xl);
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
   }
 
-  .story-detail-page__cover {
+  .story-detail-page__book-3d {
     width: 240px;
-    height: 320px;
+    height: 340px;
+  }
+
+  .story-detail-page__book-spine {
+    width: 38px;
+    transform: translateX(-19px) rotateY(-90deg);
+  }
+
+  .story-detail-page__book-pages {
+    width: 20px;
+    transform: translateX(20px) rotateY(90deg);
   }
 }
 
 @media (max-width: 768px) {
   .story-detail-page__main {
-    padding: 0 var(--spacing-md);
+    padding: 0 16px;
     padding-bottom: 140px;
   }
 
   .story-detail-page__container {
     grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
+    gap: 24px;
+    margin-top: 16px;
   }
 
   .story-detail-page__book-card {
     order: 0;
   }
 
-  .story-detail-page__cover {
+  .story-detail-page__book-3d {
     width: 220px;
-    height: 300px;
+    height: 310px;
+  }
+
+  .story-detail-page__book-spine {
+    width: 32px;
+    transform: translateX(-16px) rotateY(-90deg);
+  }
+
+  .story-detail-page__spine-title {
+    font-size: 12px;
+  }
+
+  .story-detail-page__book-pages {
+    width: 18px;
+    transform: translateX(18px) rotateY(90deg);
+  }
+
+  .story-detail-page__title {
+    font-size: 24px;
   }
 
   .story-detail-page__actions {
     grid-template-columns: 1fr;
-    gap: var(--spacing-sm);
+    gap: 10px;
   }
 
   .story-detail-page__meta {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 8px;
   }
 
   .story-detail-page__meta-item {
     width: 100%;
   }
+
+  .story-detail-page__landscape {
+    height: 100px;
+  }
+
+  .story-detail-page__grass {
+    height: 55px;
+  }
 }
 
 @media (max-width: 480px) {
-  .story-detail-page__cover {
+  .story-detail-page__book-3d {
     width: 180px;
-    height: 250px;
+    height: 260px;
+  }
+
+  .story-detail-page__book-spine {
+    width: 26px;
+    transform: translateX(-13px) rotateY(-90deg);
+  }
+
+  .story-detail-page__spine-title {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .story-detail-page__book-pages {
+    width: 14px;
+    transform: translateX(14px) rotateY(90deg);
+  }
+
+  .story-detail-page__book-cover {
+    padding: 12px;
+  }
+
+  .story-detail-page__cover-border {
+    padding: 10px;
+  }
+
+  .story-detail-page__cover-image {
+    border-width: 3px;
+  }
+
+  .story-detail-page__book-title {
+    font-size: 16px;
+  }
+
+  .story-detail-page__book-label {
+    font-size: 9px;
+    padding: 3px 10px;
+  }
+
+  .story-detail-page__book-theme {
+    font-size: 11px;
+  }
+
+  .story-detail-page__style-badge {
+    padding: 4px 10px;
+    font-size: 10px;
+    top: 8px;
+    right: 8px;
   }
 
   .story-detail-page__title {
-    font-size: var(--font-size-2xl);
+    font-size: 20px;
   }
 
-  .story-detail-page__cover-emoji {
-    font-size: 60px;
+  .story-detail-page__title-section {
+    padding: 20px;
   }
 
-  .story-detail-page__journey-title {
-    font-size: 18px;
+  .story-detail-page__journey {
+    padding: 20px;
   }
 
   .story-detail-page__journey-item {
     padding: 10px 12px;
-    gap: 10px;
+    gap: 8px;
   }
 
   .story-detail-page__journey-step {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-
-  .story-detail-page__journey-label {
-    font-size: 11px;
-    min-width: 32px;
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
   }
 
   .story-detail-page__journey-text {
@@ -665,8 +827,8 @@
 
   .story-detail-page__btn {
     padding: 14px;
-    font-size: 15px;
-    border-radius: 16px;
+    font-size: 14px;
+    border-radius: 14px;
   }
 
   .story-detail-page__landscape {
