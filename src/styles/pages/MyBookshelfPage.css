@@ -562,30 +562,13 @@
   height: 85px;
   background: linear-gradient(180deg, #8BC34A 0%, #7CB342 40%, #689F38 100%);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.2);
 }
 
-/* 잔디 질감 */
-.bookshelf-page__grass::before {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: 10%;
-  right: 10%;
-  height: 20px;
-  background: repeating-linear-gradient(90deg,
-      transparent 0px,
-      transparent 8px,
-      rgba(255, 255, 255, 0.15) 8px,
-      rgba(255, 255, 255, 0.15) 10px);
-  border-radius: 50%;
-}
-
-/* 나무 - 잔디 위에 서있게 */
+/* 나무 - 잔디 위에 서있게 (더 낮게) */
 .bookshelf-page__tree {
   position: absolute;
-  bottom: 60px;
-  /* 잔디 위로 */
+  bottom: 45px;
 }
 
 /* 나무 줄기 */
@@ -609,8 +592,8 @@
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: radial-gradient(ellipse at 30% 30%, #A5D6A7 0%, #81C784 30%, #66BB6A 60%, #4CAF50 100%);
   border-radius: 50% 50% 45% 45%;
   box-shadow:
@@ -629,8 +612,7 @@
 /* 덤불 - 잔디와 자연스럽게 연결 */
 .bookshelf-page__bush {
   position: absolute;
-  bottom: 55px;
-  /* 잔디 곡선 위 */
+  bottom: 45px;
   background: linear-gradient(180deg, #AED581 0%, #9CCC65 50%, #8BC34A 100%);
   border-radius: 50% 50% 40% 40%;
   box-shadow:
@@ -648,7 +630,7 @@
   left: 48%;
   width: 40px;
   height: 28px;
-  bottom: 52px;
+  bottom: 42px;
 }
 
 .bookshelf-page__bush--3 {
@@ -660,7 +642,7 @@
 /* 꽃 - 잔디 위에 */
 .bookshelf-page__flower {
   position: absolute;
-  bottom: 70px;
+  bottom: 55px;
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -688,7 +670,7 @@
 .bookshelf-page__flower--2 {
   left: 52%;
   background: radial-gradient(circle, #FFF59D 30%, #FFEE58 100%);
-  bottom: 68px;
+  bottom: 53px;
 }
 
 .bookshelf-page__flower--3 {
@@ -1388,46 +1370,46 @@
     width: 8px;
   }
 
-  /* 선반 스타일 */
+  /* 선반 스타일 - 높이 늘리기! */
   .bookshelf-page__shelf {
-    min-height: 145px;
-    padding: 8px 12px 0;
+    min-height: 175px;
+    padding: 12px 12px 0;
   }
 
   .bookshelf-page__shelf::before {
-    bottom: 14px;
+    bottom: 16px;
   }
 
   /* 🔥 선반 바닥 - 책장 프레임까지 늘리기 */
   .bookshelf-page__shelf-board {
-    height: 14px;
+    height: 16px;
     left: -8px;
     right: -8px;
   }
 
   .bookshelf-page__books {
-    gap: 16px;
+    gap: 18px;
   }
 
-  /* 🔥 책 크기 키우기! */
+  /* 🔥 책 크기 더 키우기! */
   .bookshelf-page__book-cover {
-    width: 100px;
-    height: 133px;
-    padding: 5px;
+    width: 115px;
+    height: 153px;
+    padding: 6px;
   }
 
   .bookshelf-page__book-cover::before {
-    width: 7px;
+    width: 8px;
   }
 
   .bookshelf-page__book-title {
-    font-size: 9px;
-    margin-top: 4px;
+    font-size: 10px;
+    margin-top: 5px;
   }
 
   .bookshelf-page__book-badge {
     font-size: 7px;
-    padding: 2px 4px;
+    padding: 2px 5px;
   }
 
   .bookshelf-page__book-bottom {
@@ -1436,8 +1418,8 @@
   }
 
   .bookshelf-page__book-shadow {
-    height: 7px;
-    bottom: -7px;
+    height: 8px;
+    bottom: -8px;
   }
 
   .bookshelf-page__cabinet-bottom {
