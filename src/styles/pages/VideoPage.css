@@ -161,6 +161,113 @@
 }
 
 /* ============================================
+   ⏳ 로딩 화면
+   ============================================ */
+.video-page__loading-container {
+  background: white;
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow:
+    0 8px 0 #E8E0D4,
+    0 16px 48px rgba(0, 0, 0, 0.1);
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-page__loading-content {
+  text-align: center;
+}
+
+.video-page__loading-emoji {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+.video-page__loading-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.video-page__loading-bar {
+  width: 280px;
+  max-width: 80%;
+  height: 16px;
+  background: #F0EBE3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.video-page__loading-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+.video-page__loading-percent {
+  font-size: 20px;
+  font-weight: 700;
+  color: #F5A623;
+}
+
+.video-page__loading-spinner {
+  text-align: center;
+}
+
+.video-page__loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.video-page__loading-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #F5A623;
+  animation: dotBounce 1.4s infinite ease-in-out both;
+}
+
+.video-page__loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.video-page__loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.video-page__loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.video-page__loading-text {
+  font-size: 18px;
+  color: #8B7D6B;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ============================================
    🎬 비디오 플레이어
    ============================================ */
 .video-page__player-wrapper {
@@ -177,7 +284,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #E8F5FF 0%, #D4ECFF 50%, #C4E4FF 100%);
+  background: #000;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -186,38 +293,27 @@
   overflow: hidden;
 }
 
-.video-page__player-content {
-  text-align: center;
-  z-index: 1;
-}
-
-.video-page__player-emoji {
-  font-size: 100px;
-  margin-bottom: 16px;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
-}
-
-.video-page__player-text {
-  font-size: 20px;
-  color: #5D4E37;
-  font-weight: 600;
+.video-page__video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
 }
 
 .video-page__play-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.video-page__player:hover .video-page__play-overlay {
-  opacity: 1;
+.video-page__play-overlay:hover {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .video-page__play-overlay svg {
@@ -233,6 +329,86 @@
 
 .video-page__play-overlay:hover svg {
   transform: scale(1.1);
+}
+
+/* 에러 오버레이 */
+.video-page__error-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 12px;
+}
+
+.video-page__error-emoji {
+  font-size: 60px;
+}
+
+.video-page__error-overlay p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.video-page__error-sub {
+  font-size: 14px !important;
+  color: #aaa !important;
+  font-weight: 400 !important;
+}
+
+/* 완료 화면 */
+.video-page__complete-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FFF8EE 0%, #FFEFD5 100%);
+  text-align: center;
+  padding: 40px;
+}
+
+.video-page__complete-emoji {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: celebrationPulse 2s infinite;
+}
+
+.video-page__complete-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.video-page__complete-subtitle {
+  font-size: 18px;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+.video-page__restart-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: white;
+  border: 2px solid #F5A623;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #F5A623;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.video-page__restart-btn:hover {
+  background: #FFF8EE;
+  transform: translateY(-2px);
 }
 
 /* ============================================
@@ -273,9 +449,11 @@
   box-shadow: 0 1px 0 #E0D8CC;
 }
 
-.video-page__control-btn--restart {
-  width: 36px;
-  height: 36px;
+.video-page__control-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 3px 0 #E0D8CC;
 }
 
 .video-page__progress-wrapper {
@@ -298,19 +476,7 @@
   height: 100%;
   background: linear-gradient(90deg, #F5A623 0%, #FF8C42 100%);
   border-radius: 4px;
-  transition: width 0.1s ease;
-}
-
-.video-page__progress-handle {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  cursor: grab;
+  transition: width 0.3s ease;
 }
 
 .video-page__time {
@@ -353,6 +519,16 @@
   box-shadow: 0 4px 0 #D4820A;
 }
 
+.video-page__chapter-btn.completed {
+  background: linear-gradient(135deg, #8BC34A 0%, #7CB342 100%);
+  box-shadow: 0 4px 0 #558B2F;
+}
+
+.video-page__chapter-btn.completed .video-page__chapter-num,
+.video-page__chapter-btn.completed .video-page__chapter-name {
+  color: white;
+}
+
 .video-page__chapter-num {
   width: 24px;
   height: 24px;
@@ -371,6 +547,10 @@
   color: white;
 }
 
+.video-page__chapter-btn.completed .video-page__chapter-num {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .video-page__chapter-name {
   font-size: 14px;
   font-weight: 700;
@@ -382,7 +562,7 @@
 }
 
 /* ============================================
-   🔘 액션 버튼들
+   📘 액션 버튼들
    ============================================ */
 .video-page__actions {
   display: grid;
@@ -452,57 +632,52 @@
 }
 
 .video-page__action-btn--share {
-  background: linear-gradient(135deg, #EC407A 0%, #D81B60 100%);
+  background: linear-gradient(135deg, #AB47BC 0%, #9C27B0 100%);
   box-shadow:
-    0 5px 0 #AD1457,
-    0 10px 24px rgba(236, 64, 122, 0.3);
+    0 5px 0 #7B1FA2,
+    0 10px 24px rgba(156, 39, 176, 0.3);
 }
 
 .video-page__action-btn--share:hover {
   box-shadow:
-    0 8px 0 #AD1457,
-    0 14px 32px rgba(236, 64, 122, 0.35);
+    0 8px 0 #7B1FA2,
+    0 14px 32px rgba(156, 39, 176, 0.35);
 }
 
 /* ============================================
-   🎉 축하 팝업
+   🎉 축하 모달
    ============================================ */
 .video-page__celebration-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 100;
   backdrop-filter: blur(4px);
 }
 
 .video-page__celebration-modal {
-  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+  background: white;
   border-radius: 32px;
-  padding: 48px 64px;
+  padding: 48px 56px;
   text-align: center;
-  box-shadow:
-    0 12px 0 #E8D4A0,
-    0 24px 64px rgba(0, 0, 0, 0.25);
-  animation: celebrationBounce 0.5s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: celebrationBounce 0.5s ease-out;
 }
 
 .video-page__celebration-emoji {
-  font-size: 100px;
-  margin-bottom: 20px;
-  animation: celebrationPulse 1s infinite;
+  font-size: 96px;
+  margin-bottom: 16px;
+  animation: celebrationPulse 2s infinite;
 }
 
 .video-page__celebration-title {
   font-size: 36px;
   font-weight: 800;
-  color: #3D3425;
-  margin-bottom: 12px;
+  color: #333;
+  margin-bottom: 8px;
 }
 
 .video-page__celebration-subtitle {
@@ -792,6 +967,19 @@
     font-size: 14px;
   }
 
+  .video-page__loading-container {
+    min-height: 300px;
+    padding: 16px;
+  }
+
+  .video-page__loading-emoji {
+    font-size: 60px;
+  }
+
+  .video-page__loading-title {
+    font-size: 20px;
+  }
+
   .video-page__player-wrapper {
     padding: 16px;
     border-radius: 24px;
@@ -801,8 +989,12 @@
     border-radius: 16px;
   }
 
-  .video-page__player-emoji {
-    font-size: 72px;
+  .video-page__complete-emoji {
+    font-size: 60px;
+  }
+
+  .video-page__complete-title {
+    font-size: 22px;
   }
 
   .video-page__controls {
@@ -911,14 +1103,6 @@
 
   .video-page__player-wrapper {
     padding: 12px;
-  }
-
-  .video-page__player-emoji {
-    font-size: 56px;
-  }
-
-  .video-page__player-text {
-    font-size: 16px;
   }
 
   .video-page__chapters {
