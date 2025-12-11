@@ -11,18 +11,18 @@ interface BookClubPageProps {
 
 // 주간 인기 작가 랭킹
 const rankings = [
-  { rank: 1, name: '김교원', avatar: '/images/avatars/avatar1.png', likes: 124, badge: '🏆' },
-  { rank: 2, name: '이수진', avatar: '/images/avatars/avatar2.png', likes: 98, badge: '🥈' },
-  { rank: 3, name: '박민수', avatar: '/images/avatars/avatar3.png', likes: 87, badge: '🥉' },
-  { rank: 4, name: '최지은', avatar: '/images/avatars/avatar4.png', likes: 76, badge: '' },
-  { rank: 5, name: '정하늘', avatar: '/images/avatars/avatar5.png', likes: 65, badge: '' }
+  { rank: 1, name: '김규원', avatar: '/images/avatars/avatar1.png', likes: 124 },
+  { rank: 2, name: '이수진', avatar: '/images/avatars/avatar2.png', likes: 98 },
+  { rank: 3, name: '박민수', avatar: '/images/avatars/avatar3.png', likes: 87 },
+  { rank: 4, name: '최지은', avatar: '/images/avatars/avatar4.png', likes: 76 },
+  { rank: 5, name: '정하늘', avatar: '/images/avatars/avatar5.png', likes: 65 }
 ]
 
-// 게시글 데이터 (동화 이미지 경로 사용)
+// 게시글 데이터
 const posts = [
   {
     id: 1,
-    author: '김교원',
+    author: '김규원',
     authorAge: 9,
     avatar: '/images/avatars/avatar1.png',
     time: '2시간 전',
@@ -39,13 +39,13 @@ const posts = [
     id: 2,
     author: '이수진',
     authorAge: 8,
-    avatar: '/src/assets/images/avatars/avatar2.png',
+    avatar: '/images/avatars/avatar2.png',
     time: '5시간 전',
     title: '마법 같은 콩쥐팥쥐',
     description: '콩쥐가 마법사가 되어서 팥쥐를 도와주는 새로운 엔딩이에요~',
     baseTale: '콩쥐팥쥐',
     hashtags: ['#콩쥐팥쥐', '#해피엔딩', '#마법'],
-    thumbnail: '/src/assets/images/tales/tale_005.png',
+    thumbnail: '/images/tales/tale_005.png',
     likes: 98,
     views: 321,
     isHot: true
@@ -54,13 +54,13 @@ const posts = [
     id: 3,
     author: '박민수',
     authorAge: 10,
-    avatar: '/src/assets/images/avatars/avatar3.png',
+    avatar: '/images/avatars/avatar3.png',
     time: '1일 전',
     title: '용감한 토끼의 모험!',
     description: '토끼가 거북이와 친구가 되어서 함께 모험을 떠나는 이야기예요',
     baseTale: '토끼와 거북이',
     hashtags: ['#토끼와거북이', '#우정', '#모험'],
-    thumbnail: '/src/assets/images/tales/tale_001.png',
+    thumbnail: '/images/tales/tale_001.png',
     likes: 87,
     views: 289,
     isHot: false
@@ -69,13 +69,13 @@ const posts = [
     id: 4,
     author: '최지은',
     authorAge: 7,
-    avatar: '/src/assets/images/avatars/avatar4.png',
+    avatar: '/images/avatars/avatar4.png',
     time: '2일 전',
     title: '금도끼를 찾아서',
     description: '정직한 나무꾼이 금도끼, 은도끼 모두 받고 마을을 도와줘요!',
     baseTale: '금도끼 은도끼',
     hashtags: ['#금도끼은도끼', '#정직', '#나눔'],
-    thumbnail: '/src/assets/images/tales/tale_006.png',
+    thumbnail: '/images/tales/tale_006.png',
     likes: 76,
     views: 198,
     isHot: false
@@ -84,13 +84,13 @@ const posts = [
     id: 5,
     author: '정하늘',
     authorAge: 9,
-    avatar: '/src/assets/images/avatars/avatar6.png',
+    avatar: '/images/avatars/avatar6.png',
     time: '3일 전',
     title: '해와 달이 된 남매의 비밀',
     description: '오누이가 하늘나라에서 겪는 신비로운 이야기를 상상해봤어요',
     baseTale: '해와 달이 된 오누이',
     hashtags: ['#해와달', '#오누이', '#신비'],
-    thumbnail: '/src/assets/images/tales/tale_002.png',
+    thumbnail: '/images/tales/tale_002.png',
     likes: 65,
     views: 176,
     isHot: false
@@ -111,12 +111,6 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
     )
   }
 
-  // 아바타가 이미지 경로인지 확인
-  const isImageUrl = (avatar: string | undefined): boolean => {
-    if (!avatar) return false
-    return avatar.startsWith('/') || avatar.startsWith('http')
-  }
-
   return (
     <div className="bookclub">
       {/* 배경 장식 */}
@@ -124,22 +118,14 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
         <div className="bookclub__cloud bookclub__cloud--1"></div>
         <div className="bookclub__cloud bookclub__cloud--2"></div>
         <div className="bookclub__cloud bookclub__cloud--3"></div>
-        <div className="bookclub__cloud bookclub__cloud--4"></div>
       </div>
 
       {/* 헤더 */}
       <header className="bookclub__header">
-        <div className="bookclub__header-left">
-          <button onClick={onGoBack} className="bookclub__back-btn">
-            <ArrowLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="bookclub__logo-img"
-            onClick={() => onNavigate('home')}
-          />
-        </div>
+        <button onClick={onGoBack} className="bookclub__back-btn">
+          <ArrowLeft size={24} />
+        </button>
+        <h1 className="bookclub__header-title">북클럽</h1>
         <div className="bookclub__header-spacer"></div>
       </header>
 
@@ -148,9 +134,8 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
         {/* 인트로 섹션 */}
         <div className="bookclub__intro">
           <div className="bookclub__intro-icon">
-            <Sparkles size={36} />
+            <Sparkles size={32} />
           </div>
-          <h1 className="bookclub__title">북클럽</h1>
           <p className="bookclub__subtitle">친구들의 멋진 동화를 구경하고 응원해요!</p>
         </div>
 
@@ -158,7 +143,7 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
         <section className="bookclub__ranking-section">
           <div className="bookclub__ranking-header">
             <div className="bookclub__ranking-title-wrap">
-              <Trophy size={24} />
+              <Trophy size={22} />
               <h2 className="bookclub__ranking-title">이번 주 인기 작가</h2>
             </div>
             <span className="bookclub__ranking-badge">TOP 5</span>
@@ -171,17 +156,21 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
                 className={`bookclub__ranking-card bookclub__ranking-card--${author.rank}`}
               >
                 <div className="bookclub__ranking-medal">
-                  {author.rank === 1 && <Crown size={20} className="bookclub__crown" />}
-                  {author.rank === 2 && <Medal size={18} className="bookclub__medal-silver" />}
-                  {author.rank === 3 && <Medal size={18} className="bookclub__medal-bronze" />}
+                  {author.rank === 1 && <Crown size={18} className="bookclub__crown" />}
+                  {author.rank === 2 && <Medal size={16} className="bookclub__medal-silver" />}
+                  {author.rank === 3 && <Medal size={16} className="bookclub__medal-bronze" />}
                   {author.rank > 3 && <span className="bookclub__ranking-num">{author.rank}</span>}
                 </div>
                 <div className="bookclub__ranking-avatar">
-                  {isImageUrl(author.avatar) ? (
-                    <img src={author.avatar} alt={author.name} className="bookclub__ranking-avatar-img" />
-                  ) : (
-                    '👤'
-                  )}
+                  <img
+                    src={author.avatar}
+                    alt={author.name}
+                    className="bookclub__ranking-avatar-img"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = 'none'
+                    }}
+                  />
                 </div>
                 <p className="bookclub__ranking-name">{author.name}</p>
                 <div className="bookclub__ranking-likes">
@@ -199,21 +188,21 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
             className={`bookclub__tab ${activeTab === 'popular' ? 'bookclub__tab--active' : ''}`}
             onClick={() => setActiveTab('popular')}
           >
-            <Flame size={18} />
+            <Flame size={16} />
             <span>인기</span>
           </button>
           <button
             className={`bookclub__tab ${activeTab === 'recent' ? 'bookclub__tab--active' : ''}`}
             onClick={() => setActiveTab('recent')}
           >
-            <Clock size={18} />
+            <Clock size={16} />
             <span>최신</span>
           </button>
           <button
             className={`bookclub__tab ${activeTab === 'following' ? 'bookclub__tab--active' : ''}`}
             onClick={() => setActiveTab('following')}
           >
-            <TrendingUp size={18} />
+            <TrendingUp size={16} />
             <span>팔로잉</span>
           </button>
         </div>
@@ -229,7 +218,7 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
               {/* HOT 배지 */}
               {post.isHot && (
                 <div className="bookclub__post-hot">
-                  <Flame size={14} />
+                  <Flame size={12} />
                   HOT
                 </div>
               )}
@@ -237,11 +226,15 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
               {/* 게시글 헤더 */}
               <div className="bookclub__post-header">
                 <div className="bookclub__post-avatar">
-                  {isImageUrl(post.avatar) ? (
-                    <img src={post.avatar} alt={post.author} className="bookclub__post-avatar-img" />
-                  ) : (
-                    '👤'
-                  )}
+                  <img
+                    src={post.avatar}
+                    alt={post.author}
+                    className="bookclub__post-avatar-img"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = 'none'
+                    }}
+                  />
                 </div>
                 <div className="bookclub__post-author-info">
                   <p className="bookclub__post-author">
@@ -262,9 +255,13 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
                     src={post.thumbnail}
                     alt={post.title}
                     className="bookclub__post-thumbnail-img"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = 'none'
+                    }}
                   />
                   <div className="bookclub__post-thumbnail-overlay">
-                    <Eye size={20} />
+                    <Eye size={18} />
                     <span>보러가기</span>
                   </div>
                 </div>
@@ -288,11 +285,11 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
                   className={`bookclub__action-btn bookclub__action-btn--like ${likedPosts.includes(post.id) ? 'bookclub__action-btn--liked' : ''}`}
                   onClick={() => handleLike(post.id)}
                 >
-                  <Heart size={18} fill={likedPosts.includes(post.id) ? '#FF6B6B' : 'none'} />
+                  <Heart size={16} fill={likedPosts.includes(post.id) ? '#FF6B6B' : 'none'} />
                   <span>{likedPosts.includes(post.id) ? post.likes + 1 : post.likes}</span>
                 </button>
                 <button className="bookclub__action-btn">
-                  <Eye size={18} />
+                  <Eye size={16} />
                   <span>{post.views}</span>
                 </button>
               </div>
@@ -306,23 +303,20 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
         onClick={() => onNavigate('bookclub-upload')}
         className="bookclub__write-btn"
       >
-        <PenLine size={24} />
+        <PenLine size={22} />
         <span>내 동화 공유하기</span>
       </button>
 
       {/* 하단 풍경 */}
       <div className="bookclub__landscape">
         <div className="bookclub__grass"></div>
-        <div className="bookclub__tree bookclub__tree--1">
-          <div className="bookclub__tree-top"></div>
-          <div className="bookclub__tree-trunk"></div>
-        </div>
-        <div className="bookclub__tree bookclub__tree--2">
-          <div className="bookclub__tree-top"></div>
-          <div className="bookclub__tree-trunk"></div>
-        </div>
+        <div className="bookclub__tree bookclub__tree--1"></div>
+        <div className="bookclub__tree bookclub__tree--2"></div>
         <div className="bookclub__bush bookclub__bush--1"></div>
         <div className="bookclub__bush bookclub__bush--2"></div>
+        <div className="bookclub__bush bookclub__bush--3"></div>
+        <div className="bookclub__flower bookclub__flower--1"></div>
+        <div className="bookclub__flower bookclub__flower--2"></div>
       </div>
     </div>
   )

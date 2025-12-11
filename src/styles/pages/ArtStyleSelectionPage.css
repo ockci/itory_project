@@ -6,7 +6,6 @@
 .artstyle-page {
   min-height: 100vh;
   background: transparent;
-  /* Global background from index.css */
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-family);
@@ -149,32 +148,45 @@
 }
 
 /* ============================================
-   📌 헤더
+   📌 헤더 - 흰색 고정, 가운데 로고
    ============================================ */
 .artstyle-page__header {
-  padding: 20px 40px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
+  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
-.artstyle-page__header-left {
+.artstyle-page__header-left,
+.artstyle-page__header-right {
+  flex: 0 0 auto;
+  width: 48px;
+}
+
+.artstyle-page__header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 뒤로가기 버튼 */
+.artstyle-page__back-btn {
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.artstyle-page__back-btn {
+  justify-content: center;
   width: 48px;
   height: 48px;
   border-radius: var(--radius-full);
   background: white;
   border: 2px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   box-shadow: var(--shadow-sm), var(--clay-inset-primary);
   transition: var(--transition-base);
@@ -187,19 +199,64 @@
   box-shadow: var(--shadow-md), var(--clay-inset-primary);
 }
 
+/* 가운데 로고 */
+.artstyle-page__logo-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.artstyle-page__logo-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 .artstyle-page__logo-img {
   height: 52px;
   width: auto;
   object-fit: contain;
 }
 
-/* 선택한 동화 표시 */
+/* 메뉴 버튼 */
+.artstyle-page__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: white;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
+  transition: var(--transition-base);
+  color: var(--color-text-secondary);
+}
+
+.artstyle-page__menu-btn:hover {
+  transform: translateY(-2px);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+}
+
+/* ============================================
+   📦 메인 콘텐츠 (헤더 아래 여백)
+   ============================================ */
+.artstyle-page__content {
+  padding-top: 130px;
+}
+
+/* 선택한 동화 표시 - 한줄로 */
 .artstyle-page__selected-tale {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 10px 20px;
+  gap: 10px;
+  padding: 12px 20px;
   position: relative;
   z-index: 1;
 }
@@ -208,17 +265,19 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-tertiary);
+  white-space: nowrap;
 }
 
 .artstyle-page__tale-title {
   background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: var(--font-size-md);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   border: 2px solid #FFE082;
   box-shadow: 0 2px 0 #E8C97C;
+  white-space: nowrap;
 }
 
 /* ============================================
@@ -226,7 +285,7 @@
    ============================================ */
 .artstyle-page__title-section {
   text-align: center;
-  padding: 10px 20px 30px;
+  padding: 50px 20px 30px;
   position: relative;
   z-index: 1;
 }
@@ -249,7 +308,7 @@
    ============================================ */
 .artstyle-page__carousel {
   position: relative;
-  height: 520px;
+  height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -299,11 +358,11 @@
 }
 
 .artstyle-page__nav-btn--left {
-  left: 0;
+  left: 20px;
 }
 
 .artstyle-page__nav-btn--right {
-  right: 0;
+  right: 20px;
 }
 
 /* ============================================
@@ -336,13 +395,13 @@
   transform: translateX(280px) scale(0.85);
 }
 
-.artstyle-page__card--left:hover,
-.artstyle-page__card--right:hover {
+.artstyle-page__card--left:hover {
   opacity: 0.8;
   transform: translateX(-280px) scale(0.9);
 }
 
 .artstyle-page__card--right:hover {
+  opacity: 0.8;
   transform: translateX(280px) scale(0.9);
 }
 
@@ -367,7 +426,7 @@
 /* 카드 이미지 */
 .artstyle-page__card-image {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 5 / 4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -383,7 +442,7 @@
 
 .artstyle-page__card--center .artstyle-page__card-image {
   border-radius: 0;
-  aspect-ratio: 1;
+  aspect-ratio: 5 / 4;
 }
 
 .artstyle-page__card-image img {
@@ -406,7 +465,7 @@
   display: block;
 }
 
-/* 카드 정보 (센터만) - 테마 컬러 그라데이션 */
+/* 카드 정보 (센터만) */
 .artstyle-page__card-info {
   padding: 20px 24px 24px;
   text-align: center;
@@ -469,7 +528,7 @@
 .artstyle-page__indicators {
   display: flex;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 20px;
   position: relative;
   z-index: 1;
 }
@@ -520,7 +579,6 @@
   cursor: pointer;
   transition: var(--transition-base);
   position: relative;
-  /* 버튼 스타일은 인라인으로 들어오는 색상에 의존하거나 기본값 설정 필요 */
   background: var(--gradient-primary);
   box-shadow: 0 6px 0 var(--color-primary-dark), var(--shadow-lg);
 }
@@ -569,9 +627,13 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 1024px
    ============================================ */
 @media (max-width: 1024px) {
+  .artstyle-page__carousel {
+    height: 440px;
+  }
+
   .artstyle-page__card--center {
     width: 300px;
   }
@@ -603,13 +665,35 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 768px
+   ============================================ */
 @media (max-width: 768px) {
   .artstyle-page__header {
     padding: 16px 20px;
   }
 
+  .artstyle-page__header-left,
+  .artstyle-page__header-right {
+    width: 44px;
+  }
+
+  .artstyle-page__back-btn,
+  .artstyle-page__menu-btn {
+    width: 44px;
+    height: 44px;
+  }
+
   .artstyle-page__logo-img {
     height: 44px;
+  }
+
+  .artstyle-page__content {
+    padding-top: 115px;
+  }
+
+  .artstyle-page__title-section {
+    padding: 24px 20px 24px;
   }
 
   .artstyle-page__title {
@@ -621,7 +705,7 @@
   }
 
   .artstyle-page__carousel {
-    height: 440px;
+    height: 400px;
   }
 
   .artstyle-page__card--center {
@@ -682,18 +766,35 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 480px (모바일)
+   ============================================ */
 @media (max-width: 480px) {
   .artstyle-page__header {
     padding: 14px 16px;
   }
 
-  .artstyle-page__back-btn {
+  .artstyle-page__header-left,
+  .artstyle-page__header-right {
+    width: 42px;
+  }
+
+  .artstyle-page__back-btn,
+  .artstyle-page__menu-btn {
     width: 42px;
     height: 42px;
   }
 
   .artstyle-page__logo-img {
     height: 40px;
+  }
+
+  .artstyle-page__content {
+    padding-top: 100px;
+  }
+
+  .artstyle-page__title-section {
+    padding: 20px 16px 20px;
   }
 
   .artstyle-page__title {
@@ -705,12 +806,12 @@
   }
 
   .artstyle-page__selected-tale {
-    flex-direction: column;
     gap: 8px;
+    padding: 12px 16px;
   }
 
   .artstyle-page__carousel {
-    height: 400px;
+    height: 360px;
   }
 
   .artstyle-page__card--center {
@@ -760,6 +861,14 @@
     height: 44px;
   }
 
+  .artstyle-page__nav-btn--left {
+    left: 8px;
+  }
+
+  .artstyle-page__nav-btn--right {
+    right: 8px;
+  }
+
   .artstyle-page__cta-btn {
     padding: 14px 28px;
     gap: 8px;
@@ -780,5 +889,48 @@
 
   .artstyle-page__indicator-dots {
     gap: 10px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 360px (작은 모바일)
+   ============================================ */
+@media (max-width: 360px) {
+  .artstyle-page__content {
+    padding-top: 90px;
+  }
+
+  .artstyle-page__title-section {
+    padding: 16px 16px 16px;
+  }
+
+  .artstyle-page__carousel {
+    height: 320px;
+  }
+
+  .artstyle-page__card--center {
+    width: 190px;
+  }
+
+  .artstyle-page__card--left,
+  .artstyle-page__card--right {
+    width: 60px;
+    height: 60px;
+  }
+
+  .artstyle-page__card--left {
+    transform: translateX(-100px) scale(0.7);
+  }
+
+  .artstyle-page__card--right {
+    transform: translateX(100px) scale(0.7);
+  }
+
+  .artstyle-page__card-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .artstyle-page__card-desc {
+    font-size: 11px;
   }
 }

@@ -111,12 +111,106 @@
 }
 
 /* ============================================
+   📌 헤더 - 흰색 고정, 가운데 로고
+   ============================================ */
+.video-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.video-page__header-left,
+.video-page__header-right {
+  flex: 0 0 auto;
+  width: 48px;
+}
+
+.video-page__header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-page__back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  color: #5D4E37;
+}
+
+.video-page__back-btn:hover {
+  transform: translateY(-2px);
+  color: #F5A623;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.video-page__logo-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.video-page__logo-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.video-page__logo-img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+
+.video-page__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), inset 0 -2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  color: #5D4E37;
+}
+
+.video-page__menu-btn:hover {
+  transform: translateY(-2px);
+  color: #F5A623;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
    📦 메인 콘텐츠
    ============================================ */
 .video-page__main {
   position: relative;
   z-index: 1;
   padding: 0 32px;
+  padding-top: 120px;
   padding-bottom: 160px;
   max-width: 1400px;
   margin: 0 auto;
@@ -654,7 +748,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 200;
   backdrop-filter: blur(4px);
 }
 
@@ -939,8 +1033,28 @@
    📱 반응형 디자인
    ============================================ */
 @media (max-width: 768px) {
+  .video-page__header {
+    padding: 16px 20px;
+  }
+
+  .video-page__header-left,
+  .video-page__header-right {
+    width: 44px;
+  }
+
+  .video-page__back-btn,
+  .video-page__menu-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .video-page__logo-img {
+    height: 44px;
+  }
+
   .video-page__main {
     padding: 0 16px;
+    padding-top: 110px;
     padding-bottom: 140px;
   }
 
@@ -1078,8 +1192,28 @@
 }
 
 @media (max-width: 480px) {
+  .video-page__header {
+    padding: 14px 16px;
+  }
+
+  .video-page__header-left,
+  .video-page__header-right {
+    width: 40px;
+  }
+
+  .video-page__back-btn,
+  .video-page__menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .video-page__logo-img {
+    height: 36px;
+  }
+
   .video-page__main {
     padding: 0 12px;
+    padding-top: 100px;
     padding-bottom: 120px;
   }
 
@@ -1139,5 +1273,93 @@
 
   .video-page__flower {
     bottom: 40px;
+  }
+}
+
+/* ============================================
+   📱 세로 모드 (Portrait) - 챕터 3+2 레이아웃
+   ============================================ */
+@media (orientation: portrait) and (max-width: 768px) {
+  .video-page__main {
+    padding-top: 120px;
+  }
+
+  /* 타이틀 배너 얇게 */
+  .video-page__title-banner {
+    flex-direction: row;
+    padding: 12px 16px;
+    gap: 12px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+
+  .video-page__title-icon {
+    font-size: 32px;
+  }
+
+  .video-page__title {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .video-page__subtitle {
+    font-size: 12px;
+  }
+
+  /* 챕터 버튼: 상단 3개, 하단 2개 */
+  .video-page__chapters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .video-page__chapter-btn {
+    flex: 0 0 calc(33.333% - 6px);
+    justify-content: center;
+  }
+
+  /* 4번째, 5번째 버튼 (절정, 결말) - 하단 중앙 정렬 */
+  .video-page__chapter-btn:nth-child(4),
+  .video-page__chapter-btn:nth-child(5) {
+    flex: 0 0 calc(40% - 4px);
+  }
+}
+
+@media (orientation: portrait) and (max-width: 480px) {
+  .video-page__main {
+    padding-top: 110px;
+  }
+
+  .video-page__title-banner {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .video-page__title-icon {
+    font-size: 28px;
+  }
+
+  .video-page__title {
+    font-size: 14px;
+  }
+
+  .video-page__subtitle {
+    font-size: 11px;
+  }
+
+  .video-page__chapter-btn {
+    padding: 10px 8px;
+    gap: 4px;
+  }
+
+  .video-page__chapter-num {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
+
+  .video-page__chapter-name {
+    font-size: 11px;
   }
 }

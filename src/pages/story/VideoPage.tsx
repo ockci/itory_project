@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { Play, Pause, Volume2, VolumeX, Download, BookOpen, Share2, RotateCcw, SkipForward } from 'lucide-react'
+import { Play, Pause, Volume2, VolumeX, Download, BookOpen, Share2, RotateCcw, SkipForward, ArrowLeft, Menu } from 'lucide-react'
 import { PageType, Tale } from '../../App'
-import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/VideoPage.css'
 
 interface VideoPageProps {
@@ -154,11 +153,30 @@ export default function VideoPage({
         <div className="video-page__cloud video-page__cloud--3"></div>
       </div>
 
-      <SimpleHeader
-        onNavigate={onNavigate}
-        onGoBack={onGoBack}
-        onMenuClick={onMenuClick}
-      />
+      {/* 헤더 - 가운데 로고, 왼쪽 뒤로가기, 오른쪽 메뉴 */}
+      <header className="video-page__header">
+        <div className="video-page__header-left">
+          <button onClick={onGoBack} className="video-page__back-btn">
+            <ArrowLeft size={24} />
+          </button>
+        </div>
+
+        <div className="video-page__header-center">
+          <button onClick={() => onNavigate('home')} className="video-page__logo-btn">
+            <img
+              src="/src/assets/images/logo.png"
+              alt="아이토리"
+              className="video-page__logo-img"
+            />
+          </button>
+        </div>
+
+        <div className="video-page__header-right">
+          <button onClick={onMenuClick} className="video-page__menu-btn">
+            <Menu size={24} />
+          </button>
+        </div>
+      </header>
 
       {/* 축하 팝업 */}
       {showCelebration && (

@@ -250,8 +250,8 @@
 
 .bookshelf-page__shelf {
   position: relative;
-  padding: 32px 48px 0;
-  min-height: 300px;
+  padding: 24px 48px 0;
+  min-height: 260px;
 }
 
 /* 선반 배경 (안쪽 깊이감) */
@@ -296,7 +296,7 @@
   position: relative;
   z-index: 2;
   display: flex;
-  gap: 48px;
+  gap: 36px;
   justify-content: center;
   padding-bottom: 10px;
   flex-wrap: wrap;
@@ -314,12 +314,12 @@
   z-index: 10;
 }
 
-/* 책 표지 - PC 기본 크기 */
+/* 책 표지 - PC 기본 크기 (4개씩 3줄) */
 .bookshelf-page__book-cover {
-  width: 180px;
-  height: 240px;
+  width: 160px;
+  height: 210px;
   border-radius: 4px 12px 12px 4px;
-  padding: 14px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -565,7 +565,7 @@
   box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.2);
 }
 
-/* 나무 - 잔디 위에 서있게 (더 낮게) */
+/* 나무 - 잔디 위에 서있게 */
 .bookshelf-page__tree {
   position: absolute;
   bottom: 45px;
@@ -609,7 +609,7 @@
   right: 6%;
 }
 
-/* 덤불 - 잔디와 자연스럽게 연결 */
+/* 덤불 */
 .bookshelf-page__bush {
   position: absolute;
   bottom: 45px;
@@ -639,7 +639,7 @@
   height: 32px;
 }
 
-/* 꽃 - 잔디 위에 */
+/* 꽃 */
 .bookshelf-page__flower {
   position: absolute;
   bottom: 55px;
@@ -649,7 +649,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* 꽃 중심 */
 .bookshelf-page__flower::after {
   content: '';
   position: absolute;
@@ -692,28 +691,28 @@
   }
 
   .bookshelf-page__shelf {
-    padding: 28px 36px 0;
-    min-height: 280px;
+    padding: 20px 28px 0;
+    min-height: 230px;
   }
 
   .bookshelf-page__books {
-    gap: 36px;
+    gap: 28px;
   }
 
   .bookshelf-page__book-cover {
-    width: 160px;
-    height: 215px;
-    padding: 12px;
+    width: 140px;
+    height: 185px;
+    padding: 10px;
   }
 
   .bookshelf-page__book-title {
-    font-size: 13px;
-    margin-top: 10px;
+    font-size: 12px;
+    margin-top: 8px;
   }
 
   .bookshelf-page__book-badge {
-    font-size: 11px;
-    padding: 5px 10px;
+    font-size: 10px;
+    padding: 4px 8px;
   }
 }
 
@@ -747,18 +746,18 @@
   }
 
   .bookshelf-page__shelf {
-    padding: 24px 28px 0;
-    min-height: 250px;
+    padding: 16px 20px 0;
+    min-height: 200px;
   }
 
   .bookshelf-page__shelf-board {
     left: -18px;
     right: -18px;
-    height: 24px;
+    height: 22px;
   }
 
   .bookshelf-page__shelf::before {
-    bottom: 24px;
+    bottom: 22px;
   }
 
   .bookshelf-page__shelf-front {
@@ -767,17 +766,17 @@
   }
 
   .bookshelf-page__books {
-    gap: 28px;
+    gap: 20px;
   }
 
   .bookshelf-page__book-cover {
-    width: 140px;
-    height: 190px;
-    padding: 10px;
+    width: 120px;
+    height: 160px;
+    padding: 8px;
   }
 
   .bookshelf-page__book-cover::before {
-    width: 14px;
+    width: 12px;
   }
 
   .bookshelf-page__book-image {
@@ -785,15 +784,15 @@
   }
 
   .bookshelf-page__book-title {
-    font-size: 12px;
-    margin-top: 8px;
+    font-size: 11px;
+    margin-top: 6px;
   }
 
   .bookshelf-page__book-badge {
-    font-size: 10px;
-    padding: 4px 8px;
-    top: 8px;
-    right: 8px;
+    font-size: 9px;
+    padding: 3px 6px;
+    top: 6px;
+    right: 6px;
   }
 
   .bookshelf-page__book-bottom {
@@ -825,11 +824,9 @@
 }
 
 /* ============================================
-   📱 반응형 - 모바일 (767px 이하) - 3열 그리드 + 선반
+   📱 반응형 - 모바일 (767px 이하)
    ============================================ */
 @media (max-width: 767px) {
-
-  /* 데스크톱 숨기고 모바일 표시 */
   .bookshelf-page__cabinet--desktop {
     display: none;
   }
@@ -881,7 +878,6 @@
     border-radius: 0 0 10px 10px;
   }
 
-  /* 모바일 그리드 - 3열 */
   .bookshelf-page__mobile-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px 6px;
@@ -916,7 +912,6 @@
     gap: 8px;
   }
 
-  /* 풍경 모바일 */
   .bookshelf-page__landscape {
     height: 120px;
   }
@@ -1020,7 +1015,6 @@
     font-size: 14px;
   }
 
-  /* 풍경 */
   .bookshelf-page__landscape {
     height: 110px;
   }
@@ -1117,7 +1111,6 @@
     border-radius: 35px;
   }
 
-  /* 풍경 */
   .bookshelf-page__landscape {
     height: 100px;
   }
@@ -1167,7 +1160,6 @@
     height: 9px;
   }
 
-  /* 구름 크기 줄이기 */
   .bookshelf-page__cloud--1 {
     width: 80px;
     height: 32px;
@@ -1272,7 +1264,6 @@
     font-size: 12px;
   }
 
-  /* 풍경 */
   .bookshelf-page__landscape {
     height: 90px;
   }
@@ -1325,11 +1316,8 @@
 
 /* ============================================
    🔄 가로 모드 - 모바일 (세로 높이 500px 이하)
-   데스크톱 선반 레이아웃 사용!
    ============================================ */
 @media (max-height: 500px) and (orientation: landscape) {
-
-  /* 🔥 가로 모드: 데스크톱(선반) 보이기, 모바일 숨기기 */
   .bookshelf-page__cabinet--desktop {
     display: block !important;
   }
@@ -1370,46 +1358,43 @@
     width: 8px;
   }
 
-  /* 선반 스타일 - 높이 늘리기! */
   .bookshelf-page__shelf {
-    min-height: 175px;
-    padding: 12px 12px 0;
+    min-height: 140px;
+    padding: 10px 12px 0;
   }
 
   .bookshelf-page__shelf::before {
-    bottom: 16px;
+    bottom: 14px;
   }
 
-  /* 🔥 선반 바닥 - 책장 프레임까지 늘리기 */
   .bookshelf-page__shelf-board {
-    height: 16px;
+    height: 14px;
     left: -8px;
     right: -8px;
   }
 
   .bookshelf-page__books {
-    gap: 18px;
+    gap: 14px;
   }
 
-  /* 🔥 책 크기 더 키우기! */
   .bookshelf-page__book-cover {
-    width: 115px;
-    height: 153px;
-    padding: 6px;
+    width: 90px;
+    height: 120px;
+    padding: 5px;
   }
 
   .bookshelf-page__book-cover::before {
-    width: 8px;
+    width: 6px;
   }
 
   .bookshelf-page__book-title {
-    font-size: 10px;
-    margin-top: 5px;
+    font-size: 8px;
+    margin-top: 4px;
   }
 
   .bookshelf-page__book-badge {
-    font-size: 7px;
-    padding: 2px 5px;
+    font-size: 6px;
+    padding: 2px 4px;
   }
 
   .bookshelf-page__book-bottom {
@@ -1435,7 +1420,6 @@
     font-size: 11px;
   }
 
-  /* 풍경 - 가로모드 */
   .bookshelf-page__landscape {
     height: 55px;
   }
@@ -1514,35 +1498,35 @@
   }
 
   .bookshelf-page__shelf {
-    padding: 12px 24px 0;
-    min-height: 155px;
+    padding: 10px 20px 0;
+    min-height: 130px;
   }
 
   .bookshelf-page__shelf::before {
-    bottom: 14px;
+    bottom: 12px;
   }
 
   .bookshelf-page__shelf-board {
-    height: 14px;
+    height: 12px;
   }
 
   .bookshelf-page__books {
-    gap: 16px;
+    gap: 14px;
   }
 
   .bookshelf-page__book-cover {
-    width: 95px;
-    height: 127px;
-    padding: 5px;
+    width: 80px;
+    height: 107px;
+    padding: 4px;
   }
 
   .bookshelf-page__book-title {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .bookshelf-page__book-badge {
-    font-size: 7px;
-    padding: 2px 4px;
+    font-size: 6px;
+    padding: 2px 3px;
   }
 
   .bookshelf-page__cta-btn {
@@ -1550,7 +1534,6 @@
     font-size: 13px;
   }
 
-  /* 풍경 */
   .bookshelf-page__landscape {
     height: 85px;
   }

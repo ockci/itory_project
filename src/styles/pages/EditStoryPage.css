@@ -1,5 +1,6 @@
 /* ============================================
-   🌳 아이토리 - 동화 편집 페이지 CSS
+   🌳 아이토리 - 동화 편집 페이지 CSS (New Design System)
+   전체 화면 활용 레이아웃 (태블릿 최적화)
    ============================================ */
 
 .edit-story-page {
@@ -158,7 +159,6 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 70px);
 }
 
 .edit-story-page__main--fullscreen {
@@ -185,7 +185,7 @@
   padding: 12px 24px;
   background: white;
   border-radius: 50px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
@@ -210,7 +210,7 @@
 }
 
 .edit-story-page__mini-step.active::after {
-  background: #F5A623;
+  background: var(--color-primary);
 }
 
 .edit-story-page__mini-dot {
@@ -225,7 +225,7 @@
 }
 
 .edit-story-page__mini-step.active .edit-story-page__mini-dot {
-  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
+  background: var(--gradient-primary);
   box-shadow: 0 3px 10px rgba(245, 166, 35, 0.4);
 }
 
@@ -235,14 +235,14 @@
 }
 
 .edit-story-page__mini-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #999;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-tertiary);
 }
 
 .edit-story-page__mini-step.active .edit-story-page__mini-label {
-  color: #333;
-  font-weight: 800;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-black);
 }
 
 .edit-story-page__mini-step.completed .edit-story-page__mini-label {
@@ -250,156 +250,162 @@
 }
 
 /* ============================================
-   🎬 콘텐츠 프레임 (영상/로딩 영역)
+   🎬 콘텐츠 프레임 (영상/로딩/완료 표시)
    ============================================ */
 .edit-story-page__content-frame {
-  flex: 1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #FFF5E1 0%, #FFE4C4 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #FFF8EE 0%, #FFEFD5 100%);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.8);
-  border: 4px solid rgba(255, 255, 255, 0.9);
-  min-height: 400px;
-  margin-bottom: 20px;
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
   overflow: hidden;
+  border: 4px solid white;
+  margin-bottom: 20px;
   position: relative;
 }
 
-/* 중앙 콘텐츠 */
 .edit-story-page__center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 40px;
+  padding: 24px;
   width: 100%;
-}
-
-/* 로딩 */
-.edit-story-page__loading-emoji {
-  font-size: 80px;
-  margin-bottom: 20px;
-  animation: pulse 1.5s infinite;
-}
-
-.edit-story-page__loading-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.edit-story-page__loading-bar {
-  width: 280px;
-  max-width: 80%;
-  height: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.edit-story-page__loading-fill {
   height: 100%;
-  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
-  border-radius: 8px;
-  transition: width 0.5s ease;
-}
-
-.edit-story-page__loading-percent {
-  font-size: 20px;
-  font-weight: 700;
-  color: #F5A623;
-}
-
-/* 완료 */
-.edit-story-page__complete-emoji {
-  font-size: 80px;
-  margin-bottom: 20px;
-}
-
-.edit-story-page__complete-title {
-  font-size: 24px;
-  font-weight: 800;
-  color: #333;
-  margin-bottom: 24px;
-}
-
-/* 다시 보기 버튼 */
-.edit-story-page__replay-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: white;
-  border: 2px solid #F5A623;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #F5A623;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.edit-story-page__replay-btn:hover {
-  background: #FFF8EE;
-  transform: translateY(-2px);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* ============================================
-   🎥 비디오 플레이어
+   🎬 영상 영역
    ============================================ */
 .edit-story-page__video-wrapper {
   width: 100%;
   height: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  background: #000;
 }
 
 .edit-story-page__video-player {
   width: 100%;
   height: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  background: #000;
+  object-fit: cover;
+  border-radius: var(--radius-md);
 }
 
-/* 비디오 에러 */
 .edit-story-page__video-error {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
-  gap: 12px;
+  background: rgba(255, 245, 225, 0.95);
+  text-align: center;
+  padding: 20px;
 }
 
 .edit-story-page__error-emoji {
-  font-size: 60px;
+  font-size: 64px;
+  margin-bottom: 16px;
 }
 
 .edit-story-page__video-error p {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
 }
 
 .edit-story-page__error-sub {
-  font-size: 14px !important;
-  color: #aaa !important;
-  font-weight: 400 !important;
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: var(--font-weight-medium) !important;
+}
+
+/* ============================================
+   ✅ 완료 상태
+   ============================================ */
+.edit-story-page__complete-emoji {
+  font-size: 100px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+}
+
+.edit-story-page__complete-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.edit-story-page__replay-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: white;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.edit-story-page__replay-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   ⏳ 로딩 상태
+   ============================================ */
+.edit-story-page__loading-emoji {
+  font-size: 100px;
+  margin-bottom: 24px;
+  animation: pulse 1.5s infinite;
+}
+
+.edit-story-page__loading-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.edit-story-page__loading-bar {
+  width: 320px;
+  max-width: 100%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.edit-story-page__loading-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.edit-story-page__loading-percent {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
 /* ============================================
@@ -409,35 +415,33 @@
   width: 100%;
   padding: 20px 28px;
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
   margin-bottom: 16px;
   border: 2px solid white;
 }
 
 .edit-story-page__story-label {
   display: inline-block;
-  font-size: 14px;
-  font-weight: 700;
-  color: #F5A623;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
   margin-bottom: 8px;
 }
 
 .edit-story-page__story-text p {
-  font-size: 16px;
-  color: #333;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
   line-height: 1.7;
   margin: 0;
 }
 
 /* ============================================
-   ⬇️ 하단 액션 버튼
+   🔘 하단 버튼
    ============================================ */
 .edit-story-page__bottom-action {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-  padding-top: 16px;
+  padding: 16px 0;
+  width: 100%;
 }
 
 .edit-story-page__big-btn {
@@ -445,55 +449,56 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 20px 48px;
-  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
+  width: 100%;
+  padding: 22px 40px;
+  background: var(--gradient-primary);
   border: none;
-  border-radius: 16px;
-  font-size: 20px;
-  font-weight: 800;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
   color: white;
   cursor: pointer;
-  box-shadow: 0 6px 0 #D4920F, 0 8px 24px rgba(245, 166, 35, 0.3);
-  transition: all 0.2s ease;
+  box-shadow: 0 6px 0 var(--color-primary-dark), var(--shadow-lg);
+  transition: var(--transition-base);
 }
 
 .edit-story-page__big-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 9px 0 #D4920F, 0 12px 32px rgba(245, 166, 35, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 var(--color-primary-dark), 0 16px 40px rgba(245, 166, 35, 0.45);
 }
 
 .edit-story-page__big-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 3px 0 #D4920F;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 var(--color-primary-dark), var(--shadow-sm);
 }
 
 /* ============================================
-   ❓ 질문 카드
+   ❓ 질문 카드 (선택 화면)
    ============================================ */
 .edit-story-page__question-card {
   width: 100%;
   margin-bottom: 32px;
   padding: 32px 40px;
   background: white;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
   border: 4px solid white;
 }
 
 .edit-story-page__stage-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #F5A623;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .edit-story-page__question-text {
-  font-size: 24px;
-  font-weight: 800;
-  color: #333;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
   margin: 0;
   line-height: 1.4;
 }
@@ -517,24 +522,24 @@
 
 .edit-story-page__choice-card {
   background: white;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 40px 32px;
   text-align: center;
   border: 3px solid transparent;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md), var(--clay-inset-primary);
+  transition: var(--transition-base);
 }
 
 .edit-story-page__choice-card:hover {
   transform: translateY(-8px);
-  border-color: #F5A623;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
 }
 
 .edit-story-page__choice-card:active {
   transform: translateY(2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
 }
 
 .edit-story-page__choice-icon {
@@ -544,16 +549,16 @@
 }
 
 .edit-story-page__choice-title {
-  font-size: 20px;
-  font-weight: 800;
-  color: #333;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
   margin-bottom: 8px;
 }
 
 .edit-story-page__choice-desc {
-  font-size: 14px;
-  color: #777;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 /* ============================================
@@ -567,12 +572,12 @@
   padding: 18px 32px;
   background: white;
   border: 2px dashed #8BC34A;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 700;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
   color: #7CB342;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-base);
   margin: 0 auto;
 }
 
@@ -591,9 +596,9 @@
 
 .edit-story-page__custom-card {
   background: white;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg), var(--clay-inset-primary);
   border: 4px solid white;
 }
 
@@ -601,8 +606,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
   color: #7CB342;
   margin-bottom: 20px;
 }
@@ -611,9 +616,9 @@
   width: 100%;
   height: 160px;
   padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #E0D8CC;
-  font-size: 18px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-border);
+  font-size: var(--font-size-lg);
   font-family: inherit;
   resize: none;
   margin-bottom: 20px;
@@ -622,7 +627,7 @@
 
 .edit-story-page__custom-input:focus {
   outline: none;
-  border-color: #F5A623;
+  border-color: var(--color-primary);
   background: white;
   box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.15);
 }
@@ -635,14 +640,14 @@
 .edit-story-page__custom-cancel {
   flex: 1;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: #F0EBE3;
   border: none;
-  font-size: 18px;
-  font-weight: 700;
-  color: #777;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition-base);
 }
 
 .edit-story-page__custom-cancel:hover {
@@ -652,24 +657,24 @@
 .edit-story-page__custom-submit {
   flex: 2;
   padding: 16px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #F5A623 0%, #F7B844 100%);
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
   border: none;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
   color: white;
   cursor: pointer;
-  box-shadow: 0 4px 0 #D4920F;
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 var(--color-primary-dark);
+  transition: var(--transition-base);
 }
 
 .edit-story-page__custom-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 0 #D4920F;
+  box-shadow: 0 6px 0 var(--color-primary-dark);
 }
 
 .edit-story-page__custom-submit:disabled {
-  background: #ccc;
+  background: var(--color-text-tertiary);
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -691,7 +696,7 @@
 }
 
 /* ============================================
-   🌳 하단 풍경 장식
+   🌳 하단 풍경 장식 (수정됨 - 땅에 자연스럽게 붙음)
    ============================================ */
 .edit-story-page__landscape {
   position: fixed;
@@ -714,9 +719,10 @@
   box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
+/* 나무 - 잔디 위에 자연스럽게 위치 (bottom을 낮춤) */
 .edit-story-page__tree {
   position: absolute;
-  bottom: 55px;
+  bottom: 35px;
 }
 
 .edit-story-page__tree::before {
@@ -778,9 +784,10 @@
   width: 10px;
 }
 
+/* 집 - 잔디 위에 자연스럽게 위치 */
 .edit-story-page__house {
   position: absolute;
-  bottom: 55px;
+  bottom: 38px;
   right: 20%;
   width: 50px;
   height: 40px;
@@ -831,9 +838,10 @@
   right: 6px;
 }
 
+/* 덤불 - 잔디 위에 자연스럽게 위치 */
 .edit-story-page__bush {
   position: absolute;
-  bottom: 55px;
+  bottom: 40px;
   background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
   border-radius: 50% 50% 45% 45%;
   box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.1);
@@ -852,90 +860,622 @@
 }
 
 .edit-story-page__bush--3 {
-  left: 45%;
-  width: 30px;
-  height: 22px;
+  left: 35%;
+  width: 32px;
+  height: 24px;
 }
 
 .edit-story-page__bush--4 {
-  right: 40%;
+  right: 38%;
   width: 28px;
   height: 20px;
 }
 
+/* 꽃 - 잔디 위에 자연스럽게 위치 */
 .edit-story-page__flower {
   position: absolute;
-  bottom: 60px;
+  bottom: 48px;
   width: 12px;
   height: 12px;
-  background: #FFEB3B;
   border-radius: 50%;
-}
-
-.edit-story-page__flower::before {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 10px;
-  background: #689F38;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .edit-story-page__flower--1 {
-  left: 30%;
-  background: #FF80AB;
+  left: 22%;
+  background: #F48FB1;
 }
 
 .edit-story-page__flower--2 {
-  left: 50%;
-  background: #FFEB3B;
+  right: 25%;
+  background: #FFD54F;
 }
 
 .edit-story-page__flower--3 {
-  right: 35%;
-  background: #B388FF;
+  left: 42%;
+  background: #CE93D8;
 }
 
 .edit-story-page__flower--4 {
-  right: 50%;
-  background: #80DEEA;
+  right: 42%;
+  background: #81D4FA;
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - Tablet (max-width: 1024px)
    ============================================ */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding: 16px 20px;
+    padding-bottom: 120px;
+  }
+
+  .edit-story-page__mini-progress {
+    padding: 10px 20px;
+    gap: 6px;
+  }
+
+  .edit-story-page__mini-step:not(:last-child)::after {
+    width: 18px;
+  }
+
+  .edit-story-page__mini-dot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .edit-story-page__mini-label {
+    font-size: 11px;
+  }
+
   .edit-story-page__content-frame {
-    min-height: 280px;
+    border-radius: var(--radius-md);
+    border-width: 3px;
   }
 
   .edit-story-page__loading-emoji,
   .edit-story-page__complete-emoji {
-    font-size: 60px;
+    font-size: 80px;
   }
 
-  .edit-story-page__loading-title,
-  .edit-story-page__complete-title {
-    font-size: 20px;
+  .edit-story-page__question-card {
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .edit-story-page__question-text {
+    font-size: var(--font-size-xl);
   }
 
   .edit-story-page__choice-grid {
+    gap: 20px;
+  }
+
+  .edit-story-page__choice-card {
+    padding: 32px 24px;
+  }
+
+  .edit-story-page__choice-icon {
+    font-size: 60px;
+    margin-bottom: 16px;
+  }
+
+  .edit-story-page__choice-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__big-btn {
+    padding: 18px 32px;
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__landscape {
+    height: 100px;
+  }
+
+  .edit-story-page__grass {
+    height: 55px;
+  }
+
+  .edit-story-page__tree {
+    bottom: 28px;
+  }
+
+  .edit-story-page__bush {
+    bottom: 32px;
+  }
+
+  .edit-story-page__house {
+    bottom: 30px;
+  }
+
+  .edit-story-page__flower {
+    bottom: 38px;
+  }
+
+  .edit-story-page__cloud--3,
+  .edit-story-page__cloud--4 {
+    display: none;
+  }
+}
+
+/* ============================================
+   📱 반응형 - Mobile Large (max-width: 768px)
+   ============================================ */
+@media (max-width: 768px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding: 12px 16px;
+    padding-bottom: 100px;
+    min-height: auto;
+  }
+
+  .edit-story-page__mini-progress {
+    padding: 8px 12px;
+    gap: 4px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .edit-story-page__mini-step:not(:last-child)::after {
+    width: 12px;
+    margin-left: 4px;
+  }
+
+  .edit-story-page__mini-dot {
+    width: 22px;
+    height: 22px;
+    font-size: 10px;
+  }
+
+  .edit-story-page__mini-label {
+    display: none;
+  }
+
+  .edit-story-page__content-frame {
+    border-radius: 20px;
+    border-width: 3px;
+    margin-bottom: 16px;
+  }
+
+  .edit-story-page__center-content {
+    padding: 16px;
+  }
+
+  .edit-story-page__loading-emoji {
+    font-size: 56px;
+    margin-bottom: 12px;
+  }
+
+  .edit-story-page__loading-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__loading-bar {
+    width: 200px;
+    height: 10px;
+  }
+
+  .edit-story-page__complete-emoji {
+    font-size: 56px;
+    margin-bottom: 12px;
+  }
+
+  .edit-story-page__complete-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__replay-btn {
+    padding: 10px 20px;
+    font-size: var(--font-size-sm);
+    margin-top: 12px;
+  }
+
+  .edit-story-page__story-text {
+    padding: 16px 20px;
+  }
+
+  .edit-story-page__question-card {
+    padding: 20px 20px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-md);
+    border-width: 3px;
+  }
+
+  .edit-story-page__stage-title {
+    font-size: var(--font-size-sm);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .edit-story-page__question-text {
+    font-size: var(--font-size-lg);
+  }
+
+  /* ✨ 선택지 - 모바일에서 세로 레이아웃! */
+  .edit-story-page__choice-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    margin-bottom: 16px;
   }
 
   .edit-story-page__choice-card {
     padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    border-radius: var(--radius-lg);
+  }
+
+  .edit-story-page__choice-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .edit-story-page__choice-icon {
+    font-size: 56px;
+    margin-bottom: 0;
+  }
+
+  .edit-story-page__choice-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: 4px;
+  }
+
+  .edit-story-page__choice-desc {
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+  }
+
+  .edit-story-page__custom-btn {
+    padding: 16px 28px;
+    font-size: var(--font-size-lg);
+    width: 100%;
+  }
+
+  .edit-story-page__custom-card {
+    padding: 20px;
+    border-width: 3px;
+  }
+
+  .edit-story-page__custom-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__custom-input {
+    height: 120px;
+    padding: 16px;
+    font-size: var(--font-size-md);
+  }
+
+  .edit-story-page__custom-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .edit-story-page__custom-cancel,
+  .edit-story-page__custom-submit {
+    flex: none;
+    padding: 16px;
+    font-size: var(--font-size-lg);
+  }
+
+  .edit-story-page__big-btn {
+    padding: 18px 24px;
+    font-size: var(--font-size-lg);
+    box-shadow: 0 4px 0 var(--color-primary-dark), var(--shadow-md);
+  }
+
+  .edit-story-page__landscape {
+    height: 80px;
+  }
+
+  .edit-story-page__grass {
+    height: 50px;
+  }
+
+  .edit-story-page__tree {
+    bottom: 25px;
+    transform: scale(0.85);
+  }
+
+  .edit-story-page__bush {
+    bottom: 28px;
+    transform: scale(0.85);
+  }
+
+  .edit-story-page__house {
+    bottom: 26px;
+    transform: scale(0.85);
+  }
+
+  .edit-story-page__flower {
+    bottom: 34px;
+    transform: scale(0.85);
+  }
+
+  .edit-story-page__tree--2,
+  .edit-story-page__tree--3,
+  .edit-story-page__bush--3,
+  .edit-story-page__bush--4,
+  .edit-story-page__flower--3,
+  .edit-story-page__flower--4 {
+    display: none;
+  }
+
+  .edit-story-page__cloud--1,
+  .edit-story-page__cloud--2 {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================
+   📱 반응형 - Mobile Small (max-width: 480px)
+   ============================================ */
+@media (max-width: 480px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding: 10px 12px;
+    padding-bottom: 80px;
+  }
+
+  .edit-story-page__mini-progress {
+    padding: 6px 10px;
+    border-radius: 30px;
+  }
+
+  .edit-story-page__mini-dot {
+    width: 20px;
+    height: 20px;
+  }
+
+  .edit-story-page__mini-step:not(:last-child)::after {
+    width: 8px;
+  }
+
+  .edit-story-page__content-frame {
+    border-radius: 16px;
+    border-width: 2px;
+  }
+
+  .edit-story-page__center-content {
+    padding: 12px;
+  }
+
+  .edit-story-page__loading-emoji {
+    font-size: 44px;
+    margin-bottom: 8px;
+  }
+
+  .edit-story-page__loading-title {
+    font-size: var(--font-size-md);
+  }
+
+  .edit-story-page__loading-bar {
+    width: 150px;
+    height: 8px;
+  }
+
+  .edit-story-page__loading-percent {
+    font-size: var(--font-size-md);
+  }
+
+  .edit-story-page__complete-emoji {
+    font-size: 44px;
+    margin-bottom: 8px;
+  }
+
+  .edit-story-page__complete-title {
+    font-size: var(--font-size-md);
+  }
+
+  .edit-story-page__replay-btn {
+    padding: 8px 16px;
+    font-size: var(--font-size-xs);
+    margin-top: 10px;
+    gap: 6px;
+  }
+
+  .edit-story-page__story-text {
+    padding: 14px 16px;
+    border-radius: 16px;
+  }
+
+  .edit-story-page__story-label {
+    font-size: 12px;
+  }
+
+  .edit-story-page__story-text p {
+    font-size: var(--font-size-sm);
+  }
+
+  .edit-story-page__question-card {
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+  }
+
+  .edit-story-page__stage-title {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .edit-story-page__question-text {
+    font-size: var(--font-size-md);
+  }
+
+  /* ✨ 선택지 - 작은 모바일에서도 세로 레이아웃! */
+  .edit-story-page__choice-grid {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .edit-story-page__choice-card {
+    padding: 20px 16px;
+    gap: 10px;
+    border-radius: 20px;
+    border-width: 3px;
   }
 
   .edit-story-page__choice-icon {
     font-size: 48px;
   }
 
+  .edit-story-page__choice-title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-black);
+  }
+
+  .edit-story-page__choice-desc {
+    font-size: var(--font-size-xs);
+  }
+
+  .edit-story-page__custom-btn {
+    padding: 14px 24px;
+    font-size: var(--font-size-md);
+    border-radius: 20px;
+  }
+
+  .edit-story-page__custom-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .edit-story-page__custom-title {
+    font-size: var(--font-size-md);
+    margin-bottom: 14px;
+  }
+
+  .edit-story-page__custom-input {
+    height: 100px;
+    padding: 14px;
+    font-size: var(--font-size-sm);
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+
+  .edit-story-page__custom-cancel,
+  .edit-story-page__custom-submit {
+    padding: 14px;
+    font-size: var(--font-size-md);
+    border-radius: 14px;
+  }
+
   .edit-story-page__big-btn {
-    padding: 16px 32px;
-    font-size: 18px;
+    padding: 16px 20px;
+    font-size: var(--font-size-md);
+    border-radius: 16px;
+    box-shadow: 0 3px 0 var(--color-primary-dark), var(--shadow-sm);
+  }
+
+  .edit-story-page__landscape {
+    height: 60px;
+  }
+
+  .edit-story-page__grass {
+    height: 40px;
+  }
+
+  .edit-story-page__tree {
+    bottom: 18px;
+    transform: scale(0.7);
+  }
+
+  .edit-story-page__bush {
+    bottom: 22px;
+    transform: scale(0.7);
+  }
+
+  .edit-story-page__house {
+    bottom: 20px;
+    transform: scale(0.7);
+  }
+
+  .edit-story-page__flower {
+    bottom: 28px;
+    transform: scale(0.7);
+  }
+
+  .edit-story-page__tree--1 {
+    display: block;
+    left: 8%;
+  }
+
+  .edit-story-page__tree--2 {
+    display: block;
+    right: 8%;
+  }
+
+  .edit-story-page__bush--1 {
+    display: block;
+    left: 30%;
+  }
+
+  .edit-story-page__bush--2 {
+    display: block;
+    right: 30%;
+  }
+
+  .edit-story-page__flower--1,
+  .edit-story-page__flower--2 {
+    display: block;
+  }
+
+  .edit-story-page__tree--3,
+  .edit-story-page__bush--3,
+  .edit-story-page__bush--4,
+  .edit-story-page__flower--3,
+  .edit-story-page__flower--4,
+  .edit-story-page__house {
+    display: none;
+  }
+
+  .edit-story-page__cloud--1,
+  .edit-story-page__cloud--2 {
+    display: none;
+  }
+}
+
+/* ============================================
+   📱 세로 모드 (Portrait) - 콘텐츠 살짝 아래로
+   ============================================ */
+@media (orientation: portrait) and (max-width: 1024px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding-top: 30px;
+  }
+
+  .edit-story-page__mini-progress {
+    margin-top: -10px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding-top: 40px;
+  }
+
+  .edit-story-page__mini-progress {
+    margin-top: -15px;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 480px) {
+
+  .edit-story-page__main,
+  .edit-story-page__main--fullscreen {
+    padding-top: 50px;
+  }
+
+  .edit-story-page__mini-progress {
+    margin-top: -20px;
   }
 }

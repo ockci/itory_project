@@ -1,12 +1,11 @@
 /* ============================================
-   📚 아이토리 - 동화 선택 페이지 CSS (New Design System)
+   📚 아이토리 - 동화 선택 페이지 CSS
    크림톤/클레이 스타일 + 3D 책 디자인
    ============================================ */
 
 .fairytale-page {
   min-height: 100vh;
   background: transparent;
-  /* Global background from index.css */
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-family);
@@ -149,56 +148,11 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-.fairytale-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
-.fairytale-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.fairytale-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: white;
-  border: 2px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
-  transition: var(--transition-base);
-  color: var(--color-text-secondary);
-}
-
-.fairytale-page__back-btn:hover {
-  transform: translateY(-2px);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-}
-
-.fairytale-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* ============================================
    📖 타이틀 섹션
    ============================================ */
 .fairytale-page__title-section {
   text-align: center;
-  padding: 10px 20px 30px;
+  padding: 70px 20px 30px;
   position: relative;
   z-index: 1;
 }
@@ -282,9 +236,6 @@
 /* ============================================
    📕 3D 책 스타일
    ============================================ */
-/* ============================================
-   📕 3D 책 스타일 (Enhanced Realism)
-   ============================================ */
 .fairytale-page__book {
   position: absolute;
   cursor: pointer;
@@ -336,16 +287,15 @@
 /* 3D 책 구조 */
 .fairytale-page__book-3d {
   position: relative;
-  width: 320px;
-  height: 440px;
+  width: 280px;
+  height: 380px;
   transform-style: preserve-3d;
-  /* 책 전체 그림자 (바닥) */
   box-shadow:
     0 30px 60px rgba(0, 0, 0, 0.3),
     0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* 책등 (Spine) - 둥근 느낌 강화 */
+/* 책등 (Spine) */
 .fairytale-page__book-spine {
   position: absolute;
   left: 0;
@@ -354,7 +304,6 @@
   height: 100%;
   transform: translateX(-25px) rotateY(-90deg);
   transform-origin: left center;
-  /* 회전축 변경 */
   background: linear-gradient(90deg,
       rgba(255, 255, 255, 0.2) 0%,
       rgba(255, 255, 255, 0) 20%,
@@ -367,7 +316,6 @@
   z-index: 1;
 }
 
-/* 책등 실제 컬러 레이어 */
 .fairytale-page__book-spine::before {
   content: '';
   position: absolute;
@@ -378,7 +326,6 @@
   box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 책등 장식 라인 */
 .fairytale-page__book-spine::after {
   content: '';
   position: absolute;
@@ -393,80 +340,84 @@
 .fairytale-page__spine-title {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
-  font-weight: 800;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  letter-spacing: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 80%;
-  transform: rotate(180deg);
-  /* 텍스트 방향 조정 */
 }
 
-/* 페이지 두께 (우측) - 종이 질감 */
+/* 페이지 두께 */
 .fairytale-page__book-pages {
   position: absolute;
   right: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 46px;
-  transform: translateX(23px) rotateY(90deg);
-  background:
-    repeating-linear-gradient(90deg,
-      #fff 0px,
-      #f0f0f0 1px,
-      #fff 2px);
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 0 2px 2px 0;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  transform: translateX(20px) rotateY(90deg);
+  transform-origin: left center;
+  background: linear-gradient(90deg,
+      #f5f0e6 0%,
+      #f8f4ec 10%,
+      #f5f0e6 20%,
+      #f8f4ec 30%,
+      #f5f0e6 40%,
+      #f8f4ec 50%,
+      #f5f0e6 60%,
+      #f8f4ec 70%,
+      #f5f0e6 80%,
+      #f8f4ec 90%,
+      #ebe5d8 100%);
+  border-radius: 0 3px 3px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px 5px;
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 책 표지 (앞) */
+.fairytale-page__page-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 0 2px;
+}
+
+/* 책 표지 */
 .fairytale-page__book-cover {
   position: absolute;
   inset: 0;
-  background: var(--book-color);
-  border-radius: 0 8px 8px 0;
-  transform: translateZ(25px);
-  /* 두께의 절반만큼 앞으로 */
-  box-shadow:
-    inset 4px 0 10px rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: var(--book-color, #4CAF50);
+  border-radius: 4px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.2),
+    inset -5px 0 20px rgba(0, 0, 0, 0.15);
 }
 
-/* 책 뒷표지 */
-.fairytale-page__book-back-cover {
-  position: absolute;
-  inset: 0;
-  background: var(--book-color);
-  border-radius: 4px 0 0 4px;
-  transform: translateZ(-25px) rotateY(180deg);
-  /* 두께의 절반만큼 뒤로 */
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-/* 표지 테두리 장식 */
+/* 표지 테두리 */
 .fairytale-page__cover-border {
   position: absolute;
-  inset: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 4px 8px 8px 4px;
+  inset: 12px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   padding: 16px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
 }
 
-/* 이미지 영역 */
+/* 이미지 영역 - 1:1 비율 */
 .fairytale-page__cover-image {
-  flex: 1;
-  background: #fff;
-  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -498,6 +449,10 @@
 /* 제목 영역 */
 .fairytale-page__cover-info {
   text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .fairytale-page__book-label {
@@ -514,7 +469,7 @@
 }
 
 .fairytale-page__book-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -557,7 +512,7 @@
 }
 
 /* ============================================
-   📍 인디케이터
+   🔍 인디케이터
    ============================================ */
 .fairytale-page__indicators {
   display: flex;
@@ -609,7 +564,7 @@
 }
 
 /* ============================================
-   🔘 CTA 버튼
+   📘 CTA 버튼
    ============================================ */
 .fairytale-page__cta {
   display: flex;
@@ -666,7 +621,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   🔎 푸터
    ============================================ */
 .fairytale-page__footer {
   text-align: center;
@@ -677,7 +632,7 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 1024px
    ============================================ */
 @media (max-width: 1024px) {
   .fairytale-page__carousel {
@@ -685,8 +640,8 @@
   }
 
   .fairytale-page__book-3d {
-    width: 260px;
-    height: 350px;
+    width: 240px;
+    height: 320px;
   }
 
   .fairytale-page__book-spine {
@@ -719,15 +674,18 @@
     width: 50px;
     height: 50px;
   }
+
+  .fairytale-page__book-title {
+    font-size: 18px;
+  }
 }
 
+/* ============================================
+   📱 반응형 - 768px
+   ============================================ */
 @media (max-width: 768px) {
-  .fairytale-page__header {
-    padding: 16px 20px;
-  }
-
-  .fairytale-page__logo-img {
-    height: 44px;
+  .fairytale-page__title-section {
+    padding: 56px 20px 24px;
   }
 
   .fairytale-page__title {
@@ -739,12 +697,12 @@
   }
 
   .fairytale-page__carousel {
-    height: 400px;
+    height: 380px;
   }
 
   .fairytale-page__book-3d {
-    width: 220px;
-    height: 300px;
+    width: 200px;
+    height: 280px;
   }
 
   .fairytale-page__book-spine {
@@ -785,20 +743,35 @@
   .fairytale-page__cta-text {
     font-size: var(--font-size-lg);
   }
+
+  .fairytale-page__cover-border {
+    inset: 10px;
+    padding: 12px;
+  }
+
+  .fairytale-page__cover-image {
+    margin-bottom: 12px;
+  }
+
+  .fairytale-page__book-title {
+    font-size: 16px;
+  }
+
+  .fairytale-page__book-theme {
+    font-size: 12px;
+  }
+
+  .fairytale-page__image-placeholder {
+    font-size: 60px;
+  }
 }
 
+/* ============================================
+   📱 반응형 - 480px (모바일)
+   ============================================ */
 @media (max-width: 480px) {
-  .fairytale-page__header {
-    padding: 12px 16px;
-  }
-
-  .fairytale-page__back-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .fairytale-page__logo-img {
-    height: 36px;
+  .fairytale-page__title-section {
+    padding: 50px 16px 20px;
   }
 
   .fairytale-page__title {
@@ -810,38 +783,45 @@
   }
 
   .fairytale-page__carousel {
-    height: 360px;
+    height: 340px;
   }
 
+  /* 모바일에서 센터 책만 크게 보이도록 */
   .fairytale-page__book-3d {
-    width: 180px;
-    height: 250px;
+    width: 200px;
+    height: 280px;
   }
 
   .fairytale-page__book-spine {
-    width: 24px;
-    transform: translateX(-24px) rotateY(-90deg);
+    width: 20px;
+    transform: translateX(-20px) rotateY(-90deg);
   }
 
   .fairytale-page__book-pages {
-    width: 20px;
-    transform: translateX(20px) rotateY(90deg);
+    width: 16px;
+    transform: translateX(16px) rotateY(90deg);
   }
 
-  .fairytale-page__book--leftFar {
-    display: none;
-  }
-
+  /* 양끝 책 숨기기 */
+  .fairytale-page__book--leftFar,
   .fairytale-page__book--rightFar {
     display: none;
   }
 
+  /* 좌우 책 더 가깝게 */
   .fairytale-page__book--left {
-    transform: translateX(-110px) rotateY(35deg) scale(0.7);
+    transform: translateX(-100px) rotateY(35deg) scale(0.65);
+    opacity: 0.7;
   }
 
   .fairytale-page__book--right {
-    transform: translateX(110px) rotateY(-35deg) scale(0.7);
+    transform: translateX(100px) rotateY(-35deg) scale(0.65);
+    opacity: 0.7;
+  }
+
+  /* 센터 책 강조 */
+  .fairytale-page__book--center {
+    transform: translateX(0) translateZ(20px) rotateY(0deg) scale(1);
   }
 
   .fairytale-page__nav-btn {
@@ -849,12 +829,122 @@
     height: 40px;
   }
 
+  .fairytale-page__nav-btn--left {
+    left: 8px;
+  }
+
+  .fairytale-page__nav-btn--right {
+    right: 8px;
+  }
+
   .fairytale-page__cta {
-    padding: 20px;
+    padding: 20px 16px;
   }
 
   .fairytale-page__cta-btn {
     width: 100%;
     justify-content: center;
+    padding: 16px 24px;
+  }
+
+  .fairytale-page__cta-text {
+    font-size: var(--font-size-md);
+  }
+
+  .fairytale-page__cta-icon {
+    font-size: 24px;
+  }
+
+  .fairytale-page__cover-border {
+    inset: 8px;
+    padding: 10px;
+  }
+
+  /* 1:1 이미지 유지 */
+  .fairytale-page__cover-image {
+    margin-bottom: 10px;
+    border-width: 3px;
+  }
+
+  .fairytale-page__book-label {
+    font-size: 9px;
+    padding: 3px 8px;
+    margin-bottom: 6px;
+  }
+
+  .fairytale-page__book-title {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .fairytale-page__book-theme {
+    font-size: 11px;
+  }
+
+  .fairytale-page__book-logo {
+    width: 30px;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .fairytale-page__image-placeholder {
+    font-size: 48px;
+  }
+
+  .fairytale-page__indicators {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  .fairytale-page__indicator-count {
+    font-size: var(--font-size-sm);
+    padding: 5px 12px;
+  }
+
+  .fairytale-page__indicator-dots {
+    max-width: 280px;
+  }
+
+  .fairytale-page__indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .fairytale-page__footer {
+    padding: 16px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 360px (작은 모바일)
+   ============================================ */
+@media (max-width: 360px) {
+  .fairytale-page__title-section {
+    padding: 40px 16px 16px;
+  }
+
+  .fairytale-page__carousel {
+    height: 300px;
+  }
+
+  .fairytale-page__book-3d {
+    width: 170px;
+    height: 240px;
+  }
+
+  .fairytale-page__book--left {
+    transform: translateX(-85px) rotateY(35deg) scale(0.6);
+  }
+
+  .fairytale-page__book--right {
+    transform: translateX(85px) rotateY(-35deg) scale(0.6);
+  }
+
+  .fairytale-page__book-title {
+    font-size: 13px;
+  }
+
+  .fairytale-page__book-theme {
+    font-size: 10px;
   }
 }
