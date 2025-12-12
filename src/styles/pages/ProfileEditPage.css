@@ -1,6 +1,6 @@
 /* ============================================
    ✏️ 아이토리 - 프로필 수정 페이지 CSS
-   크림톤/클레이 스타일 + 가로 화면 최적화
+   크림톤/클레이 스타일 + 모바일 최적화
    ============================================ */
 
 .profile-edit-page {
@@ -131,65 +131,6 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-.profile-edit-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
-.profile-edit-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.profile-edit-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #E8D4C4,
-    0 6px 20px rgba(93, 78, 55, 0.15);
-  transition: all 0.2s ease;
-  color: #5D4E37;
-}
-
-.profile-edit-page__back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #E8D4C4,
-    0 10px 28px rgba(93, 78, 55, 0.2);
-}
-
-.profile-edit-page__back-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #E8D4C4;
-}
-
-.profile-edit-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-.profile-edit-page__header-title {
-  font-size: 26px;
-  font-weight: 800;
-  color: #3D3425;
-}
-
-/* ============================================
    📦 메인 콘텐츠
    ============================================ */
 .profile-edit-page__main {
@@ -198,6 +139,25 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+}
+
+/* 타이틀 섹션 */
+.profile-edit-page__title-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.profile-edit-page__title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #3D3425;
+  margin-bottom: 8px;
+}
+
+.profile-edit-page__subtitle {
+  font-size: 15px;
+  color: #6B5D4D;
+  font-weight: 500;
 }
 
 .profile-edit-page__content {
@@ -212,7 +172,7 @@
    ============================================ */
 .profile-edit-page__left {
   position: sticky;
-  top: 20px;
+  top: 100px;
   height: fit-content;
 }
 
@@ -496,7 +456,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   🔎 푸터
    ============================================ */
 .profile-edit-page__footer {
   text-align: center;
@@ -507,7 +467,7 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 태블릿 (1024px)
    ============================================ */
 @media (max-width: 1024px) {
   .profile-edit-page__content {
@@ -520,22 +480,24 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 태블릿/모바일 (768px)
+   ============================================ */
 @media (max-width: 768px) {
-  .profile-edit-page__header {
-    padding: 16px 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .profile-edit-page__header-title {
-    order: 3;
-    width: 100%;
-    text-align: center;
-    font-size: 22px;
-  }
-
   .profile-edit-page__main {
-    padding: 16px 20px 50px;
+    padding: 20px 20px 50px;
+  }
+
+  .profile-edit-page__title-section {
+    margin-bottom: 24px;
+  }
+
+  .profile-edit-page__title {
+    font-size: 24px;
+  }
+
+  .profile-edit-page__subtitle {
+    font-size: 14px;
   }
 
   .profile-edit-page__content {
@@ -553,6 +515,11 @@
     padding: 24px;
   }
 
+  .profile-edit-page__section-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
   .profile-edit-page__preview-image {
     width: 120px;
     height: 120px;
@@ -560,6 +527,7 @@
 
   .profile-edit-page__avatar-grid {
     grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
   }
 
   .profile-edit-page__age-grid {
@@ -581,26 +549,24 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
-  .profile-edit-page__header {
-    padding: 14px 16px;
+  .profile-edit-page__main {
+    padding: 16px 16px 40px;
   }
 
-  .profile-edit-page__header-left {
-    gap: 10px;
+  .profile-edit-page__title-section {
+    margin-bottom: 20px;
   }
 
-  .profile-edit-page__logo-img {
-    height: 40px;
+  .profile-edit-page__title {
+    font-size: 22px;
   }
 
-  .profile-edit-page__back-btn {
-    width: 42px;
-    height: 42px;
-  }
-
-  .profile-edit-page__header-title {
-    font-size: 20px;
+  .profile-edit-page__subtitle {
+    font-size: 13px;
   }
 
   .profile-edit-page__photo-section,
@@ -610,39 +576,133 @@
   }
 
   .profile-edit-page__section-title {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 16px;
   }
 
   .profile-edit-page__preview-image {
     width: 100px;
     height: 100px;
+    border-width: 3px;
+  }
+
+  .profile-edit-page__avatar-hint {
+    font-size: 13px;
+    margin-bottom: 16px;
   }
 
   .profile-edit-page__avatar-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
 
   .profile-edit-page__avatar-btn {
     border-width: 2px;
+    padding: 3px;
   }
 
   .profile-edit-page__avatar-btn.selected {
     border-width: 3px;
   }
 
+  .profile-edit-page__field {
+    margin-bottom: 20px;
+  }
+
+  .profile-edit-page__label {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .profile-edit-page__input {
+    padding: 14px 16px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+
   .profile-edit-page__age-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .profile-edit-page__age-btn {
+    padding: 12px 6px;
+    font-size: 14px;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+
+  .profile-edit-page__current-info {
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+
+  .profile-edit-page__info-badge {
+    font-size: 11px;
   }
 
   .profile-edit-page__info-details {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .profile-edit-page__actions {
+    gap: 12px;
+    margin-top: 24px;
   }
 
   .profile-edit-page__cancel-btn,
   .profile-edit-page__submit-btn {
     padding: 16px 32px;
     font-size: 16px;
+  }
+
+  .profile-edit-page__footer {
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+  .profile-edit-page__main {
+    padding: 12px 12px 32px;
+  }
+
+  .profile-edit-page__title {
+    font-size: 20px;
+  }
+
+  .profile-edit-page__subtitle {
+    font-size: 12px;
+  }
+
+  .profile-edit-page__photo-section,
+  .profile-edit-page__info-section {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .profile-edit-page__preview-image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-edit-page__avatar-grid {
+    gap: 6px;
+  }
+
+  .profile-edit-page__age-btn {
+    padding: 10px 4px;
+    font-size: 13px;
+  }
+
+  .profile-edit-page__cancel-btn,
+  .profile-edit-page__submit-btn {
+    padding: 14px 24px;
+    font-size: 15px;
   }
 }

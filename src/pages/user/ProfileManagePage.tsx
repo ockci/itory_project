@@ -1,11 +1,11 @@
-import { ChevronLeft, Plus, Edit2, Trash2, Users } from 'lucide-react'
+import { Plus, Edit2, Trash2 } from 'lucide-react'
 import { PageType, Kid, calculateAge } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/ProfileManagePage.css'
 
 interface ProfileManagePageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
   kids: Kid[]
   currentKidId: string | null
   onSelectKid: (id: string) => void
@@ -15,7 +15,6 @@ interface ProfileManagePageProps {
 export default function ProfileManagePage({
   onNavigate,
   onGoBack,
-  onMenuClick: _onMenuClick,
   kids,
   currentKidId,
   onSelectKid,
@@ -37,27 +36,18 @@ export default function ProfileManagePage({
         <div className="profile-manage-page__cloud profile-manage-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="profile-manage-page__header">
-        <div className="profile-manage-page__header-left">
-          <button onClick={onGoBack} className="profile-manage-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="profile-manage-page__logo-img"
-          />
-        </div>
-        <div style={{ width: 48 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="profile-manage-page__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="profile-manage-page__intro">
-          <div className="profile-manage-page__intro-icon">
-            <Users size={32} />
-          </div>
           <h2 className="profile-manage-page__intro-title">프로필 관리</h2>
           <p className="profile-manage-page__intro-desc">최대 4개의 프로필을 만들 수 있어요</p>
           <div className="profile-manage-page__count-badge">

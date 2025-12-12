@@ -111,20 +111,24 @@
 }
 
 /* ============================================
-   🏷️ 헤더
+   🏷️ 헤더 - Fixed, 가운데 제목
    ============================================ */
 .payment-method-page__header {
-    position: relative;
-    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-    border-radius: 0 0 32px 32px;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgba(227, 242, 253, 0.95) 0%, rgba(187, 222, 251, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    border-radius: 0 0 24px 24px;
     box-shadow:
-        0 6px 0 #90CAF9,
-        0 12px 32px rgba(33, 150, 243, 0.15);
+        0 4px 0 #90CAF9,
+        0 8px 24px rgba(33, 150, 243, 0.15);
 }
 
 .payment-method-page__back-btn {
@@ -140,6 +144,7 @@
     box-shadow: 0 3px 0 #90CAF9;
     transition: all 0.2s ease;
     color: #2196F3;
+    flex-shrink: 0;
 }
 
 .payment-method-page__back-btn:hover {
@@ -153,9 +158,37 @@
 }
 
 .payment-method-page__header-title {
-    font-size: 24px;
+    flex: 1;
+    font-size: 22px;
     font-weight: 800;
     color: #1565C0;
+    text-align: center;
+}
+
+.payment-method-page__menu-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #90CAF9;
+    transition: all 0.2s ease;
+    color: #2196F3;
+    flex-shrink: 0;
+}
+
+.payment-method-page__menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #90CAF9;
+}
+
+.payment-method-page__menu-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #90CAF9;
 }
 
 /* ============================================
@@ -165,8 +198,9 @@
     position: relative;
     z-index: 1;
     padding: 24px;
-    padding-bottom: 160px;
-    max-width: 500px;
+    padding-top: 110px;
+    padding-bottom: 220px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -445,35 +479,38 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 120px;
+    height: 180px;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
 .payment-method-page__grass {
     position: absolute;
     bottom: 0;
-    left: -5%;
-    right: -5%;
-    height: 70px;
-    background: linear-gradient(180deg, #8BC34A 0%, #7CB342 50%, #689F38 100%);
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-    box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
+    left: -10%;
+    right: -10%;
+    height: 120px;
+    background: linear-gradient(180deg, #8BC34A 0%, #7CB342 40%, #689F38 100%);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.25);
 }
 
 .payment-method-page__tree {
     position: absolute;
-    bottom: 55px;
+    bottom: 0;
+    width: 80px;
+    height: 120px;
 }
 
 .payment-method-page__tree::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 14px;
-    height: 28px;
+    width: 18px;
+    height: 40px;
     background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
     border-radius: 4px;
 }
@@ -481,96 +518,99 @@
 .payment-method-page__tree::after {
     content: '';
     position: absolute;
-    bottom: 22px;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(180deg, #81C784 0%, #66BB6A 50%, #4CAF50 100%);
     border-radius: 50%;
-    box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: inset -6px -6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .payment-method-page__tree--1 {
-    left: 5%;
+    left: 3%;
 }
 
 .payment-method-page__tree--2 {
-    right: 8%;
+    right: 5%;
 }
 
 .payment-method-page__tree--2::after {
-    width: 48px;
-    height: 48px;
-    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    bottom: 65px;
 }
 
 .payment-method-page__tree--2::before {
-    height: 24px;
-    width: 12px;
+    height: 35px;
+    width: 16px;
+    bottom: 38px;
 }
 
 .payment-method-page__bush {
     position: absolute;
-    bottom: 55px;
+    bottom: 70px;
     background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
     border-radius: 50% 50% 45% 45%;
-    box-shadow: inset -3px -2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset -4px -3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .payment-method-page__bush--1 {
-    left: 12%;
-    width: 38px;
-    height: 28px;
+    left: 14%;
+    width: 50px;
+    height: 38px;
 }
 
 .payment-method-page__bush--2 {
-    left: 45%;
-    width: 32px;
-    height: 24px;
-    bottom: 52px;
+    left: 48%;
+    width: 42px;
+    height: 32px;
+    bottom: 68px;
 }
 
 .payment-method-page__bush--3 {
-    right: 15%;
-    width: 36px;
-    height: 26px;
+    right: 16%;
+    width: 46px;
+    height: 35px;
 }
 
 .payment-method-page__flower {
     position: absolute;
-    bottom: 65px;
-    width: 12px;
-    height: 12px;
+    bottom: 95px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .payment-method-page__flower--1 {
-    left: 20%;
+    left: 22%;
     background: #F48FB1;
 }
 
 .payment-method-page__flower--2 {
-    left: 55%;
+    left: 52%;
     background: #FFD54F;
 }
 
 .payment-method-page__flower--3 {
-    right: 25%;
+    right: 24%;
     background: #CE93D8;
 }
 
 /* ============================================
-   📱 반응형 디자인
+   📱 반응형 디자인 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
     .payment-method-page__content {
         padding: 20px 16px;
-        padding-bottom: 140px;
+        padding-top: 100px;
+        padding-bottom: 200px;
     }
 
     .payment-method-page__header {
-        padding: 16px 20px;
+        padding: 14px 20px;
     }
 
     .payment-method-page__header-title {
@@ -581,34 +621,84 @@
         display: none;
     }
 
+    /* 풍경 조정 */
     .payment-method-page__landscape {
-        height: 100px;
+        height: 160px;
     }
 
     .payment-method-page__grass {
-        height: 55px;
+        height: 100px;
     }
 
-    .payment-method-page__tree,
-    .payment-method-page__bush,
+    .payment-method-page__tree::before {
+        bottom: 32px;
+        height: 35px;
+        width: 16px;
+    }
+
+    .payment-method-page__tree::after {
+        bottom: 58px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .payment-method-page__tree--2::after {
+        width: 52px;
+        height: 52px;
+        bottom: 54px;
+    }
+
+    .payment-method-page__tree--2::before {
+        height: 30px;
+        bottom: 30px;
+    }
+
+    .payment-method-page__bush {
+        bottom: 58px;
+    }
+
+    .payment-method-page__bush--1 {
+        width: 44px;
+        height: 34px;
+    }
+
+    .payment-method-page__bush--2 {
+        display: none;
+    }
+
+    .payment-method-page__bush--3 {
+        width: 40px;
+        height: 32px;
+    }
+
     .payment-method-page__flower {
-        bottom: 42px;
+        bottom: 78px;
+    }
+
+    .payment-method-page__flower--2 {
+        display: none;
     }
 }
 
+/* ============================================
+   📱 반응형 디자인 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
     .payment-method-page__content {
         padding: 16px 12px;
-        padding-bottom: 120px;
+        padding-top: 90px;
+        padding-bottom: 180px;
     }
 
     .payment-method-page__header {
-        padding: 14px 16px;
+        padding: 12px 16px;
     }
 
-    .payment-method-page__back-btn {
+    .payment-method-page__back-btn,
+    .payment-method-page__menu-btn {
         width: 40px;
         height: 40px;
+        border-radius: 12px;
     }
 
     .payment-method-page__header-title {
@@ -648,23 +738,132 @@
         align-items: center;
     }
 
+    /* 풍경 조정 */
     .payment-method-page__landscape {
-        height: 80px;
+        height: 140px;
     }
 
     .payment-method-page__grass {
-        height: 45px;
+        height: 90px;
     }
 
-    .payment-method-page__tree {
-        display: none;
+    .payment-method-page__tree::before {
+        bottom: 28px;
+        height: 30px;
+        width: 14px;
+    }
+
+    .payment-method-page__tree::after {
+        bottom: 50px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .payment-method-page__tree--2::after {
+        width: 44px;
+        height: 44px;
+        bottom: 46px;
+    }
+
+    .payment-method-page__tree--2::before {
+        height: 26px;
+        bottom: 26px;
     }
 
     .payment-method-page__bush {
-        bottom: 35px;
+        bottom: 52px;
+    }
+
+    .payment-method-page__bush--1 {
+        width: 38px;
+        height: 30px;
+    }
+
+    .payment-method-page__bush--3 {
+        width: 36px;
+        height: 28px;
     }
 
     .payment-method-page__flower {
+        bottom: 68px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ============================================
+   📱 반응형 디자인 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+    .payment-method-page__content {
+        padding: 12px 10px;
+        padding-top: 85px;
+        padding-bottom: 160px;
+    }
+
+    .payment-method-page__header {
+        padding: 10px 14px;
+    }
+
+    .payment-method-page__back-btn,
+    .payment-method-page__menu-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .payment-method-page__header-title {
+        font-size: 16px;
+    }
+
+    /* 풍경 조정 */
+    .payment-method-page__landscape {
+        height: 120px;
+    }
+
+    .payment-method-page__grass {
+        height: 80px;
+    }
+
+    .payment-method-page__tree::before {
+        bottom: 24px;
+        height: 26px;
+        width: 12px;
+    }
+
+    .payment-method-page__tree::after {
+        bottom: 44px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .payment-method-page__tree--2::after {
+        width: 38px;
+        height: 38px;
         bottom: 40px;
+    }
+
+    .payment-method-page__tree--2::before {
+        height: 22px;
+        bottom: 22px;
+    }
+
+    .payment-method-page__bush {
+        bottom: 48px;
+    }
+
+    .payment-method-page__bush--1 {
+        width: 34px;
+        height: 26px;
+    }
+
+    .payment-method-page__bush--3 {
+        width: 32px;
+        height: 24px;
+    }
+
+    .payment-method-page__flower {
+        bottom: 62px;
+        width: 12px;
+        height: 12px;
     }
 }

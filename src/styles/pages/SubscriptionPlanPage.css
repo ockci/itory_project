@@ -111,20 +111,24 @@
 }
 
 /* ============================================
-   🏷️ 헤더
+   🏷️ 헤더 - Fixed, 가운데 제목
    ============================================ */
 .subscription-plan-page__header {
-    position: relative;
-    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
-    border-radius: 0 0 32px 32px;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgba(255, 248, 225, 0.95) 0%, rgba(255, 236, 179, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    border-radius: 0 0 24px 24px;
     box-shadow:
-        0 6px 0 #E8D4A0,
-        0 12px 32px rgba(245, 166, 35, 0.15);
+        0 4px 0 #E8D4A0,
+        0 8px 24px rgba(245, 166, 35, 0.15);
 }
 
 .subscription-plan-page__back-btn {
@@ -140,6 +144,7 @@
     box-shadow: 0 3px 0 #E8D4A0;
     transition: all 0.2s ease;
     color: #F5A623;
+    flex-shrink: 0;
 }
 
 .subscription-plan-page__back-btn:hover {
@@ -153,9 +158,37 @@
 }
 
 .subscription-plan-page__header-title {
-    font-size: 24px;
+    flex: 1;
+    font-size: 22px;
     font-weight: 800;
     color: #8B6914;
+    text-align: center;
+}
+
+.subscription-plan-page__menu-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #E8D4A0;
+    transition: all 0.2s ease;
+    color: #F5A623;
+    flex-shrink: 0;
+}
+
+.subscription-plan-page__menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #E8D4A0;
+}
+
+.subscription-plan-page__menu-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #E8D4A0;
 }
 
 /* ============================================
@@ -165,8 +198,9 @@
     position: relative;
     z-index: 1;
     padding: 24px;
-    padding-bottom: 160px;
-    max-width: 500px;
+    padding-top: 110px;
+    padding-bottom: 220px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
@@ -182,15 +216,26 @@
 }
 
 /* ============================================
-   💳 플랜 카드
+   🔲 2열 그리드 레이아웃
    ============================================ */
-.subscription-plan-page__list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.subscription-plan-page__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
     margin-bottom: 24px;
 }
 
+.subscription-plan-page__grid-left,
+.subscription-plan-page__grid-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ============================================
+   💳 플랜 카드
+   ============================================ */
 .subscription-plan-page__card {
     position: relative;
     background: white;
@@ -288,6 +333,7 @@
     justify-content: center;
     font-size: 28px;
     box-shadow: 0 3px 0 #E8D4A0;
+    flex-shrink: 0;
 }
 
 .subscription-plan-page__card.selected .subscription-plan-page__card-emoji {
@@ -365,11 +411,11 @@
     color: #C4B8A8;
 }
 
-/* 선택 인디케이터 */
+/* 선택 표시 */
 .subscription-plan-page__select-indicator {
-    position: absolute;
-    top: 24px;
-    right: 24px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
 }
 
 .subscription-plan-page__radio {
@@ -377,21 +423,21 @@
     height: 28px;
     border-radius: 50%;
     border: 3px solid #E8E0D4;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    background: white;
 }
 
 .subscription-plan-page__radio.selected {
     background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
     border-color: #4CAF50;
-    box-shadow: 0 3px 0 #388E3C;
+    box-shadow: 0 2px 0 #388E3C;
 }
 
 /* ============================================
-   💎 1회 구매 섹션
+   💎 1회 구매 옵션
    ============================================ */
 .subscription-plan-page__onetime {
     display: flex;
@@ -400,7 +446,6 @@
     background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
     border-radius: 20px;
     padding: 20px;
-    margin-bottom: 24px;
     border: 3px solid #CE93D8;
     box-shadow: 0 4px 0 #BA68C8;
 }
@@ -464,45 +509,6 @@
 }
 
 /* ============================================
-   🔘 변경 버튼
-   ============================================ */
-.subscription-plan-page__change-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 20px;
-    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
-    border: none;
-    border-radius: 20px;
-    font-size: 17px;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-bottom: 24px;
-    box-shadow: 0 6px 0 #388E3C;
-}
-
-.subscription-plan-page__change-btn:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 9px 0 #388E3C;
-}
-
-.subscription-plan-page__change-btn:active:not(:disabled) {
-    transform: translateY(3px);
-    box-shadow: 0 3px 0 #388E3C;
-}
-
-.subscription-plan-page__change-btn:disabled {
-    background: #E8E0D4;
-    color: #A89F91;
-    cursor: not-allowed;
-    box-shadow: 0 4px 0 #D4CBC0;
-}
-
-/* ============================================
    📝 안내 문구
    ============================================ */
 .subscription-plan-page__notice {
@@ -525,6 +531,46 @@
 }
 
 /* ============================================
+   🔘 변경 버튼
+   ============================================ */
+.subscription-plan-page__change-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    border: none;
+    border-radius: 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 0 #388E3C;
+}
+
+.subscription-plan-page__change-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 #388E3C;
+}
+
+.subscription-plan-page__change-btn:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #388E3C;
+}
+
+.subscription-plan-page__change-btn:disabled {
+    background: #E8E0D4;
+    color: #A89F91;
+    cursor: not-allowed;
+    box-shadow: 0 4px 0 #D4CBC0;
+}
+
+/* ============================================
    🌳 하단 풍경 장식
    ============================================ */
 .subscription-plan-page__landscape {
@@ -532,35 +578,38 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 120px;
+    height: 180px;
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
 
 .subscription-plan-page__grass {
     position: absolute;
     bottom: 0;
-    left: -5%;
-    right: -5%;
-    height: 70px;
-    background: linear-gradient(180deg, #8BC34A 0%, #7CB342 50%, #689F38 100%);
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-    box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
+    left: -10%;
+    right: -10%;
+    height: 120px;
+    background: linear-gradient(180deg, #8BC34A 0%, #7CB342 40%, #689F38 100%);
+    border-radius: 50% 50% 0 0 / 80% 80% 0 0;
+    box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.25);
 }
 
 .subscription-plan-page__tree {
     position: absolute;
-    bottom: 55px;
+    bottom: 0;
+    width: 80px;
+    height: 120px;
 }
 
 .subscription-plan-page__tree::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 14px;
-    height: 28px;
+    width: 18px;
+    height: 40px;
     background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
     border-radius: 4px;
 }
@@ -568,96 +617,99 @@
 .subscription-plan-page__tree::after {
     content: '';
     position: absolute;
-    bottom: 22px;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(180deg, #81C784 0%, #66BB6A 50%, #4CAF50 100%);
     border-radius: 50%;
-    box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: inset -6px -6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .subscription-plan-page__tree--1 {
-    left: 5%;
+    left: 3%;
 }
 
 .subscription-plan-page__tree--2 {
-    right: 8%;
+    right: 5%;
 }
 
 .subscription-plan-page__tree--2::after {
-    width: 48px;
-    height: 48px;
-    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    bottom: 65px;
 }
 
 .subscription-plan-page__tree--2::before {
-    height: 24px;
-    width: 12px;
+    height: 35px;
+    width: 16px;
+    bottom: 38px;
 }
 
 .subscription-plan-page__bush {
     position: absolute;
-    bottom: 55px;
+    bottom: 70px;
     background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
     border-radius: 50% 50% 45% 45%;
-    box-shadow: inset -3px -2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: inset -4px -3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .subscription-plan-page__bush--1 {
-    left: 12%;
-    width: 38px;
-    height: 28px;
+    left: 14%;
+    width: 50px;
+    height: 38px;
 }
 
 .subscription-plan-page__bush--2 {
-    left: 45%;
-    width: 32px;
-    height: 24px;
-    bottom: 52px;
+    left: 48%;
+    width: 42px;
+    height: 32px;
+    bottom: 68px;
 }
 
 .subscription-plan-page__bush--3 {
-    right: 15%;
-    width: 36px;
-    height: 26px;
+    right: 16%;
+    width: 46px;
+    height: 35px;
 }
 
 .subscription-plan-page__flower {
     position: absolute;
-    bottom: 65px;
-    width: 12px;
-    height: 12px;
+    bottom: 95px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subscription-plan-page__flower--1 {
-    left: 20%;
+    left: 22%;
     background: #F48FB1;
 }
 
 .subscription-plan-page__flower--2 {
-    left: 55%;
+    left: 52%;
     background: #FFD54F;
 }
 
 .subscription-plan-page__flower--3 {
-    right: 25%;
+    right: 24%;
     background: #CE93D8;
 }
 
 /* ============================================
-   📱 반응형 디자인
+   📱 반응형 디자인 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
     .subscription-plan-page__content {
         padding: 20px 16px;
-        padding-bottom: 140px;
+        padding-top: 100px;
+        padding-bottom: 200px;
     }
 
     .subscription-plan-page__header {
-        padding: 16px 20px;
+        padding: 14px 20px;
     }
 
     .subscription-plan-page__header-title {
@@ -668,34 +720,93 @@
         display: none;
     }
 
+    /* 모바일에서 1열 레이아웃 */
+    .subscription-plan-page__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subscription-plan-page__grid-right {
+        order: -1;
+    }
+
+    /* 풍경 조정 */
     .subscription-plan-page__landscape {
-        height: 100px;
+        height: 160px;
     }
 
     .subscription-plan-page__grass {
-        height: 55px;
+        height: 100px;
     }
 
-    .subscription-plan-page__tree,
-    .subscription-plan-page__bush,
+    .subscription-plan-page__tree::before {
+        bottom: 32px;
+        height: 35px;
+        width: 16px;
+    }
+
+    .subscription-plan-page__tree::after {
+        bottom: 58px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .subscription-plan-page__tree--2::after {
+        width: 52px;
+        height: 52px;
+        bottom: 54px;
+    }
+
+    .subscription-plan-page__tree--2::before {
+        height: 30px;
+        bottom: 30px;
+    }
+
+    .subscription-plan-page__bush {
+        bottom: 58px;
+    }
+
+    .subscription-plan-page__bush--1 {
+        width: 44px;
+        height: 34px;
+    }
+
+    .subscription-plan-page__bush--2 {
+        display: none;
+    }
+
+    .subscription-plan-page__bush--3 {
+        width: 40px;
+        height: 32px;
+    }
+
     .subscription-plan-page__flower {
-        bottom: 42px;
+        bottom: 78px;
+    }
+
+    .subscription-plan-page__flower--2 {
+        display: none;
     }
 }
 
+/* ============================================
+   📱 반응형 디자인 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
     .subscription-plan-page__content {
         padding: 16px 12px;
-        padding-bottom: 120px;
+        padding-top: 90px;
+        padding-bottom: 180px;
     }
 
     .subscription-plan-page__header {
-        padding: 14px 16px;
+        padding: 12px 16px;
     }
 
-    .subscription-plan-page__back-btn {
+    .subscription-plan-page__back-btn,
+    .subscription-plan-page__menu-btn {
         width: 40px;
         height: 40px;
+        border-radius: 12px;
     }
 
     .subscription-plan-page__header-title {
@@ -740,23 +851,132 @@
         font-size: 16px;
     }
 
+    /* 풍경 조정 */
     .subscription-plan-page__landscape {
-        height: 80px;
+        height: 140px;
     }
 
     .subscription-plan-page__grass {
-        height: 45px;
+        height: 90px;
     }
 
-    .subscription-plan-page__tree {
-        display: none;
+    .subscription-plan-page__tree::before {
+        bottom: 28px;
+        height: 30px;
+        width: 14px;
+    }
+
+    .subscription-plan-page__tree::after {
+        bottom: 50px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .subscription-plan-page__tree--2::after {
+        width: 44px;
+        height: 44px;
+        bottom: 46px;
+    }
+
+    .subscription-plan-page__tree--2::before {
+        height: 26px;
+        bottom: 26px;
     }
 
     .subscription-plan-page__bush {
-        bottom: 35px;
+        bottom: 52px;
+    }
+
+    .subscription-plan-page__bush--1 {
+        width: 38px;
+        height: 30px;
+    }
+
+    .subscription-plan-page__bush--3 {
+        width: 36px;
+        height: 28px;
     }
 
     .subscription-plan-page__flower {
+        bottom: 68px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ============================================
+   📱 반응형 디자인 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+    .subscription-plan-page__content {
+        padding: 12px 10px;
+        padding-top: 85px;
+        padding-bottom: 160px;
+    }
+
+    .subscription-plan-page__header {
+        padding: 10px 14px;
+    }
+
+    .subscription-plan-page__back-btn,
+    .subscription-plan-page__menu-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .subscription-plan-page__header-title {
+        font-size: 16px;
+    }
+
+    /* 풍경 조정 */
+    .subscription-plan-page__landscape {
+        height: 120px;
+    }
+
+    .subscription-plan-page__grass {
+        height: 80px;
+    }
+
+    .subscription-plan-page__tree::before {
+        bottom: 24px;
+        height: 26px;
+        width: 12px;
+    }
+
+    .subscription-plan-page__tree::after {
+        bottom: 44px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .subscription-plan-page__tree--2::after {
+        width: 38px;
+        height: 38px;
         bottom: 40px;
+    }
+
+    .subscription-plan-page__tree--2::before {
+        height: 22px;
+        bottom: 22px;
+    }
+
+    .subscription-plan-page__bush {
+        bottom: 48px;
+    }
+
+    .subscription-plan-page__bush--1 {
+        width: 34px;
+        height: 26px;
+    }
+
+    .subscription-plan-page__bush--3 {
+        width: 32px;
+        height: 24px;
+    }
+
+    .subscription-plan-page__flower {
+        bottom: 62px;
+        width: 12px;
+        height: 12px;
     }
 }

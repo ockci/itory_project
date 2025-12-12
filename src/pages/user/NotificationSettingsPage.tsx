@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { ChevronLeft, Bell, MessageSquare, Heart, Gift, Smartphone, Mail } from 'lucide-react'
+import { Bell, MessageSquare, Heart, Gift, Smartphone, Mail } from 'lucide-react'
 import { PageType } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/NotificationSettingsPage.css'
 
 interface NotificationSettingsPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
 }
 
-export default function NotificationSettingsPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: NotificationSettingsPageProps) {
+export default function NotificationSettingsPage({ onNavigate, onGoBack }: NotificationSettingsPageProps) {
   const [settings, setSettings] = useState({
     newStory: true,
     comment: true,
@@ -24,7 +24,6 @@ export default function NotificationSettingsPage({ onNavigate: _onNavigate, onGo
   }
 
   const handleSave = () => {
-    // 백엔드 저장 로직은 그대로 유지
     alert('알림 설정이 저장되었습니다!')
     onGoBack()
   }
@@ -39,29 +38,18 @@ export default function NotificationSettingsPage({ onNavigate: _onNavigate, onGo
         <div className="notification-settings-page__cloud notification-settings-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="notification-settings-page__header">
-        <div className="notification-settings-page__header-left">
-          <button onClick={onGoBack} className="notification-settings-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="notification-settings-page__logo-img"
-          />
-        </div>
-        <button onClick={handleSave} className="notification-settings-page__save-btn">
-          저장
-        </button>
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="notification-settings-page__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="notification-settings-page__intro">
-          <div className="notification-settings-page__intro-icon">
-            <Bell size={32} />
-          </div>
           <h2 className="notification-settings-page__intro-title">알림을 관리하세요</h2>
           <p className="notification-settings-page__intro-desc">원하는 알림만 받아볼 수 있어요</p>
         </div>
@@ -194,7 +182,7 @@ export default function NotificationSettingsPage({ onNavigate: _onNavigate, onGo
           </div>
         </div>
 
-        {/* 저장 버튼 (모바일) */}
+        {/* 저장 버튼 */}
         <div className="notification-settings-page__actions">
           <button onClick={handleSave} className="notification-settings-page__submit-btn">
             변경사항 저장 ✨

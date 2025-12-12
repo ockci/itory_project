@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { ChevronLeft } from 'lucide-react'
 import { PageType, Kid, calculateAge } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/ProfileEditPage.css'
 
 interface ProfileEditPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
   currentKid: Kid | null
   onUpdateKid: (kid: { kid_name: string; kid_birth_date: string; avatar_url: string; gender?: string; interest_tags?: string[] }) => void
 }
@@ -17,7 +16,7 @@ const isImageUrl = (avatar: string | undefined): boolean => {
   return avatar.startsWith('/') || avatar.startsWith('http')
 }
 
-// 아바타 이미지 옵션 (ProfileAddPage와 동일)
+// 아바타 이미지 옵션 (ProductionPath)
 const avatarOptions = [
   { id: 'avatar1', src: '/images/avatars/avatar1.png', alt: '아바타 1' },
   { id: 'avatar2', src: '/images/avatars/avatar2.png', alt: '아바타 2' },
@@ -49,9 +48,8 @@ function birthDateFromAge(age: number): string {
 }
 
 export default function ProfileEditPage({
-  onNavigate: _onNavigate,
+  onNavigate,
   onGoBack,
-  onMenuClick: _onMenuClick,
   currentKid,
   onUpdateKid
 }: ProfileEditPageProps) {
@@ -88,23 +86,22 @@ export default function ProfileEditPage({
         <div className="profile-edit-page__cloud profile-edit-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="profile-edit-page__header">
-        <div className="profile-edit-page__header-left">
-          <button onClick={onGoBack} className="profile-edit-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="profile-edit-page__logo-img"
-          />
-        </div>
-        <h1 className="profile-edit-page__header-title">프로필 수정</h1>
-        <div style={{ width: 120 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="profile-edit-page__main">
+        {/* 타이틀 섹션 */}
+        <div className="profile-edit-page__title-section">
+          <h1 className="profile-edit-page__title">프로필 수정</h1>
+          <p className="profile-edit-page__subtitle">프로필 정보를 변경해보세요</p>
+        </div>
+
         <div className="profile-edit-page__content">
           {/* 왼쪽: 프로필 아바타 */}
           <div className="profile-edit-page__left">

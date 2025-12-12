@@ -1,4 +1,4 @@
-import { ChevronLeft, CreditCard, Plus, Trash2, Check, Shield } from 'lucide-react'
+import { ArrowLeft, CreditCard, Plus, Trash2, Check, Shield, Menu } from 'lucide-react'
 import { PageType } from '../../App'
 import '../../styles/pages/PaymentMethodPage.css'
 
@@ -8,7 +8,7 @@ interface PaymentMethodPageProps {
     onMenuClick: () => void
 }
 
-export default function PaymentMethodPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: PaymentMethodPageProps) {
+export default function PaymentMethodPage({ onNavigate: _onNavigate, onGoBack, onMenuClick }: PaymentMethodPageProps) {
     // 더미 결제수단 데이터
     const paymentMethods = [
         { id: 1, type: 'card', name: '신한카드', last4: '1234', isDefault: true },
@@ -24,13 +24,15 @@ export default function PaymentMethodPage({ onNavigate: _onNavigate, onGoBack, o
                 <div className="payment-method-page__cloud payment-method-page__cloud--3"></div>
             </div>
 
-            {/* 헤더 */}
+            {/* 헤더 - Fixed, 가운데 제목 */}
             <header className="payment-method-page__header">
                 <button onClick={onGoBack} className="payment-method-page__back-btn">
-                    <ChevronLeft size={24} />
+                    <ArrowLeft size={24} />
                 </button>
                 <h1 className="payment-method-page__header-title">결제수단 관리</h1>
-                <div style={{ width: 48 }} />
+                <button onClick={onMenuClick} className="payment-method-page__menu-btn">
+                    <Menu size={24} />
+                </button>
             </header>
 
             <main className="payment-method-page__content">
@@ -86,7 +88,7 @@ export default function PaymentMethodPage({ onNavigate: _onNavigate, onGoBack, o
                             <span className="payment-method-page__add-title">새 결제수단 추가</span>
                             <span className="payment-method-page__add-desc">신용카드, 체크카드 등록</span>
                         </div>
-                        <ChevronLeft size={20} color="#C4B8A8" style={{ transform: 'rotate(180deg)' }} />
+                        <ArrowLeft size={20} color="#C4B8A8" style={{ transform: 'rotate(180deg)' }} />
                     </button>
                 </div>
 

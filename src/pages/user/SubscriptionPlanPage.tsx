@@ -1,4 +1,4 @@
-import { ChevronLeft, Check, Star, Zap, Crown, Sparkles } from 'lucide-react'
+import { ArrowLeft, Check, Star, Zap, Crown, Sparkles, Menu } from 'lucide-react'
 import { useState } from 'react'
 import { PageType, User, SubscriptionTier } from '../../App'
 import '../../styles/pages/SubscriptionPlanPage.css'
@@ -10,7 +10,7 @@ interface SubscriptionPlanPageProps {
     userInfo: User
 }
 
-export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick, userInfo }: SubscriptionPlanPageProps) {
+export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack, onMenuClick, userInfo }: SubscriptionPlanPageProps) {
     const [selectedPlan, setSelectedPlan] = useState<SubscriptionTier>(userInfo.subscription_tier)
 
     // 현재 사용자 상태
@@ -77,6 +77,10 @@ export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack
         return '플랜 선택하기'
     }
 
+    // 현재 플랜과 다른 플랜 분리
+    const currentPlanData = plans.find(p => p.id === currentPlan)
+    const otherPlan = plans.find(p => p.id !== currentPlan)
+
     return (
         <div className="subscription-plan-page">
             {/* 배경 구름 */}
@@ -86,13 +90,15 @@ export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack
                 <div className="subscription-plan-page__cloud subscription-plan-page__cloud--3"></div>
             </div>
 
-            {/* 헤더 */}
+            {/* 헤더 - Fixed, 가운데 제목 */}
             <header className="subscription-plan-page__header">
                 <button onClick={onGoBack} className="subscription-plan-page__back-btn">
-                    <ChevronLeft size={24} />
+                    <ArrowLeft size={24} />
                 </button>
                 <h1 className="subscription-plan-page__header-title">요금제 선택</h1>
-                <div style={{ width: 48 }} />
+                <button onClick={onMenuClick} className="subscription-plan-page__menu-btn">
+                    <Menu size={24} />
+                </button>
             </header>
 
             <main className="subscription-plan-page__content">
@@ -101,76 +107,131 @@ export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack
                     우리 아이에게 맞는 플랜을 선택해주세요
                 </p>
 
-                {/* 플랜 목록 */}
-                <div className="subscription-plan-page__list">
-                    {plans.map((plan) => (
-                        <div
-                            key={plan.id}
-                            className={`subscription-plan-page__card ${selectedPlan === plan.id ? 'selected' : ''} ${currentPlan === plan.id ? 'current' : ''} ${plan.disabled ? 'disabled' : ''} ${plan.popular ? 'popular' : ''}`}
-                            onClick={() => handleSelectPlan(plan.id)}
-                        >
-                            {plan.popular && (
-                                <div className="subscription-plan-page__popular-badge">
-                                    🔥 인기
+                {/* 2열 그리드 레이아웃 */}
+                <div className="subscription-plan-page__grid">
+                    {/* 왼쪽 컬럼 - 다른 플랜 + 1회 구매 */}
+                    <div className="subscription-plan-page__grid-left">
+                        {otherPlan && (
+                            <div
+                                className={`subscription-plan-page__card ${selectedPlan === otherPlan.id ? 'selected' : ''} ${otherPlan.disabled ? 'disabled' : ''} ${otherPlan.popular ? 'popular' : ''}`}
+                                onClick={() => handleSelectPlan(otherPlan.id)}
+                            >
+                                {otherPlan.popular && (
+                                    <div className="subscription-plan-page__popular-badge">
+                                        🔥 인기
+                                    </div>
+                                )}
+
+                                <div className="subscription-plan-page__card-header">
+                                    <span className="subscription-plan-page__card-emoji">{otherPlan.emoji}</span>
+                                    <div className="subscription-plan-page__card-title-wrap">
+                                        <h3 className="subscription-plan-page__card-name">{otherPlan.name}</h3>
+                                        <div className="subscription-plan-page__card-price">
+                                            <span className="subscription-plan-page__price-value">
+                                                {otherPlan.priceLabel}
+                                            </span>
+                                            {otherPlan.priceSuffix && (
+                                                <span className="subscription-plan-page__price-period">
+                                                    {otherPlan.priceSuffix}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                            )}
-                            {currentPlan === plan.id && (
+
+                                <ul className="subscription-plan-page__features">
+                                    {otherPlan.features.map((feature, index) => (
+                                        <li key={index} className="subscription-plan-page__feature">
+                                            <div className={`subscription-plan-page__feature-icon ${otherPlan.disabled ? 'disabled' : ''}`}>
+                                                <Check size={14} />
+                                            </div>
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="subscription-plan-page__select-indicator">
+                                    {selectedPlan === otherPlan.id && !otherPlan.disabled ? (
+                                        <div className="subscription-plan-page__radio selected">
+                                            <Check size={14} color="white" />
+                                        </div>
+                                    ) : (
+                                        <div className="subscription-plan-page__radio" />
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* 1회 구매 옵션 */}
+                        <div className="subscription-plan-page__onetime">
+                            <div className="subscription-plan-page__onetime-icon">💎</div>
+                            <div className="subscription-plan-page__onetime-content">
+                                <p className="subscription-plan-page__onetime-title">구독 없이 1회만 이용하고 싶다면?</p>
+                                <p className="subscription-plan-page__onetime-desc">부담 없이 한 번만 체험해보세요</p>
+                            </div>
+                            <button className="subscription-plan-page__onetime-btn">
+                                1회 구매<br /><span>4,900원</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* 오른쪽 컬럼 - 현재 플랜 */}
+                    <div className="subscription-plan-page__grid-right">
+                        {currentPlanData && (
+                            <div
+                                className={`subscription-plan-page__card current ${selectedPlan === currentPlanData.id ? 'selected' : ''}`}
+                                onClick={() => handleSelectPlan(currentPlanData.id)}
+                            >
                                 <div className="subscription-plan-page__current-badge">
                                     ✓ 현재 플랜
                                 </div>
-                            )}
 
-                            <div className="subscription-plan-page__card-header">
-                                <span className="subscription-plan-page__card-emoji">{plan.emoji}</span>
-                                <div className="subscription-plan-page__card-title-wrap">
-                                    <h3 className="subscription-plan-page__card-name">{plan.name}</h3>
-                                    <div className="subscription-plan-page__card-price">
-                                        <span className="subscription-plan-page__price-value">
-                                            {plan.priceLabel}
-                                        </span>
-                                        {plan.priceSuffix && (
-                                            <span className="subscription-plan-page__price-period">
-                                                {plan.priceSuffix}
+                                <div className="subscription-plan-page__card-header">
+                                    <span className="subscription-plan-page__card-emoji">{currentPlanData.emoji}</span>
+                                    <div className="subscription-plan-page__card-title-wrap">
+                                        <h3 className="subscription-plan-page__card-name">{currentPlanData.name}</h3>
+                                        <div className="subscription-plan-page__card-price">
+                                            <span className="subscription-plan-page__price-value">
+                                                {currentPlanData.priceLabel}
                                             </span>
-                                        )}
+                                            {currentPlanData.priceSuffix && (
+                                                <span className="subscription-plan-page__price-period">
+                                                    {currentPlanData.priceSuffix}
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <ul className="subscription-plan-page__features">
-                                {plan.features.map((feature, index) => (
-                                    <li key={index} className="subscription-plan-page__feature">
-                                        <div className={`subscription-plan-page__feature-icon ${plan.disabled ? 'disabled' : ''}`}>
-                                            <Check size={14} />
+                                <ul className="subscription-plan-page__features">
+                                    {currentPlanData.features.map((feature, index) => (
+                                        <li key={index} className="subscription-plan-page__feature">
+                                            <div className="subscription-plan-page__feature-icon">
+                                                <Check size={14} />
+                                            </div>
+                                            <span>{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="subscription-plan-page__select-indicator">
+                                    {selectedPlan === currentPlanData.id ? (
+                                        <div className="subscription-plan-page__radio selected">
+                                            <Check size={14} color="white" />
                                         </div>
-                                        <span>{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            <div className="subscription-plan-page__select-indicator">
-                                {selectedPlan === plan.id && !plan.disabled ? (
-                                    <div className="subscription-plan-page__radio selected">
-                                        <Check size={14} color="white" />
-                                    </div>
-                                ) : (
-                                    <div className="subscription-plan-page__radio" />
-                                )}
+                                    ) : (
+                                        <div className="subscription-plan-page__radio" />
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        )}
 
-                {/* 1회 구매 옵션 */}
-                <div className="subscription-plan-page__onetime">
-                    <div className="subscription-plan-page__onetime-icon">💎</div>
-                    <div className="subscription-plan-page__onetime-content">
-                        <p className="subscription-plan-page__onetime-title">구독 없이 1회만 이용하고 싶다면?</p>
-                        <p className="subscription-plan-page__onetime-desc">부담 없이 한 번만 체험해보세요</p>
+                        {/* 안내 문구 */}
+                        <div className="subscription-plan-page__notice">
+                            <p>💡 프리미엄 구독은 매월 자동 갱신됩니다.</p>
+                            <p>언제든 구독을 해지할 수 있습니다.</p>
+                        </div>
                     </div>
-                    <button className="subscription-plan-page__onetime-btn">
-                        1회 구매<br /><span>4,900원</span>
-                    </button>
                 </div>
 
                 {/* 변경 버튼 */}
@@ -181,12 +242,6 @@ export default function SubscriptionPlanPage({ onNavigate: _onNavigate, onGoBack
                     <Crown size={20} />
                     {getButtonText()}
                 </button>
-
-                {/* 안내 문구 */}
-                <div className="subscription-plan-page__notice">
-                    <p>💡 프리미엄 구독은 매월 자동 갱신됩니다.</p>
-                    <p>언제든 구독을 해지할 수 있습니다.</p>
-                </div>
             </main>
 
             {/* 하단 풍경 장식 */}

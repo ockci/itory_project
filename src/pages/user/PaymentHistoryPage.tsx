@@ -1,4 +1,4 @@
-import { ChevronLeft, Receipt, Download, Calendar, CreditCard, TrendingUp } from 'lucide-react'
+import { ArrowLeft, Receipt, Download, Calendar, CreditCard, TrendingUp, Menu } from 'lucide-react'
 import { PageType } from '../../App'
 import '../../styles/pages/PaymentHistoryPage.css'
 
@@ -8,7 +8,7 @@ interface PaymentHistoryPageProps {
     onMenuClick: () => void
 }
 
-export default function PaymentHistoryPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: PaymentHistoryPageProps) {
+export default function PaymentHistoryPage({ onNavigate: _onNavigate, onGoBack, onMenuClick }: PaymentHistoryPageProps) {
     // 더미 결제 내역 데이터
     const paymentHistory = [
         {
@@ -60,13 +60,15 @@ export default function PaymentHistoryPage({ onNavigate: _onNavigate, onGoBack, 
                 <div className="payment-history-page__cloud payment-history-page__cloud--3"></div>
             </div>
 
-            {/* 헤더 */}
+            {/* 헤더 - Fixed, 가운데 제목 */}
             <header className="payment-history-page__header">
                 <button onClick={onGoBack} className="payment-history-page__back-btn">
-                    <ChevronLeft size={24} />
+                    <ArrowLeft size={24} />
                 </button>
                 <h1 className="payment-history-page__header-title">결제 내역</h1>
-                <div style={{ width: 48 }} />
+                <button onClick={onMenuClick} className="payment-history-page__menu-btn">
+                    <Menu size={24} />
+                </button>
             </header>
 
             <main className="payment-history-page__content">

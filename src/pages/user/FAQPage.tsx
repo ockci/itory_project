@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { ChevronLeft, ChevronDown, MessageCircle, HelpCircle } from 'lucide-react'
+import { ChevronDown, MessageCircle } from 'lucide-react'
 import { PageType } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/FAQPage.css'
 
 interface FAQPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
 }
 
 const faqs = [
@@ -76,7 +76,7 @@ const faqs = [
   }
 ]
 
-export default function FAQPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: FAQPageProps) {
+export default function FAQPage({ onNavigate, onGoBack }: FAQPageProps) {
   const [openItems, setOpenItems] = useState<string[]>([])
 
   const toggleItem = (key: string) => {
@@ -97,27 +97,18 @@ export default function FAQPage({ onNavigate: _onNavigate, onGoBack, onMenuClick
         <div className="faq-page__cloud faq-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="faq-page__header">
-        <div className="faq-page__header-left">
-          <button onClick={onGoBack} className="faq-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="faq-page__logo-img"
-          />
-        </div>
-        <div style={{ width: 48 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="faq-page__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="faq-page__intro">
-          <div className="faq-page__intro-icon">
-            <HelpCircle size={32} />
-          </div>
           <h2 className="faq-page__intro-title">무엇을 도와드릴까요?</h2>
           <p className="faq-page__intro-desc">궁금한 점을 찾아보세요!</p>
         </div>

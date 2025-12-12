@@ -131,59 +131,6 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-.terms-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
-.terms-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.terms-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #E8D4C4,
-    0 6px 20px rgba(93, 78, 55, 0.15);
-  transition: all 0.2s ease;
-  color: #5D4E37;
-}
-
-.terms-page__back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #E8D4C4,
-    0 10px 28px rgba(93, 78, 55, 0.2);
-}
-
-.terms-page__back-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #E8D4C4;
-}
-
-.terms-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* ============================================
    📦 메인 콘텐츠
    ============================================ */
 .terms-page__main {
@@ -194,32 +141,17 @@
   z-index: 1;
 }
 
-/* 인트로 */
+/* 인트로 - 아이콘 제거됨 */
 .terms-page__intro {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.terms-page__intro-icon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #5D4E37 0%, #8B7D6B 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  color: white;
-  box-shadow:
-    0 4px 0 #3D3425,
-    0 8px 24px rgba(93, 78, 55, 0.3);
-}
-
 .terms-page__intro-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   color: #3D3425;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .terms-page__updated {
@@ -270,6 +202,7 @@
   justify-content: center;
   color: #5D4E37;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .terms-page__section-title {
@@ -354,24 +287,19 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
-  .terms-page__header {
-    padding: 16px 20px;
-  }
-
   .terms-page__main {
-    padding: 16px 20px 50px;
+    padding: 20px 20px 50px;
   }
 
-  .terms-page__intro-icon {
-    width: 60px;
-    height: 60px;
+  .terms-page__intro {
+    margin-bottom: 28px;
   }
 
   .terms-page__intro-title {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .terms-page__section-header {
@@ -388,50 +316,134 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
-  .terms-page__header {
-    padding: 14px 16px;
+  .terms-page__main {
+    padding: 16px 16px 40px;
   }
 
-  .terms-page__header-left {
-    gap: 10px;
-  }
-
-  .terms-page__logo-img {
-    height: 40px;
-  }
-
-  .terms-page__back-btn {
-    width: 42px;
-    height: 42px;
+  .terms-page__intro {
+    margin-bottom: 24px;
   }
 
   .terms-page__intro-title {
     font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .terms-page__updated {
+    padding: 6px 16px;
+    font-size: 13px;
+  }
+
+  .terms-page__content {
+    gap: 16px;
   }
 
   .terms-page__section {
     border-radius: 16px;
   }
 
+  .terms-page__section-header {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
   .terms-page__section-icon {
     width: 36px;
     height: 36px;
+    border-radius: 10px;
   }
 
   .terms-page__section-title {
     font-size: 15px;
   }
 
+  .terms-page__section-body {
+    padding: 16px;
+  }
+
   .terms-page__section-body p {
     font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .terms-page__list li {
+    font-size: 13px;
+    padding-left: 20px;
+    margin-bottom: 8px;
   }
 
   .terms-page__bottom-notice {
     padding: 24px 20px;
+    border-radius: 16px;
+    margin-top: 28px;
   }
 
   .terms-page__bottom-notice p {
     font-size: 16px;
+  }
+
+  .terms-page__bottom-sub {
+    font-size: 13px !important;
+  }
+
+  .terms-page__footer {
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+  .terms-page__main {
+    padding: 12px 12px 32px;
+  }
+
+  .terms-page__intro-title {
+    font-size: 20px;
+  }
+
+  .terms-page__updated {
+    padding: 5px 14px;
+    font-size: 12px;
+  }
+
+  .terms-page__section-header {
+    padding: 12px 14px;
+  }
+
+  .terms-page__section-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .terms-page__section-title {
+    font-size: 14px;
+  }
+
+  .terms-page__section-body {
+    padding: 14px;
+  }
+
+  .terms-page__section-body p {
+    font-size: 13px;
+  }
+
+  .terms-page__list li {
+    font-size: 12px;
+    padding-left: 18px;
+  }
+
+  .terms-page__bottom-notice {
+    padding: 20px 16px;
+  }
+
+  .terms-page__bottom-notice p {
+    font-size: 15px;
   }
 }

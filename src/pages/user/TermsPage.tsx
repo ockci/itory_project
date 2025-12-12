@@ -1,11 +1,11 @@
-import { ChevronLeft, FileText, Shield, Users, AlertTriangle, RefreshCw } from 'lucide-react'
+import { FileText, Shield, Users, AlertTriangle, RefreshCw } from 'lucide-react'
 import { PageType } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/TermsPage.css'
 
 interface TermsPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
 }
 
 const termsData = [
@@ -65,7 +65,7 @@ const termsData = [
   }
 ]
 
-export default function TermsPage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: TermsPageProps) {
+export default function TermsPage({ onNavigate, onGoBack }: TermsPageProps) {
   return (
     <div className="terms-page">
       {/* 배경 구름 */}
@@ -76,30 +76,21 @@ export default function TermsPage({ onNavigate: _onNavigate, onGoBack, onMenuCli
         <div className="terms-page__cloud terms-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="terms-page__header">
-        <div className="terms-page__header-left">
-          <button onClick={onGoBack} className="terms-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="terms-page__logo-img"
-          />
-        </div>
-        <div style={{ width: 48 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="terms-page__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="terms-page__intro">
-          <div className="terms-page__intro-icon">
-            <FileText size={32} />
-          </div>
           <h2 className="terms-page__intro-title">아이토리 서비스 이용약관</h2>
           <div className="terms-page__updated">
-            <span>최종 수정일: 2024년 1월 15일</span>
+            <span>최종 수정일: 2025년 12월 12일</span>
           </div>
         </div>
 

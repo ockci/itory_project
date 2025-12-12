@@ -1,13 +1,15 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { PageType } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/ServiceGuidePage.css'
 
 interface ServiceGuidePageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
+  onMenuClick: () => void
 }
 
-export default function ServiceGuidePage({ onNavigate, onGoBack }: ServiceGuidePageProps) {
+export default function ServiceGuidePage({ onNavigate, onGoBack, onMenuClick }: ServiceGuidePageProps) {
   // 동화 목록 예시
   const fairytales = [
     { title: '토끼와 거북이', emoji: '🐢' },
@@ -46,25 +48,14 @@ export default function ServiceGuidePage({ onNavigate, onGoBack }: ServiceGuideP
         <div className="service-guide-page__cloud service-guide-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="service-guide-page__header">
-        <div className="service-guide-page__header-left">
-          <button onClick={onGoBack} className="service-guide-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="service-guide-page__logo-img"
-          />
-        </div>
-        <button
-          onClick={() => onNavigate('fairytale-selection')}
-          className="service-guide-page__start-btn"
-        >
-          바로 시작하기
-        </button>
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (FairyTaleSelectionPage와 동일) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        onMenuClick={onMenuClick}
+        showCenterLogo={true}
+        isFixed={true}
+      />
 
       <main className="service-guide-page__main">
         {/* 인트로 */}

@@ -860,6 +860,21 @@
     padding: 30px 20px 60px;
   }
 
+  .landing-page__hero {
+    margin-bottom: 60px;
+  }
+
+  .landing-page__hero-visual {
+    margin-top: -30px;
+  }
+
+  .landing-page__hero-img {
+    transform: translateY(-20px) scale(1);
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0;
+  }
+
   .landing-page__hero-title {
     font-size: 36px;
   }

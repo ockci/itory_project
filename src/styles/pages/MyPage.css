@@ -6,7 +6,6 @@
 .mypage {
   min-height: 100vh;
   background: transparent;
-  /* Global background from index.css */
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-family);
@@ -149,63 +148,6 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-/* ============================================
-   📌 헤더 (Sticky)
-   ============================================ */
-.mypage__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  /* Sticky positioning */
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.8);
-  /* Translucent background */
-  backdrop-filter: blur(12px);
-  /* Blur effect */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.mypage__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.mypage__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: white;
-  border: 2px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm), var(--clay-inset-primary);
-  transition: var(--transition-base);
-  color: var(--color-text-secondary);
-}
-
-.mypage__back-btn:hover {
-  transform: translateY(-2px);
-  color: var(--color-primary);
-  box-shadow: var(--shadow-md), var(--clay-inset-primary);
-}
-
-.mypage__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* ============================================
    📱 메인 콘텐츠
    ============================================ */
 .mypage__main {
@@ -214,24 +156,10 @@
   padding-bottom: 40px;
 }
 
-/* 인트로 */
+/* 인트로 - 아이콘 제거됨 */
 .mypage__intro {
   text-align: center;
   padding: 40px 20px 32px;
-  /* Increased top padding */
-}
-
-.mypage__intro-icon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #5C6BC0 0%, #7E57C2 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  color: white;
-  box-shadow: 0 4px 0 #4A4A8F;
 }
 
 .mypage__intro-title {
@@ -246,12 +174,10 @@
   color: var(--color-text-secondary);
 }
 
-/* 콘텐츠 영역 - 2컬럼 레이아웃 (Wider) */
+/* 콘텐츠 영역 - 2컬럼 레이아웃 */
 .mypage__content {
   max-width: 1400px;
-  /* Increased from 1200px */
   width: 95%;
-  /* Use percentage for better responsiveness */
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -263,10 +189,8 @@
   .mypage__content {
     flex-direction: row;
     gap: 40px;
-    /* Increased gap */
     padding: 0 40px;
     align-items: flex-start;
-    /* Align top */
   }
 }
 
@@ -284,14 +208,11 @@
 
   .mypage__column--left {
     flex: 0 0 400px;
-    /* Fixed width for left column */
   }
 
   .mypage__column--right {
     flex: 1;
-    /* Take remaining space */
     min-width: 0;
-    /* Prevent overflow */
   }
 }
 
@@ -610,6 +531,20 @@
   box-shadow: 0 2px 0 #FFCDD2;
 }
 
+/* PC에서는 desktop 버튼만 표시 */
+.mypage__logout-btn--desktop {
+  display: flex;
+}
+
+/* 모바일 로그아웃 wrapper - PC에서는 숨김 */
+.mypage__logout-wrapper {
+  display: none;
+}
+
+.mypage__logout-btn--mobile {
+  display: none;
+}
+
 /* ============================================
    📱 버전
    ============================================ */
@@ -622,7 +557,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   🔎 푸터
    ============================================ */
 .mypage__footer {
   text-align: center;
@@ -635,20 +570,11 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
-  .mypage__header {
-    padding: 16px 20px;
-  }
-
-  .mypage__logo-img {
-    height: 44px;
-  }
-
-  .mypage__intro-icon {
-    width: 64px;
-    height: 64px;
+  .mypage__intro {
+    padding: 32px 20px 24px;
   }
 
   .mypage__intro-title {
@@ -677,20 +603,31 @@
   .mypage__cloud--4 {
     display: none;
   }
+
+  /* PC 로그아웃 숨김, 모바일 로그아웃 표시 */
+  .mypage__logout-btn--desktop {
+    display: none;
+  }
+
+  .mypage__logout-wrapper {
+    display: block;
+    max-width: 1400px;
+    width: 95%;
+    margin: 32px auto 0;
+    padding: 0 20px;
+  }
+
+  .mypage__logout-btn--mobile {
+    display: flex;
+  }
 }
 
+/* ============================================
+   📱 반응형 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
-  .mypage__header {
-    padding: 14px 16px;
-  }
-
-  .mypage__back-btn {
-    width: 42px;
-    height: 42px;
-  }
-
-  .mypage__logo-img {
-    height: 40px;
+  .mypage__intro {
+    padding: 24px 16px 20px;
   }
 
   .mypage__intro-title {
@@ -701,29 +638,48 @@
     font-size: var(--font-size-sm);
   }
 
+  .mypage__content {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .mypage__column {
+    gap: 16px;
+  }
+
   .mypage__profile-card {
     flex-wrap: wrap;
     gap: 12px;
+    padding: 16px;
   }
 
   .mypage__profile-avatar {
-    width: 64px;
-    height: 64px;
-    font-size: 32px;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
   }
 
   .mypage__profile-info {
     flex: 1;
-    min-width: 120px;
+    min-width: 100px;
+  }
+
+  .mypage__profile-name {
+    font-size: var(--font-size-lg);
   }
 
   .mypage__profile-edit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
   }
 
   .mypage__stats-card {
-    padding: 20px 16px;
+    padding: 16px 12px;
+  }
+
+  .mypage__stat-icon {
+    font-size: 20px;
+    margin-bottom: 6px;
   }
 
   .mypage__stat-value {
@@ -734,35 +690,136 @@
     font-size: 11px;
   }
 
+  .mypage__stat-divider {
+    height: 40px;
+  }
+
   .mypage__parent-card {
-    padding: 16px;
+    padding: 14px;
+    gap: 12px;
   }
 
   .mypage__parent-icon {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 
   .mypage__parent-name {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .mypage__parent-email {
+    font-size: 11px;
+  }
+
+  .mypage__parent-btn {
+    width: 36px;
+    height: 36px;
   }
 
   .mypage__menu-section {
-    padding: 16px;
+    padding: 14px;
+  }
+
+  .mypage__menu-title {
+    font-size: 13px;
+    margin-bottom: 10px;
   }
 
   .mypage__menu-item {
-    padding: 14px 10px;
+    padding: 12px 10px;
     font-size: var(--font-size-sm);
+    margin-bottom: 6px;
   }
 
   .mypage__menu-icon {
     width: 32px;
     height: 32px;
+    border-radius: 8px;
   }
 
-  .mypage__logout-btn {
+  .mypage__logout-wrapper {
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+
+  .mypage__logout-btn--mobile {
+    padding: 14px;
+    font-size: var(--font-size-sm);
+  }
+
+  .mypage__version {
+    margin-top: 20px;
+    font-size: 11px;
+  }
+
+  .mypage__footer {
     padding: 16px;
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+  .mypage__intro {
+    padding: 20px 12px 16px;
+  }
+
+  .mypage__intro-title {
+    font-size: 20px;
+  }
+
+  .mypage__content {
+    padding: 0 12px;
+  }
+
+  .mypage__profile-card {
+    padding: 14px;
+  }
+
+  .mypage__profile-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+
+  .mypage__profile-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+
+  .mypage__profile-name {
     font-size: var(--font-size-md);
+  }
+
+  .mypage__profile-age {
+    font-size: 12px;
+  }
+
+  .mypage__stats-card {
+    padding: 14px 10px;
+  }
+
+  .mypage__stat-icon {
+    font-size: 18px;
+  }
+
+  .mypage__stat-value {
+    font-size: var(--font-size-md);
+  }
+
+  .mypage__menu-section {
+    padding: 12px;
+  }
+
+  .mypage__menu-item {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .mypage__logout-wrapper {
+    padding: 0 12px;
   }
 }

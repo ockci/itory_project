@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ChevronRight, Check, Edit3, RotateCcw } from 'lucide-react'
+import { ChevronRight, Check, Edit3, RotateCcw, Volume2, VolumeX } from 'lucide-react'
 import { PageType, Tale, ArtStyle } from '../../App'
 import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/EditStoryPage.css'
@@ -143,6 +143,7 @@ export default function EditStoryPage({
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [isVideoCompleted, setIsVideoCompleted] = useState(false)
   const [videoError, setVideoError] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const [showStageResult, setShowStageResult] = useState(false)
@@ -221,6 +222,13 @@ export default function EditStoryPage({
 
   const handleVideoError = () => {
     setVideoError(true)
+  }
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted
+      setIsMuted(!isMuted)
+    }
   }
 
   const handleNextStage = () => {
@@ -355,7 +363,17 @@ export default function EditStoryPage({
                   onEnded={handleVideoEnded}
                   onError={handleVideoError}
                   playsInline
+                  muted={isMuted}
+                  autoPlay
+                  preload="auto"
                 />
+                <button
+                  onClick={toggleMute}
+                  className="edit-story-page__mute-btn"
+                  aria-label={isMuted ? '소리 켜기' : '소리 끄기'}
+                >
+                  {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+                </button>
                 {videoError && (
                   <div className="edit-story-page__video-error">
                     <p className="edit-story-page__error-emoji">😢</p>
@@ -470,12 +488,22 @@ export default function EditStoryPage({
               <div className="edit-story-page__video-wrapper">
                 <video
                   ref={videoRef}
-                  src={STAGE_VIDEOS[currentStageId]}
+                  src={`${STAGE_VIDEOS[currentStageId]}?v=${Date.now()}`}
                   className="edit-story-page__video-player"
                   onEnded={handleVideoEnded}
                   onError={handleVideoError}
                   playsInline
+                  muted={isMuted}
+                  autoPlay
+                  preload="auto"
                 />
+                <button
+                  onClick={toggleMute}
+                  className="edit-story-page__mute-btn"
+                  aria-label={isMuted ? '소리 켜기' : '소리 끄기'}
+                >
+                  {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+                </button>
                 {videoError && (
                   <div className="edit-story-page__video-error">
                     <p className="edit-story-page__error-emoji">😢</p>

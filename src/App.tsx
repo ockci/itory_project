@@ -311,6 +311,7 @@ function App() {
           <ServiceGuidePage
             onNavigate={navigate}
             onGoBack={goBack}
+            onMenuClick={openSidebar}
           />
         )
 
@@ -396,7 +397,6 @@ function App() {
           <MyPage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
             currentKid={currentKid}
             userInfo={userInfo}
           />
@@ -406,7 +406,6 @@ function App() {
           <ProfileEditPage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
             currentKid={currentKid}
             onUpdateKid={updateKid}
           />
@@ -416,7 +415,6 @@ function App() {
           <ProfileManagePage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
             kids={kids}
             currentKidId={currentKidId}
             onSelectKid={selectKid}
@@ -428,7 +426,6 @@ function App() {
           <NotificationSettingsPage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
           />
         )
       case 'password-change':
@@ -444,7 +441,6 @@ function App() {
           <FAQPage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
           />
         )
       case 'terms':
@@ -452,7 +448,6 @@ function App() {
           <TermsPage
             onNavigate={navigate}
             onGoBack={goBack}
-            onMenuClick={openSidebar}
           />
         )
       case 'parent-account':
@@ -460,6 +455,7 @@ function App() {
           <ParentAccountPage
             onNavigate={navigate}
             onGoBack={goBack}
+            onMenuClick={openSidebar}
             userInfo={userInfo}
             kidsCount={kids.length}
             isUnlocked={isParentUnlocked}

@@ -131,86 +131,6 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-.notification-settings-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
-.notification-settings-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.notification-settings-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #E8D4C4,
-    0 6px 20px rgba(93, 78, 55, 0.15);
-  transition: all 0.2s ease;
-  color: #5D4E37;
-}
-
-.notification-settings-page__back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #E8D4C4,
-    0 10px 28px rgba(93, 78, 55, 0.2);
-}
-
-.notification-settings-page__back-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #E8D4C4;
-}
-
-.notification-settings-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-.notification-settings-page__save-btn {
-  padding: 12px 28px;
-  background: linear-gradient(180deg, #4CAF50 0%, #66BB6A 100%);
-  border: none;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: 700;
-  color: white;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #388E3C,
-    0 6px 16px rgba(76, 175, 80, 0.3);
-  transition: all 0.2s ease;
-}
-
-.notification-settings-page__save-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #388E3C,
-    0 10px 24px rgba(76, 175, 80, 0.4);
-}
-
-.notification-settings-page__save-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #388E3C;
-}
-
-/* ============================================
    📦 메인 콘텐츠
    ============================================ */
 .notification-settings-page__main {
@@ -221,36 +141,21 @@
   z-index: 1;
 }
 
-/* 인트로 */
+/* 인트로 - 아이콘 제거됨 */
 .notification-settings-page__intro {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.notification-settings-page__intro-icon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #FF9F4D 0%, #F5A623 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  color: white;
-  box-shadow:
-    0 4px 0 #D4880F,
-    0 8px 24px rgba(245, 166, 35, 0.3);
-}
-
 .notification-settings-page__intro-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   color: #3D3425;
   margin-bottom: 8px;
 }
 
 .notification-settings-page__intro-desc {
-  font-size: 16px;
+  font-size: 15px;
   color: #6B5D4D;
   font-weight: 500;
 }
@@ -331,6 +236,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .notification-settings-page__item-label {
@@ -382,11 +288,10 @@
 }
 
 /* ============================================
-   🔘 하단 저장 버튼 (모바일)
+   🔘 하단 저장 버튼
    ============================================ */
 .notification-settings-page__actions {
   margin-top: 32px;
-  display: none;
 }
 
 .notification-settings-page__submit-btn {
@@ -430,7 +335,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   🔎 푸터
    ============================================ */
 .notification-settings-page__footer {
   text-align: center;
@@ -441,28 +346,19 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
-  .notification-settings-page__header {
-    padding: 16px 20px;
-  }
-
-  .notification-settings-page__save-btn {
-    display: none;
-  }
-
   .notification-settings-page__main {
-    padding: 16px 20px 50px;
+    padding: 20px 20px 50px;
   }
 
-  .notification-settings-page__intro-icon {
-    width: 60px;
-    height: 60px;
+  .notification-settings-page__intro {
+    margin-bottom: 28px;
   }
 
   .notification-settings-page__intro-title {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .notification-settings-page__section-header {
@@ -473,40 +369,43 @@
     padding: 14px 20px;
   }
 
-  .notification-settings-page__actions {
-    display: block;
-  }
-
   .notification-settings-page__cloud--3,
   .notification-settings-page__cloud--4 {
     display: none;
   }
 }
 
+/* ============================================
+   📱 반응형 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
-  .notification-settings-page__header {
-    padding: 14px 16px;
+  .notification-settings-page__main {
+    padding: 16px 16px 40px;
   }
 
-  .notification-settings-page__header-left {
-    gap: 10px;
-  }
-
-  .notification-settings-page__logo-img {
-    height: 40px;
-  }
-
-  .notification-settings-page__back-btn {
-    width: 42px;
-    height: 42px;
+  .notification-settings-page__intro {
+    margin-bottom: 24px;
   }
 
   .notification-settings-page__intro-title {
     font-size: 22px;
   }
 
+  .notification-settings-page__intro-desc {
+    font-size: 14px;
+  }
+
+  .notification-settings-page__content {
+    gap: 16px;
+  }
+
   .notification-settings-page__section {
     border-radius: 20px;
+  }
+
+  .notification-settings-page__section-header {
+    padding: 14px 16px;
+    gap: 10px;
   }
 
   .notification-settings-page__section-icon {
@@ -518,16 +417,18 @@
   }
 
   .notification-settings-page__item {
+    padding: 12px 16px;
     gap: 12px;
   }
 
   .notification-settings-page__item-icon {
     width: 40px;
     height: 40px;
+    border-radius: 12px;
   }
 
   .notification-settings-page__item-label {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .notification-settings-page__item-desc {
@@ -548,8 +449,66 @@
     left: 25px;
   }
 
+  .notification-settings-page__actions {
+    margin-top: 24px;
+  }
+
   .notification-settings-page__submit-btn {
     padding: 16px;
     font-size: 16px;
+  }
+
+  .notification-settings-page__footer {
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+  .notification-settings-page__main {
+    padding: 12px 12px 32px;
+  }
+
+  .notification-settings-page__intro-title {
+    font-size: 20px;
+  }
+
+  .notification-settings-page__section-header {
+    padding: 12px 14px;
+  }
+
+  .notification-settings-page__item {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .notification-settings-page__item-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .notification-settings-page__item-label {
+    font-size: 13px;
+  }
+
+  .notification-settings-page__item-desc {
+    font-size: 11px;
+  }
+
+  .notification-settings-page__toggle {
+    width: 46px;
+    height: 26px;
+  }
+
+  .notification-settings-page__toggle-circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .notification-settings-page__toggle.on .notification-settings-page__toggle-circle {
+    left: 23px;
   }
 }

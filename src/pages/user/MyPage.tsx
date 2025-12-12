@@ -1,11 +1,11 @@
-import { ChevronLeft, ChevronRight, Bell, HelpCircle, FileText, LogOut, User as UserIcon, Users, Settings } from 'lucide-react'
+import { ChevronRight, Bell, HelpCircle, FileText, LogOut, User as UserIcon, Users, Settings } from 'lucide-react'
 import { PageType, Kid, User, calculateAge } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/MyPage.css'
 
 interface MyPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
-  onMenuClick: () => void
   currentKid: Kid | null
   userInfo: User
 }
@@ -16,7 +16,7 @@ const isImageUrl = (avatar: string | undefined): boolean => {
   return avatar.startsWith('/') || avatar.startsWith('http')
 }
 
-export default function MyPage({ onNavigate, onGoBack, onMenuClick: _onMenuClick, currentKid, userInfo }: MyPageProps) {
+export default function MyPage({ onNavigate, onGoBack, currentKid, userInfo }: MyPageProps) {
   // 아이 나이 계산
   const kidAge = currentKid ? calculateAge(currentKid.kid_birth_date) : null
   const avatarUrl = currentKid?.avatar_url
@@ -31,27 +31,18 @@ export default function MyPage({ onNavigate, onGoBack, onMenuClick: _onMenuClick
         <div className="mypage__cloud mypage__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="mypage__header">
-        <div className="mypage__header-left">
-          <button onClick={onGoBack} className="mypage__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="mypage__logo-img"
-          />
-        </div>
-        <div style={{ width: 48 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 (사이드바 없음) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        showCenterLogo={true}
+        showMenuButton={false}
+        isFixed={true}
+      />
 
       <main className="mypage__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="mypage__intro">
-          <div className="mypage__intro-icon">
-            <Settings size={32} />
-          </div>
           <h1 className="mypage__intro-title">마이페이지</h1>
           <p className="mypage__intro-desc">내 정보와 설정을 관리해요</p>
         </div>
@@ -125,10 +116,10 @@ export default function MyPage({ onNavigate, onGoBack, onMenuClick: _onMenuClick
               </button>
             </div>
 
-            {/* 로그아웃 - PC에서는 왼쪽 하단 */}
+            {/* 로그아웃 - PC에서만 왼쪽 컬럼에 표시 */}
             <button
               onClick={() => onNavigate('landing')}
-              className="mypage__logout-btn"
+              className="mypage__logout-btn mypage__logout-btn--desktop"
             >
               <LogOut size={20} />
               로그아웃
@@ -198,6 +189,17 @@ export default function MyPage({ onNavigate, onGoBack, onMenuClick: _onMenuClick
               </button>
             </div>
           </div>
+        </div>
+
+        {/* 로그아웃 - 모바일에서만 하단에 표시 */}
+        <div className="mypage__logout-wrapper">
+          <button
+            onClick={() => onNavigate('landing')}
+            className="mypage__logout-btn mypage__logout-btn--mobile"
+          >
+            <LogOut size={20} />
+            로그아웃
+          </button>
         </div>
 
         {/* 앱 버전 */}

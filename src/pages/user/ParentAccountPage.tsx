@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { ChevronRight, CreditCard, Users, Shield, ArrowLeft, Crown, Receipt, X, Lock, Check, Zap, Trash2, UserCog, Bell } from 'lucide-react'
+import { ChevronRight, CreditCard, Users, ArrowLeft, Crown, Receipt, X, Lock, Check, Zap, Trash2, UserCog, Bell, Menu } from 'lucide-react'
 import { PageType, User } from '../../App'
 import '../../styles/pages/ParentAccountPage.css'
 
 interface ParentAccountPageProps {
   onNavigate: (page: PageType) => void
   onGoBack: () => void
+  onMenuClick: () => void
   userInfo: User
   kidsCount: number
   isUnlocked: boolean
@@ -15,6 +16,7 @@ interface ParentAccountPageProps {
 export default function ParentAccountPage({
   onNavigate,
   onGoBack,
+  onMenuClick,
   userInfo,
   kidsCount,
   isUnlocked,
@@ -128,13 +130,15 @@ export default function ParentAccountPage({
         <div className="parent-account-page__cloud parent-account-page__cloud--3"></div>
       </div>
 
-      {/* 헤더 */}
+      {/* 헤더 - 왼쪽 뒤로가기, 가운데 제목, 오른쪽 사이드바 */}
       <header className="parent-account-page__header">
         <button onClick={onGoBack} className="parent-account-page__back-btn">
           <ArrowLeft size={24} />
         </button>
         <h1 className="parent-account-page__header-title">보호자 계정</h1>
-        <div style={{ width: 48 }} />
+        <button onClick={onMenuClick} className="parent-account-page__menu-btn">
+          <Menu size={24} />
+        </button>
       </header>
 
       <main className="parent-account-page__content">
@@ -183,7 +187,7 @@ export default function ParentAccountPage({
                 </div>
                 <div className="parent-account-page__menu-content">
                   <span className="parent-account-page__menu-label">프로필 관리</span>
-                  <span className="parent-account-page__menu-sub">등록된 자녀 {kidsCount}명</span>
+                  <span className="parent-account-page__menu-sub">자녀 프로필 추가/수정</span>
                 </div>
                 <ChevronRight size={20} color="#C4B8A8" />
               </button>
@@ -193,7 +197,7 @@ export default function ParentAccountPage({
             <div className="parent-account-page__section">
               <h3 className="parent-account-page__section-title">
                 <span className="parent-account-page__section-icon parent-account-page__section-icon--orange">
-                  <Shield size={18} />
+                  <Lock size={18} />
                 </span>
                 계정 설정
               </h3>

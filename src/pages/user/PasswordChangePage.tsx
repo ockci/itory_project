@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronLeft, Eye, EyeOff, Lock, Shield } from 'lucide-react'
+import { ArrowLeft, Eye, EyeOff, Shield, Menu } from 'lucide-react'
 import { PageType } from '../../App'
 import '../../styles/pages/PasswordChangePage.css'
 
@@ -9,7 +9,7 @@ interface PasswordChangePageProps {
   onMenuClick: () => void
 }
 
-export default function PasswordChangePage({ onNavigate: _onNavigate, onGoBack, onMenuClick: _onMenuClick }: PasswordChangePageProps) {
+export default function PasswordChangePage({ onNavigate: _onNavigate, onGoBack, onMenuClick }: PasswordChangePageProps) {
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -80,27 +80,24 @@ export default function PasswordChangePage({ onNavigate: _onNavigate, onGoBack, 
         <div className="password-change-page__cloud password-change-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
+      {/* 헤더 - 왼쪽 뒤로가기, 가운데 로고, 오른쪽 사이드바 */}
       <header className="password-change-page__header">
-        <div className="password-change-page__header-left">
-          <button onClick={onGoBack} className="password-change-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="password-change-page__logo-img"
-          />
-        </div>
-        <div style={{ width: 48 }} />
+        <button onClick={onGoBack} className="password-change-page__back-btn">
+          <ArrowLeft size={24} />
+        </button>
+        <img
+          src="/images/logo.png"
+          alt="아이토리"
+          className="password-change-page__logo-img"
+        />
+        <button onClick={onMenuClick} className="password-change-page__menu-btn">
+          <Menu size={24} />
+        </button>
       </header>
 
       <main className="password-change-page__main">
-        {/* 인트로 */}
+        {/* 인트로 - 아이콘 제거 */}
         <div className="password-change-page__intro">
-          <div className="password-change-page__intro-icon">
-            <Lock size={32} />
-          </div>
           <h2 className="password-change-page__intro-title">비밀번호 변경</h2>
           <p className="password-change-page__intro-desc">안전한 비밀번호로 계정을 보호하세요</p>
         </div>
@@ -230,10 +227,18 @@ export default function PasswordChangePage({ onNavigate: _onNavigate, onGoBack, 
         </div>
       </main>
 
-      {/* 푸터 */}
-      <footer className="password-change-page__footer">
-        <p>© 2025 아이토리. 모든 아이들의 상상력을 응원합니다.</p>
-      </footer>
+      {/* 하단 풍경 장식 */}
+      <div className="password-change-page__landscape">
+        <div className="password-change-page__grass"></div>
+        <div className="password-change-page__tree password-change-page__tree--1"></div>
+        <div className="password-change-page__tree password-change-page__tree--2"></div>
+        <div className="password-change-page__bush password-change-page__bush--1"></div>
+        <div className="password-change-page__bush password-change-page__bush--2"></div>
+        <div className="password-change-page__bush password-change-page__bush--3"></div>
+        <div className="password-change-page__flower password-change-page__flower--1"></div>
+        <div className="password-change-page__flower password-change-page__flower--2"></div>
+        <div className="password-change-page__flower password-change-page__flower--3"></div>
+      </div>
     </div>
   )
 }

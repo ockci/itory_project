@@ -131,59 +131,6 @@
 }
 
 /* ============================================
-   📌 헤더
-   ============================================ */
-.faq-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-}
-
-.faq-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.faq-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #E8D4C4,
-    0 6px 20px rgba(93, 78, 55, 0.15);
-  transition: all 0.2s ease;
-  color: #5D4E37;
-}
-
-.faq-page__back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #E8D4C4,
-    0 10px 28px rgba(93, 78, 55, 0.2);
-}
-
-.faq-page__back-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #E8D4C4;
-}
-
-.faq-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* ============================================
    📦 메인 콘텐츠
    ============================================ */
 .faq-page__main {
@@ -194,36 +141,21 @@
   z-index: 1;
 }
 
-/* 인트로 */
+/* 인트로 - 아이콘 제거됨 */
 .faq-page__intro {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.faq-page__intro-icon {
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  color: white;
-  box-shadow:
-    0 4px 0 #7B1FA2,
-    0 8px 24px rgba(156, 39, 176, 0.3);
-}
-
 .faq-page__intro-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   color: #3D3425;
   margin-bottom: 8px;
 }
 
 .faq-page__intro-desc {
-  font-size: 16px;
+  font-size: 15px;
   color: #6B5D4D;
   font-weight: 500;
 }
@@ -370,6 +302,7 @@
 
 .faq-page__contact-icon {
   color: #4CAF50;
+  flex-shrink: 0;
 }
 
 .faq-page__contact-text h3 {
@@ -398,6 +331,7 @@
     0 6px 20px rgba(76, 175, 80, 0.3);
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .faq-page__contact-btn:hover {
@@ -413,7 +347,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   🔎 푸터
    ============================================ */
 .faq-page__footer {
   text-align: center;
@@ -424,24 +358,19 @@
 }
 
 /* ============================================
-   📱 반응형
+   📱 반응형 - 태블릿 (768px)
    ============================================ */
 @media (max-width: 768px) {
-  .faq-page__header {
-    padding: 16px 20px;
-  }
-
   .faq-page__main {
-    padding: 16px 20px 50px;
+    padding: 20px 20px 50px;
   }
 
-  .faq-page__intro-icon {
-    width: 60px;
-    height: 60px;
+  .faq-page__intro {
+    margin-bottom: 28px;
   }
 
   .faq-page__intro-title {
-    font-size: 26px;
+    font-size: 24px;
   }
 
   .faq-page__category-header {
@@ -476,30 +405,37 @@
   }
 }
 
+/* ============================================
+   📱 반응형 - 모바일 (480px)
+   ============================================ */
 @media (max-width: 480px) {
-  .faq-page__header {
-    padding: 14px 16px;
+  .faq-page__main {
+    padding: 16px 16px 40px;
   }
 
-  .faq-page__header-left {
-    gap: 10px;
-  }
-
-  .faq-page__logo-img {
-    height: 40px;
-  }
-
-  .faq-page__back-btn {
-    width: 42px;
-    height: 42px;
+  .faq-page__intro {
+    margin-bottom: 24px;
   }
 
   .faq-page__intro-title {
     font-size: 22px;
   }
 
+  .faq-page__intro-desc {
+    font-size: 14px;
+  }
+
+  .faq-page__content {
+    gap: 16px;
+  }
+
   .faq-page__category {
     border-radius: 20px;
+  }
+
+  .faq-page__category-header {
+    padding: 14px 16px;
+    gap: 10px;
   }
 
   .faq-page__category-icon {
@@ -510,12 +446,90 @@
     font-size: 16px;
   }
 
+  .faq-page__category-count {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .faq-page__question {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
   .faq-page__question-text {
     font-size: 14px;
+  }
+
+  .faq-page__answer.visible {
+    padding: 0 16px 14px 16px;
   }
 
   .faq-page__answer p {
     font-size: 13px;
     padding: 14px 16px;
+    border-radius: 10px;
+    border-left-width: 3px;
+  }
+
+  .faq-page__contact {
+    padding: 20px;
+    border-radius: 20px;
+    margin-top: 28px;
+  }
+
+  .faq-page__contact-text h3 {
+    font-size: 16px;
+  }
+
+  .faq-page__contact-text p {
+    font-size: 13px;
+  }
+
+  .faq-page__contact-btn {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+
+  .faq-page__footer {
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================
+   📱 반응형 - 초소형 모바일 (360px)
+   ============================================ */
+@media (max-width: 360px) {
+  .faq-page__main {
+    padding: 12px 12px 32px;
+  }
+
+  .faq-page__intro-title {
+    font-size: 20px;
+  }
+
+  .faq-page__category-header {
+    padding: 12px 14px;
+  }
+
+  .faq-page__question {
+    padding: 12px 14px;
+  }
+
+  .faq-page__question-text {
+    font-size: 13px;
+  }
+
+  .faq-page__answer p {
+    font-size: 12px;
+    padding: 12px 14px;
+  }
+
+  .faq-page__contact {
+    padding: 16px;
+  }
+
+  .faq-page__contact-text h3 {
+    font-size: 15px;
   }
 }
