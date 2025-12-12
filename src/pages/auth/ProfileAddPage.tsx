@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import { ChevronLeft } from 'lucide-react'
 import { PageType, Kid } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/ProfileAddPage.css'
 
 interface ProfileAddPageProps {
   onNavigate: (page: PageType) => void
   onAddKid: (kid: Omit<Kid, 'id'>) => void
   onGoBack: () => void
+  onMenuClick: () => void
 }
 
-// 아바타 이미지 옵션 (실제 이미지 경로로 수정하세요)
+// 아바타 이미지 옵션
 const avatarOptions = [
   { id: 'avatar1', src: '/images/avatars/avatar1.png', alt: '아바타 1' },
   { id: 'avatar2', src: '/images/avatars/avatar2.png', alt: '아바타 2' },
@@ -47,7 +48,7 @@ function birthDateFromAge(age: number): string {
   return `${birthYear}-${month}-${day}`
 }
 
-export default function ProfileAddPage({ onNavigate, onAddKid, onGoBack }: ProfileAddPageProps) {
+export default function ProfileAddPage({ onNavigate, onAddKid, onGoBack, onMenuClick }: ProfileAddPageProps) {
   const [formData, setFormData] = useState({
     kid_name: '',
     kid_birth_date: birthDateFromAge(7),
@@ -130,21 +131,20 @@ export default function ProfileAddPage({ onNavigate, onAddKid, onGoBack }: Profi
         <div className="profile-add-page__cloud profile-add-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 */}
-      <header className="profile-add-page__header">
-        <div className="profile-add-page__header-left">
-          <button onClick={onGoBack} className="profile-add-page__back-btn">
-            <ChevronLeft size={24} />
-          </button>
-          <img
-            src="/images/logo.png"
-            alt="아이토리"
-            className="profile-add-page__logo-img"
-          />
-        </div>
-        <h1 className="profile-add-page__header-title">아이 프로필 추가</h1>
-        <div style={{ width: 120 }} />
-      </header>
+      {/* 헤더 - SimpleHeader 사용 */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        onMenuClick={onMenuClick}
+        showCenterLogo={true}
+        isFixed={true}
+      />
+
+      {/* 페이지 타이틀 */}
+      <div className="profile-add-page__title-section">
+        <h1 className="profile-add-page__page-title">아이 프로필 추가</h1>
+        <p className="profile-add-page__page-subtitle">우리 아이의 정보를 입력해주세요</p>
+      </div>
 
       <main className="profile-add-page__main">
         <div className="profile-add-page__content">

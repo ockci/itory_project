@@ -175,13 +175,14 @@ function App() {
   })
 
   // 자녀 프로필 관리 (DB: KIDS + KID_PROFILES_NS)
+  // 아바타 이미지 경로 사용
   const [kids, setKids] = useState<Kid[]>([
     {
       id: 'kid_001',
       parent_id: 'user_001',
       kid_name: '민준이',
       kid_birth_date: '2017-03-15',  // 8세
-      avatar_url: '👦',
+      avatar_url: '/images/avatars/avatar1.png',
       gender: 'male',
       interest_tags: ['공룡', '우주']
     },
@@ -190,7 +191,7 @@ function App() {
       parent_id: 'user_001',
       kid_name: '서연이',
       kid_birth_date: '2019-07-22',  // 6세
-      avatar_url: '👧',
+      avatar_url: '/images/avatars/avatar5.png',
       gender: 'female',
       interest_tags: ['공주', '동물']
     }
@@ -291,6 +292,7 @@ function App() {
             onNavigate={navigate}
             onGoBack={goBack}
             onAddKid={addKid}
+            onMenuClick={openSidebar}
           />
         )
 

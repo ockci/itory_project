@@ -1,6 +1,6 @@
 /* ============================================
-   👶 아이토리 - 프로필 추가 페이지 CSS
-   크림톤/클레이 스타일 + 가로 화면 최적화
+   ðŸ‘¶ ì•„ì´í† ë¦¬ - í”„ë¡œí•„ ì¶”ê°€ íŽ˜ì´ì§€ CSS
+   í¬ë¦¼í†¤/í´ë ˆì´ ìŠ¤íƒ€ì¼ + ê°€ë¡œ í™”ë©´ ìµœì í™”
    ============================================ */
 
 .profile-add-page {
@@ -16,7 +16,7 @@
 }
 
 /* ============================================
-   ☁️ 배경 구름
+   â˜ï¸ ë°°ê²½ êµ¬ë¦„
    ============================================ */
 .profile-add-page__bg-decorations {
   position: fixed;
@@ -131,66 +131,30 @@
 }
 
 /* ============================================
-   📌 헤더
+   📌 타이틀 섹션 (SimpleHeader 아래)
    ============================================ */
-.profile-add-page__header {
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.profile-add-page__title-section {
+  text-align: center;
+  padding: 20px 20px 10px;
   position: relative;
-  z-index: 10;
+  z-index: 1;
 }
 
-.profile-add-page__header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.profile-add-page__page-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
 }
 
-.profile-add-page__back-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow:
-    0 4px 0 #E8D4C4,
-    0 6px 20px rgba(93, 78, 55, 0.15);
-  transition: all 0.2s ease;
-  color: #5D4E37;
-}
-
-.profile-add-page__back-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 0 #E8D4C4,
-    0 10px 28px rgba(93, 78, 55, 0.2);
-}
-
-.profile-add-page__back-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 #E8D4C4;
-}
-
-.profile-add-page__logo-img {
-  height: 52px;
-  width: auto;
-  object-fit: contain;
-}
-
-.profile-add-page__header-title {
-  font-size: 26px;
-  font-weight: 800;
-  color: #3D3425;
+.profile-add-page__page-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 /* ============================================
-   📦 메인 콘텐츠
+   ðŸ“¦ ë©”ì¸ ì½˜í…ì¸ 
    ============================================ */
 .profile-add-page__main {
   padding: 20px 40px 60px;
@@ -208,7 +172,7 @@
 }
 
 /* ============================================
-   📷 왼쪽: 프로필 사진 섹션
+   ðŸ“· ì™¼ìª½: í”„ë¡œí•„ ì‚¬ì§„ ì„¹ì…˜
    ============================================ */
 .profile-add-page__left {
   position: sticky;
@@ -235,7 +199,7 @@
   margin-bottom: 24px;
 }
 
-/* 프로필 미리보기 */
+/* í”„ë¡œí•„ ë¯¸ë¦¬ë³´ê¸° */
 .profile-add-page__photo-preview {
   display: flex;
   justify-content: center;
@@ -262,7 +226,7 @@
   font-weight: 500;
 }
 
-/* 아바타 이미지 그리드 */
+/* ì•„ë°”íƒ€ ì´ë¯¸ì§€ ê·¸ë¦¬ë“œ */
 .profile-add-page__avatar-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -301,7 +265,7 @@
 }
 
 /* ============================================
-   📝 오른쪽: 기본 정보
+   ðŸ“ ì˜¤ë¥¸ìª½: ê¸°ë³¸ ì •ë³´
    ============================================ */
 .profile-add-page__right {
   background: white;
@@ -340,7 +304,7 @@
   color: #8B7D6B;
 }
 
-/* 입력 필드 */
+/* ìž…ë ¥ í•„ë“œ */
 .profile-add-page__input {
   width: 100%;
   padding: 16px 20px;
@@ -376,7 +340,7 @@
   font-weight: 500;
 }
 
-/* 성별 선택 */
+/* ì„±ë³„ ì„ íƒ */
 .profile-add-page__gender-selector {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -421,7 +385,7 @@
   color: #2E7D32;
 }
 
-/* 나이 선택 */
+/* ë‚˜ì´ ì„ íƒ */
 .profile-add-page__age-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -452,7 +416,7 @@
   box-shadow: 0 4px 0 #D4880F;
 }
 
-/* 관심사 선택 */
+/* ê´€ì‹¬ì‚¬ ì„ íƒ */
 .profile-add-page__interest-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -494,7 +458,7 @@
 }
 
 /* ============================================
-   🔘 하단 버튼
+   ðŸ”˜ í•˜ë‹¨ ë²„íŠ¼
    ============================================ */
 .profile-add-page__actions {
   display: flex;
@@ -561,7 +525,7 @@
 }
 
 /* ============================================
-   📎 푸터
+   ðŸ“Ž í‘¸í„°
    ============================================ */
 .profile-add-page__footer {
   text-align: center;
@@ -572,7 +536,7 @@
 }
 
 /* ============================================
-   📱 반응형
+   ðŸ“± ë°˜ì‘í˜•
    ============================================ */
 @media (max-width: 1024px) {
   .profile-add-page__content {
@@ -590,17 +554,16 @@
 }
 
 @media (max-width: 768px) {
-  .profile-add-page__header {
-    padding: 16px 20px;
-    flex-wrap: wrap;
-    gap: 12px;
+  .profile-add-page__title-section {
+    padding: 12px 20px 8px;
   }
 
-  .profile-add-page__header-title {
-    order: 3;
-    width: 100%;
-    text-align: center;
-    font-size: 22px;
+  .profile-add-page__page-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .profile-add-page__page-subtitle {
+    font-size: var(--font-size-sm);
   }
 
   .profile-add-page__main {
@@ -666,25 +629,16 @@
 }
 
 @media (max-width: 480px) {
-  .profile-add-page__header {
-    padding: 14px 16px;
+  .profile-add-page__title-section {
+    padding: 10px 16px 6px;
   }
 
-  .profile-add-page__header-left {
-    gap: 10px;
+  .profile-add-page__page-title {
+    font-size: var(--font-size-lg);
   }
 
-  .profile-add-page__logo-img {
-    height: 40px;
-  }
-
-  .profile-add-page__back-btn {
-    width: 42px;
-    height: 42px;
-  }
-
-  .profile-add-page__header-title {
-    font-size: 20px;
+  .profile-add-page__page-subtitle {
+    font-size: var(--font-size-xs);
   }
 
   .profile-add-page__photo-section,

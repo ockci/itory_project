@@ -9,7 +9,7 @@ interface ProfileSelectPageProps {
   onLogout: () => void
 }
 
-// 아바타 배경색 배열 (파스텔톤)
+// 아바타 배경색 배열 (파스텔톤) - 이모지 폴백용
 const avatarColors = [
   '#FFE4B5', // 살구
   '#B8E0D2', // 민트
@@ -18,6 +18,11 @@ const avatarColors = [
   '#E5D4FF', // 라벤더
   '#D4FFE5', // 연두
 ]
+
+// 아바타가 이미지 경로인지 이모지인지 확인
+const isImageUrl = (avatar: string) => {
+  return avatar.startsWith('/') || avatar.startsWith('http')
+}
 
 export default function ProfileSelectPage({
   onNavigate,
@@ -82,9 +87,21 @@ export default function ProfileSelectPage({
             >
               <div
                 className="profile-select-page__avatar"
-                style={{ backgroundColor: avatarColors[index % avatarColors.length] }}
+                style={{
+                  backgroundColor: isImageUrl(kid.avatar_url)
+                    ? 'transparent'
+                    : avatarColors[index % avatarColors.length]
+                }}
               >
-                {kid.avatar_url}
+                {isImageUrl(kid.avatar_url) ? (
+                  <img
+                    src={kid.avatar_url}
+                    alt={kid.kid_name}
+                    className="profile-select-page__avatar-img"
+                  />
+                ) : (
+                  kid.avatar_url
+                )}
               </div>
               <div className="profile-select-page__info">
                 <p className="profile-select-page__name">{kid.kid_name}</p>
