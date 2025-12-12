@@ -9,7 +9,7 @@
   position: relative;
   overflow-x: hidden;
   font-family: var(--font-family);
-  padding-bottom: 180px;
+  padding-bottom: 200px;
 }
 
 /* ============================================
@@ -106,15 +106,33 @@
 }
 
 /* ============================================
-   📌 헤더
+   📌 헤더 - 흰색 고정, 3분할 레이아웃
    ============================================ */
 .bookclub__header {
-  padding: 20px 30px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 10;
+  justify-content: space-between;
+  padding: 20px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.bookclub__header-left,
+.bookclub__header-right {
+  flex: 0 0 auto;
+  width: 48px;
+}
+
+.bookclub__header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bookclub__back-btn {
@@ -135,6 +153,49 @@
 .bookclub__back-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  color: #F5A623;
+}
+
+.bookclub__logo-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bookclub__logo-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.bookclub__logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bookclub__menu-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  color: #5D4037;
+}
+
+.bookclub__menu-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  color: #F5A623;
 }
 
 .bookclub__header-title {
@@ -156,6 +217,7 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
+  padding-top: 100px;
 }
 
 /* ============================================
@@ -164,6 +226,13 @@
 .bookclub__intro {
   text-align: center;
   padding: 10px 0 24px;
+}
+
+.bookclub__title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #5D4037;
+  margin-bottom: 8px;
 }
 
 .bookclub__intro-icon {
@@ -623,7 +692,7 @@
    ============================================ */
 .bookclub__write-btn {
   position: fixed;
-  bottom: 100px;
+  bottom: 120px;
   right: 20px;
   padding: 14px 20px;
   border-radius: 28px;
@@ -659,7 +728,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 130px;
+  height: 160px;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
@@ -670,7 +739,7 @@
   bottom: 0;
   left: -5%;
   right: -5%;
-  height: 75px;
+  height: 95px;
   background: linear-gradient(180deg, #8BC34A 0%, #7CB342 40%, #689F38 100%);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   box-shadow: inset 0 15px 40px rgba(255, 255, 255, 0.2);
@@ -678,7 +747,7 @@
 
 .bookclub__tree {
   position: absolute;
-  bottom: 42px;
+  bottom: 55px;
 }
 
 .bookclub__tree::before {
@@ -687,8 +756,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 28px;
+  width: 16px;
+  height: 32px;
   background: linear-gradient(90deg, #6D4C41 0%, #8D6E63 50%, #6D4C41 100%);
   border-radius: 4px;
 }
@@ -696,11 +765,11 @@
 .bookclub__tree::after {
   content: '';
   position: absolute;
-  bottom: 22px;
+  bottom: 26px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   background: radial-gradient(ellipse at 30% 30%, #A5D6A7 0%, #81C784 30%, #66BB6A 60%, #4CAF50 100%);
   border-radius: 50% 50% 45% 45%;
 }
@@ -715,35 +784,35 @@
 
 .bookclub__bush {
   position: absolute;
-  bottom: 42px;
+  bottom: 58px;
   background: linear-gradient(180deg, #AED581 0%, #9CCC65 50%, #8BC34A 100%);
   border-radius: 50% 50% 40% 40%;
 }
 
 .bookclub__bush--1 {
   left: 18%;
-  width: 40px;
-  height: 28px;
+  width: 45px;
+  height: 32px;
 }
 
 .bookclub__bush--2 {
   left: 50%;
-  width: 32px;
-  height: 22px;
-  bottom: 40px;
+  width: 38px;
+  height: 26px;
+  bottom: 56px;
 }
 
 .bookclub__bush--3 {
   right: 20%;
-  width: 36px;
-  height: 25px;
+  width: 42px;
+  height: 30px;
 }
 
 .bookclub__flower {
   position: absolute;
-  bottom: 52px;
-  width: 12px;
-  height: 12px;
+  bottom: 68px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
 }
 
@@ -764,6 +833,7 @@
   .bookclub__main {
     max-width: 700px;
     padding: 0 30px;
+    padding-top: 100px;
   }
 
   .bookclub__ranking-card {
@@ -795,16 +865,26 @@
    ============================================ */
 @media (max-width: 767px) {
   .bookclub {
-    padding-bottom: 160px;
+    padding-bottom: 180px;
   }
 
   .bookclub__header {
     padding: 16px 16px;
   }
 
-  .bookclub__back-btn {
+  .bookclub__header-left,
+  .bookclub__header-right {
+    width: 42px;
+  }
+
+  .bookclub__back-btn,
+  .bookclub__menu-btn {
     width: 42px;
     height: 42px;
+  }
+
+  .bookclub__logo-img {
+    height: 40px;
   }
 
   .bookclub__header-title {
@@ -813,10 +893,15 @@
 
   .bookclub__main {
     padding: 0 16px;
+    padding-top: 90px;
   }
 
   .bookclub__intro {
     padding: 8px 0 20px;
+  }
+
+  .bookclub__title {
+    font-size: 24px;
   }
 
   .bookclub__intro-icon {
@@ -958,7 +1043,7 @@
   }
 
   .bookclub__write-btn {
-    bottom: 85px;
+    bottom: 100px;
     right: 16px;
     width: 52px;
     height: 52px;
@@ -972,52 +1057,52 @@
   }
 
   .bookclub__landscape {
-    height: 110px;
+    height: 130px;
   }
 
   .bookclub__grass {
-    height: 65px;
+    height: 80px;
   }
 
   .bookclub__tree {
-    bottom: 38px;
+    bottom: 48px;
   }
 
   .bookclub__tree::before {
-    width: 12px;
-    height: 22px;
+    width: 14px;
+    height: 26px;
   }
 
   .bookclub__tree::after {
-    width: 42px;
-    height: 42px;
-    bottom: 16px;
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
   }
 
   .bookclub__bush {
-    bottom: 38px;
+    bottom: 50px;
   }
 
   .bookclub__bush--1 {
-    width: 32px;
-    height: 22px;
+    width: 36px;
+    height: 26px;
   }
 
   .bookclub__bush--2 {
-    width: 26px;
-    height: 18px;
-    bottom: 36px;
+    width: 30px;
+    height: 22px;
+    bottom: 48px;
   }
 
   .bookclub__bush--3 {
-    width: 28px;
-    height: 20px;
+    width: 32px;
+    height: 24px;
   }
 
   .bookclub__flower {
-    bottom: 46px;
-    width: 10px;
-    height: 10px;
+    bottom: 58px;
+    width: 12px;
+    height: 12px;
   }
 
   .bookclub__cloud--1 {
@@ -1055,9 +1140,19 @@
     padding: 12px 12px;
   }
 
-  .bookclub__back-btn {
+  .bookclub__header-left,
+  .bookclub__header-right {
+    width: 38px;
+  }
+
+  .bookclub__back-btn,
+  .bookclub__menu-btn {
     width: 38px;
     height: 38px;
+  }
+
+  .bookclub__logo-img {
+    height: 36px;
   }
 
   .bookclub__header-title {
@@ -1066,6 +1161,11 @@
 
   .bookclub__main {
     padding: 0 12px;
+    padding-top: 80px;
+  }
+
+  .bookclub__title {
+    font-size: 22px;
   }
 
   .bookclub__intro-icon {
@@ -1122,18 +1222,34 @@
   }
 
   .bookclub__write-btn {
-    bottom: 80px;
+    bottom: 95px;
     right: 12px;
     width: 48px;
     height: 48px;
   }
 
   .bookclub__landscape {
-    height: 100px;
+    height: 120px;
   }
 
   .bookclub__grass {
-    height: 58px;
+    height: 72px;
+  }
+
+  .bookclub__tree {
+    bottom: 42px;
+  }
+
+  .bookclub__bush {
+    bottom: 44px;
+  }
+
+  .bookclub__bush--2 {
+    bottom: 42px;
+  }
+
+  .bookclub__flower {
+    bottom: 52px;
   }
 }
 
@@ -1143,6 +1259,11 @@
 @media (max-width: 360px) {
   .bookclub__main {
     padding: 0 10px;
+    padding-top: 75px;
+  }
+
+  .bookclub__title {
+    font-size: 20px;
   }
 
   .bookclub__ranking-section {
@@ -1173,11 +1294,27 @@
   }
 
   .bookclub__landscape {
-    height: 90px;
+    height: 110px;
   }
 
   .bookclub__grass {
-    height: 52px;
+    height: 66px;
+  }
+
+  .bookclub__tree {
+    bottom: 38px;
+  }
+
+  .bookclub__bush {
+    bottom: 40px;
+  }
+
+  .bookclub__bush--2 {
+    bottom: 38px;
+  }
+
+  .bookclub__flower {
+    bottom: 48px;
   }
 }
 
@@ -1186,24 +1323,42 @@
    ============================================ */
 @media (max-height: 500px) and (orientation: landscape) {
   .bookclub {
-    padding-bottom: 100px;
+    padding-bottom: 120px;
   }
 
   .bookclub__header {
     padding: 10px 16px;
   }
 
-  .bookclub__back-btn {
+  .bookclub__header-left,
+  .bookclub__header-right {
+    width: 36px;
+  }
+
+  .bookclub__back-btn,
+  .bookclub__menu-btn {
     width: 36px;
     height: 36px;
+  }
+
+  .bookclub__logo-img {
+    height: 32px;
   }
 
   .bookclub__header-title {
     font-size: 16px;
   }
 
+  .bookclub__main {
+    padding-top: 70px;
+  }
+
   .bookclub__intro {
     padding: 6px 0 14px;
+  }
+
+  .bookclub__title {
+    font-size: 20px;
   }
 
   .bookclub__intro-icon {
@@ -1258,52 +1413,52 @@
   }
 
   .bookclub__write-btn {
-    bottom: 60px;
+    bottom: 70px;
     width: 44px;
     height: 44px;
   }
 
   .bookclub__landscape {
-    height: 60px;
+    height: 80px;
   }
 
   .bookclub__grass {
-    height: 38px;
+    height: 50px;
   }
 
   .bookclub__tree {
-    bottom: 24px;
+    bottom: 28px;
   }
 
   .bookclub__tree::before {
-    width: 8px;
-    height: 14px;
+    width: 10px;
+    height: 18px;
   }
 
   .bookclub__tree::after {
-    width: 28px;
-    height: 28px;
-    bottom: 10px;
+    width: 34px;
+    height: 34px;
+    bottom: 14px;
   }
 
   .bookclub__bush {
-    bottom: 26px;
+    bottom: 30px;
   }
 
   .bookclub__bush--1 {
-    width: 22px;
-    height: 15px;
+    width: 26px;
+    height: 18px;
   }
 
   .bookclub__bush--2 {
-    width: 18px;
-    height: 12px;
-    bottom: 24px;
+    width: 22px;
+    height: 15px;
+    bottom: 28px;
   }
 
   .bookclub__bush--3 {
-    width: 20px;
-    height: 14px;
+    width: 24px;
+    height: 17px;
   }
 
   .bookclub__flower {
@@ -1324,8 +1479,18 @@
     padding: 24px 40px;
   }
 
-  .bookclub__back-btn {
+  .bookclub__header-left,
+  .bookclub__header-right {
     width: 52px;
+  }
+
+  .bookclub__back-btn,
+  .bookclub__menu-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .bookclub__logo-img {
     height: 52px;
   }
 
@@ -1336,10 +1501,15 @@
   .bookclub__main {
     max-width: 1000px;
     padding: 0 40px;
+    padding-top: 120px;
   }
 
   .bookclub__intro {
     padding: 16px 0 32px;
+  }
+
+  .bookclub__title {
+    font-size: 32px;
   }
 
   .bookclub__intro-icon {
@@ -1424,7 +1594,7 @@
   }
 
   .bookclub__write-btn {
-    bottom: 40px;
+    bottom: 50px;
     right: 40px;
     padding: 16px 28px;
     font-size: 17px;
@@ -1436,51 +1606,51 @@
   }
 
   .bookclub__landscape {
-    height: 150px;
+    height: 180px;
   }
 
   .bookclub__grass {
-    height: 90px;
+    height: 110px;
   }
 
   .bookclub__tree {
-    bottom: 52px;
+    bottom: 65px;
   }
 
   .bookclub__tree::before {
-    width: 18px;
-    height: 35px;
+    width: 20px;
+    height: 40px;
   }
 
   .bookclub__tree::after {
-    width: 65px;
-    height: 65px;
-    bottom: 28px;
+    width: 72px;
+    height: 72px;
+    bottom: 32px;
   }
 
   .bookclub__bush {
-    bottom: 52px;
+    bottom: 68px;
   }
 
   .bookclub__bush--1 {
-    width: 50px;
-    height: 35px;
+    width: 55px;
+    height: 40px;
   }
 
   .bookclub__bush--2 {
-    width: 40px;
-    height: 28px;
-    bottom: 50px;
+    width: 46px;
+    height: 34px;
+    bottom: 66px;
   }
 
   .bookclub__bush--3 {
-    width: 45px;
-    height: 32px;
+    width: 50px;
+    height: 38px;
   }
 
   .bookclub__flower {
-    bottom: 62px;
-    width: 14px;
-    height: 14px;
+    bottom: 78px;
+    width: 16px;
+    height: 16px;
   }
 }

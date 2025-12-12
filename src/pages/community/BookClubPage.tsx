@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Trophy, Heart, Crown, Medal, Flame, Clock, TrendingUp, Sparkles, PenLine, Eye } from 'lucide-react'
+import { ArrowLeft, Menu, Trophy, Heart, Crown, Medal, Flame, Clock, TrendingUp, PenLine, Eye } from 'lucide-react'
 import { PageType } from '../../App'
 import '../../styles/pages/BookClubPage.css'
 
@@ -99,7 +99,7 @@ const posts = [
 
 type TabType = 'popular' | 'recent' | 'following'
 
-export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMenuClick }: BookClubPageProps) {
+export default function BookClubPage({ onNavigate, onGoBack, onMenuClick }: BookClubPageProps) {
   const [activeTab, setActiveTab] = useState<TabType>('popular')
   const [likedPosts, setLikedPosts] = useState<number[]>([])
 
@@ -120,22 +120,30 @@ export default function BookClubPage({ onNavigate, onGoBack, onMenuClick: _onMen
         <div className="bookclub__cloud bookclub__cloud--3"></div>
       </div>
 
-      {/* 헤더 */}
+      {/* 헤더 - 왼쪽 뒤로가기, 중앙 로고, 오른쪽 사이드바 */}
       <header className="bookclub__header">
-        <button onClick={onGoBack} className="bookclub__back-btn">
-          <ArrowLeft size={24} />
-        </button>
-        <h1 className="bookclub__header-title">북클럽</h1>
-        <div className="bookclub__header-spacer"></div>
+        <div className="bookclub__header-left">
+          <button onClick={onGoBack} className="bookclub__back-btn">
+            <ArrowLeft size={24} />
+          </button>
+        </div>
+        <div className="bookclub__header-center">
+          <button onClick={() => onNavigate('home')} className="bookclub__logo-btn">
+            <img src="/images/logo.png" alt="아이토리" className="bookclub__logo-img" />
+          </button>
+        </div>
+        <div className="bookclub__header-right">
+          <button onClick={onMenuClick} className="bookclub__menu-btn">
+            <Menu size={24} />
+          </button>
+        </div>
       </header>
 
       {/* 메인 콘텐츠 */}
       <main className="bookclub__main">
-        {/* 인트로 섹션 */}
+        {/* 인트로 섹션 - 아이콘 대신 텍스트 */}
         <div className="bookclub__intro">
-          <div className="bookclub__intro-icon">
-            <Sparkles size={32} />
-          </div>
+          <h1 className="bookclub__title">북클럽</h1>
           <p className="bookclub__subtitle">친구들의 멋진 동화를 구경하고 응원해요!</p>
         </div>
 

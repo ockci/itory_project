@@ -11,18 +11,18 @@ interface MyBookshelfPageProps {
 
 // 내 책장에 저장된 동화들 (실제 이미지 경로 사용)
 const myStories = [
-  { id: 1, title: '흥부와 놀부', style: '수채화', thumbnail: '/src/assets/images/tales/tale_003.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
-  { id: 2, title: '콩쥐팥쥐', style: '3D 카툰', thumbnail: '/src/assets/images/tales/tale_005.png', color: '#B3E0FF', spineColor: '#8BC8FF' },
-  { id: 3, title: '토끼와 거북이', style: '실사', thumbnail: '/src/assets/images/tales/tale_001.png', color: '#FFF4B3', spineColor: '#FFE87C' },
-  { id: 4, title: '혹부리 영감', style: '2D 애니', thumbnail: '/src/assets/images/tales/tale_012.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
-  { id: 5, title: '해와 달이 된 오누이', style: '픽사', thumbnail: '/src/assets/images/tales/tale_002.png', color: '#FFCFA3', spineColor: '#FFB87C' },
-  { id: 6, title: '금도끼 은도끼', style: '수채화', thumbnail: '/src/assets/images/tales/tale_006.png', color: '#E0CFFF', spineColor: '#C8A8FF' },
-  { id: 7, title: '선녀와 나무꾼', style: '2D 애니', thumbnail: '/src/assets/images/tales/tale_004.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
-  { id: 8, title: '별주부전', style: '픽사', thumbnail: '/src/assets/images/tales/tale_007.png', color: '#B3F5E6', spineColor: '#8BE5D0' },
-  { id: 9, title: '잭과 콩나무', style: '3D 카툰', thumbnail: '/src/assets/images/tales/tale_010.png', color: '#B3E0FF', spineColor: '#8BC8FF' },
-  { id: 10, title: '호랑이와 곶감', style: '실사', thumbnail: '/src/assets/images/tales/tale_016.png', color: '#FFF4B3', spineColor: '#FFE87C' },
-  { id: 11, title: '도깨비 방망이', style: '수채화', thumbnail: '/src/assets/images/tales/tale_020.png', color: '#E0CFFF', spineColor: '#C8A8FF' },
-  { id: 12, title: '젊어지는 샘물', style: '픽사', thumbnail: '/src/assets/images/tales/tale_019.png', color: '#B3F5E6', spineColor: '#8BE5D0' }
+  { id: 1, title: '흥부와 놀부', style: '수채화', thumbnail: '/images/tales/tale_003.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
+  { id: 2, title: '콩쥐팥쥐', style: '3D 카툰', thumbnail: '/images/tales/tale_005.png', color: '#B3E0FF', spineColor: '#8BC8FF' },
+  { id: 3, title: '토끼와 거북이', style: '실사', thumbnail: '/images/tales/tale_001.png', color: '#FFF4B3', spineColor: '#FFE87C' },
+  { id: 4, title: '혹부리 영감', style: '2D 애니', thumbnail: '/images/tales/tale_012.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
+  { id: 5, title: '해와 달이 된 오누이', style: '픽사', thumbnail: '/images/tales/tale_002.png', color: '#FFCFA3', spineColor: '#FFB87C' },
+  { id: 6, title: '금도끼 은도끼', style: '수채화', thumbnail: '/images/tales/tale_006.png', color: '#E0CFFF', spineColor: '#C8A8FF' },
+  { id: 7, title: '선녀와 나무꾼', style: '2D 애니', thumbnail: '/images/tales/tale_004.png', color: '#FFB3D9', spineColor: '#FF8BBD' },
+  { id: 8, title: '별주부전', style: '픽사', thumbnail: '/images/tales/tale_007.png', color: '#B3F5E6', spineColor: '#8BE5D0' },
+  { id: 9, title: '잭과 콩나무', style: '3D 카툰', thumbnail: '/images/tales/tale_010.png', color: '#B3E0FF', spineColor: '#8BC8FF' },
+  { id: 10, title: '호랑이와 곶감', style: '실사', thumbnail: '/images/tales/tale_016.png', color: '#FFF4B3', spineColor: '#FFE87C' },
+  { id: 11, title: '도깨비 방망이', style: '수채화', thumbnail: '/images/tales/tale_020.png', color: '#E0CFFF', spineColor: '#C8A8FF' },
+  { id: 12, title: '젊어지는 샘물', style: '픽사', thumbnail: '/images/tales/tale_019.png', color: '#B3F5E6', spineColor: '#8BE5D0' }
 ]
 
 export default function MyBookshelfPage({ onNavigate, onGoBack, onMenuClick }: MyBookshelfPageProps) {

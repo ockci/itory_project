@@ -164,7 +164,7 @@ export default function VideoPage({
         <div className="video-page__header-center">
           <button onClick={() => onNavigate('home')} className="video-page__logo-btn">
             <img
-              src="/src/assets/images/logo.png"
+              src="/images/logo.png"
               alt="아이토리"
               className="video-page__logo-img"
             />

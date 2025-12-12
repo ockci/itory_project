@@ -24,35 +24,35 @@ const styleOptions: StyleOption[] = [
     id: 'realistic',
     name: '실사 스타일',
     description: '사진처럼 사실적인 그림체로 생생한 장면을 표현해요',
-    image: '/src/assets/images/styles/realistic.png',
+    image: '/images/styles/realistic.png',
     color: '#E91E63'
   },
   {
     id: 'cartoon_2d',
     name: '2D 애니메이션',
     description: '귀여운 2D 만화 스타일로 친근한 느낌을 줘요',
-    image: '/src/assets/images/styles/cartoon_2d.png',
+    image: '/images/styles/cartoon_2d.png',
     color: '#2196F3'
   },
   {
     id: 'cartoon_3d',
     name: '3D 카툰',
     description: '입체감 있는 3D 캐릭터가 살아 움직여요',
-    image: '/src/assets/images/styles/cartoon_3d.png',
+    image: '/images/styles/cartoon_3d.png',
     color: '#FF9800'
   },
   {
     id: 'pixar',
     name: '픽사 스타일',
     description: '픽사 애니메이션처럼 감동적인 영상을 만들어요',
-    image: '/src/assets/images/styles/pixar.png',
+    image: '/images/styles/pixar.png',
     color: '#4CAF50'
   },
   {
     id: 'watercolor',
     name: '수채화 스타일',
     description: '부드럽고 따뜻한 수채화 느낌으로 표현해요',
-    image: '/src/assets/images/styles/watercolor.png',
+    image: '/images/styles/watercolor.png',
     color: '#9C27B0'
   }
 ]
@@ -114,7 +114,7 @@ export default function ArtStyleSelectionPage({
         <div className="artstyle-page__header-center">
           <button onClick={() => onNavigate('home')} className="artstyle-page__logo-btn">
             <img
-              src="/src/assets/images/logo.png"
+              src="/images/logo.png"
               alt="아이토리"
               className="artstyle-page__logo-img"
             />

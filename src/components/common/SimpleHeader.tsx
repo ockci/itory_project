@@ -36,7 +36,7 @@ export default function SimpleHeader({
               className="simple-header__logo"
             >
               <img
-                src="/src/assets/images/logo.png"
+                src="/images/logo.png"
                 alt="아이토리"
                 className="simple-header__logo-img"
               />
@@ -54,7 +54,7 @@ export default function SimpleHeader({
               className="simple-header__logo simple-header__logo--center"
             >
               <img
-                src="/src/assets/images/logo.png"
+                src="/images/logo.png"
                 alt="아이토리"
                 className="simple-header__logo-img"
               />
