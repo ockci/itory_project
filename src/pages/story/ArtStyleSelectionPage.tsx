@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, ArrowLeft, Menu } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { PageType, Tale, ArtStyle } from '../../App'
+import SimpleHeader from '../../components/common/SimpleHeader'
 import '../../styles/pages/ArtStyleSelectionPage.css'
 
 interface ArtStyleSelectionPageProps {
@@ -103,145 +104,126 @@ export default function ArtStyleSelectionPage({
         <div className="artstyle-page__cloud artstyle-page__cloud--4"></div>
       </div>
 
-      {/* 헤더 - 가운데 로고, 왼쪽 뒤로가기, 오른쪽 메뉴 */}
-      <header className="artstyle-page__header">
-        <div className="artstyle-page__header-left">
-          <button onClick={onGoBack} className="artstyle-page__back-btn">
-            <ArrowLeft size={24} />
-          </button>
+      {/* 헤더 - SimpleHeader 사용 (FairyTaleSelectionPage와 동일) */}
+      <SimpleHeader
+        onNavigate={onNavigate}
+        onGoBack={onGoBack}
+        onMenuClick={onMenuClick}
+        showCenterLogo={true}
+        isFixed={true}
+      />
+
+      {/* 선택된 동화 표시 */}
+      {selectedTale && (
+        <div className="artstyle-page__selected-tale">
+          <span className="artstyle-page__tale-label">선택한 동화</span>
+          <span className="artstyle-page__tale-title">{selectedTale.title}</span>
         </div>
+      )}
 
-        <div className="artstyle-page__header-center">
-          <button onClick={() => onNavigate('home')} className="artstyle-page__logo-btn">
-            <img
-              src="/images/logo.png"
-              alt="아이토리"
-              className="artstyle-page__logo-img"
-            />
-          </button>
-        </div>
+      {/* 타이틀 */}
+      <div className="artstyle-page__title-section">
+        <h1 className="artstyle-page__title">어떤 그림체로 만들까요?</h1>
+        <p className="artstyle-page__subtitle">원하는 스타일을 골라주세요!</p>
+      </div>
 
-        <div className="artstyle-page__header-right">
-          <button onClick={onMenuClick} className="artstyle-page__menu-btn">
-            <Menu size={24} />
-          </button>
-        </div>
-      </header>
+      {/* 카드 캐러셀 */}
+      <div className="artstyle-page__carousel">
+        {/* 왼쪽 화살표 */}
+        <button onClick={handlePrev} className="artstyle-page__nav-btn artstyle-page__nav-btn--left">
+          <ChevronLeft size={32} />
+        </button>
 
-      {/* 메인 콘텐츠 */}
-      <div className="artstyle-page__content">
-        {/* 선택된 동화 표시 */}
-        {selectedTale && (
-          <div className="artstyle-page__selected-tale">
-            <span className="artstyle-page__tale-label">선택한 동화</span>
-            <span className="artstyle-page__tale-title">{selectedTale.title}</span>
-          </div>
-        )}
-
-        {/* 타이틀 */}
-        <div className="artstyle-page__title-section">
-          <h1 className="artstyle-page__title">어떤 그림체로 만들까요?</h1>
-          <p className="artstyle-page__subtitle">원하는 스타일을 골라주세요!</p>
-        </div>
-
-        {/* 카드 캐러셀 */}
-        <div className="artstyle-page__carousel">
-          {/* 왼쪽 화살표 */}
-          <button onClick={handlePrev} className="artstyle-page__nav-btn artstyle-page__nav-btn--left">
-            <ChevronLeft size={32} />
-          </button>
-
-          {/* 카드들 */}
-          <div className="artstyle-page__cards">
-            {/* 왼쪽 카드 */}
-            <div
-              className="artstyle-page__card artstyle-page__card--left"
-              onClick={() => setCurrentIndex(visibleCards.left)}
-            >
-              <div
-                className="artstyle-page__card-image"
-                style={{ backgroundColor: styleOptions[visibleCards.left].color + '33' }}
-              >
-                <img src={styleOptions[visibleCards.left].image} alt="" />
-              </div>
-            </div>
-
-            {/* 센터 카드 */}
-            <div
-              className="artstyle-page__card artstyle-page__card--center"
-              style={{ '--card-color': currentStyle.color } as React.CSSProperties}
-            >
-              <div
-                className="artstyle-page__card-image"
-                style={{ backgroundColor: currentStyle.color + '22' }}
-              >
-                <img
-                  src={currentStyle.image}
-                  alt={currentStyle.name}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.style.display = 'none'
-                  }}
-                />
-                <div className="artstyle-page__image-placeholder">🎨</div>
-              </div>
-              <div className="artstyle-page__card-info">
-                <span className="artstyle-page__card-label">ART STYLE</span>
-                <h3 className="artstyle-page__card-name">{currentStyle.name}</h3>
-                <p className="artstyle-page__card-desc">{currentStyle.description}</p>
-              </div>
-            </div>
-
-            {/* 오른쪽 카드 */}
-            <div
-              className="artstyle-page__card artstyle-page__card--right"
-              onClick={() => setCurrentIndex(visibleCards.right)}
-            >
-              <div
-                className="artstyle-page__card-image"
-                style={{ backgroundColor: styleOptions[visibleCards.right].color + '33' }}
-              >
-                <img src={styleOptions[visibleCards.right].image} alt="" />
-              </div>
-            </div>
-          </div>
-
-          {/* 오른쪽 화살표 */}
-          <button onClick={handleNext} className="artstyle-page__nav-btn artstyle-page__nav-btn--right">
-            <ChevronRight size={32} />
-          </button>
-        </div>
-
-        {/* 페이지 인디케이터 */}
-        <div className="artstyle-page__indicators">
-          <div className="artstyle-page__indicator-dots">
-            {styleOptions.map((style, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`artstyle-page__indicator ${currentIndex === index ? 'active' : ''}`}
-                style={{ '--dot-color': style.color } as React.CSSProperties}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* 선택 버튼 */}
-        <div className="artstyle-page__cta">
-          <button
-            onClick={handleConfirm}
-            className="artstyle-page__cta-btn"
-            style={{
-              background: `linear-gradient(180deg, ${currentStyle.color} 0%, ${currentStyle.color}dd 100%)`,
-              boxShadow: `0 6px 0 ${currentStyle.color}99, 0 10px 32px ${currentStyle.color}66`
-            }}
+        {/* 카드들 */}
+        <div className="artstyle-page__cards">
+          {/* 왼쪽 카드 */}
+          <div
+            className="artstyle-page__card artstyle-page__card--left"
+            onClick={() => setCurrentIndex(visibleCards.left)}
           >
-            <span className="artstyle-page__cta-text">
-              "{currentStyle.name}" 선택하기
-            </span>
-            <span className="artstyle-page__cta-icon">🎨</span>
-          </button>
+            <div
+              className="artstyle-page__card-image"
+              style={{ backgroundColor: styleOptions[visibleCards.left].color + '33' }}
+            >
+              <img src={styleOptions[visibleCards.left].image} alt="" />
+            </div>
+          </div>
+
+          {/* 센터 카드 */}
+          <div
+            className="artstyle-page__card artstyle-page__card--center"
+            style={{ '--card-color': currentStyle.color } as React.CSSProperties}
+          >
+            <div
+              className="artstyle-page__card-image"
+              style={{ backgroundColor: currentStyle.color + '22' }}
+            >
+              <img
+                src={currentStyle.image}
+                alt={currentStyle.name}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.style.display = 'none'
+                }}
+              />
+              <div className="artstyle-page__image-placeholder">🎨</div>
+            </div>
+            <div className="artstyle-page__card-info">
+              <span className="artstyle-page__card-label">ART STYLE</span>
+              <h3 className="artstyle-page__card-name">{currentStyle.name}</h3>
+              <p className="artstyle-page__card-desc">{currentStyle.description}</p>
+            </div>
+          </div>
+
+          {/* 오른쪽 카드 */}
+          <div
+            className="artstyle-page__card artstyle-page__card--right"
+            onClick={() => setCurrentIndex(visibleCards.right)}
+          >
+            <div
+              className="artstyle-page__card-image"
+              style={{ backgroundColor: styleOptions[visibleCards.right].color + '33' }}
+            >
+              <img src={styleOptions[visibleCards.right].image} alt="" />
+            </div>
+          </div>
         </div>
+
+        {/* 오른쪽 화살표 */}
+        <button onClick={handleNext} className="artstyle-page__nav-btn artstyle-page__nav-btn--right">
+          <ChevronRight size={32} />
+        </button>
+      </div>
+
+      {/* 페이지 인디케이터 */}
+      <div className="artstyle-page__indicators">
+        <div className="artstyle-page__indicator-dots">
+          {styleOptions.map((style, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`artstyle-page__indicator ${currentIndex === index ? 'active' : ''}`}
+              style={{ '--dot-color': style.color } as React.CSSProperties}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* 선택 버튼 */}
+      <div className="artstyle-page__cta">
+        <button
+          onClick={handleConfirm}
+          className="artstyle-page__cta-btn"
+          style={{
+            background: `linear-gradient(180deg, ${currentStyle.color} 0%, ${currentStyle.color}dd 100%)`,
+            boxShadow: `0 6px 0 ${currentStyle.color}99, 0 10px 32px ${currentStyle.color}66`
+          }}
+        >
+          <span className="artstyle-page__cta-text">
+            "{currentStyle.name}" 선택하기
+          </span>
+          <span className="artstyle-page__cta-icon">🎨</span>
+        </button>
       </div>
 
       {/* 푸터 */}
