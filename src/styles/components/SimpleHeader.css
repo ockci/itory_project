@@ -111,8 +111,9 @@
   background: rgba(245, 166, 35, 0.1);
 }
 
+/* 로고 이미지 - 크기 키움 */
 .simple-header__logo-img {
-  height: 48px;
+  height: 64px;
   width: auto;
   object-fit: contain;
 }
@@ -179,8 +180,9 @@
     height: 44px;
   }
 
+  /* 로고 - 모바일에서도 크게 유지 */
   .simple-header__logo-img {
-    height: 40px;
+    height: 52px;
   }
 
   .simple-header__placeholder {
@@ -209,12 +211,38 @@
     border-radius: 50%;
   }
 
+  /* 로고 - 모바일에서도 적당히 큰 사이즈 */
   .simple-header__logo-img {
-    height: 36px;
+    height: 44px;
   }
 
   .simple-header__placeholder {
     width: 40px;
     height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .simple-header {
+    padding: 10px 12px;
+  }
+
+  .simple-header__spacer {
+    height: 72px;
+  }
+
+  .simple-header__back-btn,
+  .simple-header__menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .simple-header__logo-img {
+    height: 40px;
+  }
+
+  .simple-header__placeholder {
+    width: 36px;
+    height: 36px;
   }
 }

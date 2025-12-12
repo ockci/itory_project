@@ -127,9 +127,27 @@ export default function HomePage({ onNavigate, onMenuClick, currentKid, userInfo
               </div>
             </button>
           ))}
+
+          {/* 모바일 전용: 가이드 카드 (PC에서는 숨김) */}
+          <button
+            onClick={() => onNavigate('service-guide')}
+            className="home-page__card home-page__card--guide"
+          >
+            <div className="home-page__card-image-area">
+              <img
+                src="/images/home-guide.png"
+                alt="사용자 가이드"
+                className="home-page__card-image"
+              />
+            </div>
+            <div className="home-page__card-text-area">
+              <h3 className="home-page__card-title">사용자 가이드</h3>
+              <p className="home-page__card-desc">처음이신가요?</p>
+            </div>
+          </button>
         </div>
 
-        {/* 사용자 가이드 버튼 */}
+        {/* PC/태블릿용: 사용자 가이드 버튼 (모바일에서는 숨김) */}
         <div className="home-page__guide-section">
           <button
             onClick={() => onNavigate('service-guide')}

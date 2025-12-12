@@ -731,7 +731,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 180px;
   pointer-events: none;
   z-index: 0;
 }
@@ -741,16 +741,16 @@
   bottom: 0;
   left: -5%;
   right: -5%;
-  height: 70px;
-  background: linear-gradient(180deg, #8BC34A 0%, #7CB342 50%, #689F38 100%);
+  height: 100px;
+  background: linear-gradient(180deg, #B2E0A2 0%, #9CCC65 100%);
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 10px 30px rgba(255, 255, 255, 0.3);
 }
 
-/* 나무 - 잔디 위에 자연스럽게 위치 (bottom을 낮춤) */
+/* 나무 */
 .edit-story-page__tree {
   position: absolute;
-  bottom: 35px;
+  bottom: 40px;
 }
 
 .edit-story-page__tree::before {
@@ -759,23 +759,23 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 28px;
-  background: linear-gradient(180deg, #8D6E63 0%, #6D4C41 100%);
-  border-radius: 4px;
+  width: 16px;
+  height: 30px;
+  background: linear-gradient(90deg, #D7CCC8 0%, #BCAAA4 100%);
+  border-radius: 0 0 4px 4px;
 }
 
 .edit-story-page__tree::after {
   content: '';
   position: absolute;
-  bottom: 22px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(180deg, #81C784 0%, #66BB6A 50%, #4CAF50 100%);
-  border-radius: 50%;
-  box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 70px;
+  background: linear-gradient(180deg, #C5E1A5 0%, #AED581 100%);
+  border-radius: 50% 50% 45% 45%;
+  box-shadow: inset -4px -4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .edit-story-page__tree--1 {
@@ -783,57 +783,57 @@
 }
 
 .edit-story-page__tree--2 {
-  right: 8%;
+  right: 3%;
 }
 
 .edit-story-page__tree--2::after {
-  width: 48px;
-  height: 48px;
-  bottom: 20px;
+  width: 55px;
+  height: 65px;
+  bottom: 22px;
 }
 
 .edit-story-page__tree--2::before {
+  height: 26px;
+  width: 14px;
+}
+
+.edit-story-page__tree--3 {
+  left: 20%;
+}
+
+.edit-story-page__tree--3::after {
+  width: 50px;
+  height: 58px;
+  bottom: 20px;
+}
+
+.edit-story-page__tree--3::before {
   height: 24px;
   width: 12px;
 }
 
-.edit-story-page__tree--3 {
-  left: 15%;
-}
-
-.edit-story-page__tree--3::after {
-  width: 42px;
-  height: 42px;
-  bottom: 18px;
-}
-
-.edit-story-page__tree--3::before {
-  height: 22px;
-  width: 10px;
-}
-
-/* 집 - 잔디 위에 자연스럽게 위치 */
+/* 집 */
 .edit-story-page__house {
   position: absolute;
-  bottom: 38px;
-  right: 20%;
-  width: 50px;
-  height: 40px;
-  background: linear-gradient(180deg, #FFF8E1 0%, #FFECB3 100%);
-  border-radius: 4px;
-  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.08);
+  bottom: 50px;
+  right: 15%;
+  width: 70px;
+  height: 50px;
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFE0B2 100%);
+  border-radius: 0 0 8px 8px;
+  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .edit-story-page__house::before {
   content: '';
   position: absolute;
-  top: -24px;
-  left: -6px;
+  top: -40px;
+  left: -10px;
   width: 0;
   height: 0;
-  border-left: 31px solid transparent;
-  border-right: 31px solid transparent;
-  border-bottom: 28px solid #FF8A65;
+  border-left: 45px solid transparent;
+  border-right: 45px solid transparent;
+  border-bottom: 40px solid #FFAB91;
 }
 
 .edit-story-page__house::after {
@@ -842,90 +842,89 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 20px;
-  background: #8D6E63;
-  border-radius: 2px 2px 0 0;
+  width: 20px;
+  height: 28px;
+  background: #A1887F;
+  border-radius: 4px 4px 0 0;
 }
 
 .edit-story-page__house-window {
   position: absolute;
-  top: 8px;
-  width: 10px;
-  height: 10px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
   background: #81D4FA;
-  border-radius: 2px;
-  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.5);
+  border: 2px solid white;
+  border-radius: 4px;
 }
 
 .edit-story-page__house-window--left {
-  left: 6px;
+  left: 10px;
 }
 
 .edit-story-page__house-window--right {
-  right: 6px;
+  right: 10px;
 }
 
-/* 덤불 - 잔디 위에 자연스럽게 위치 */
+/* 덤불 */
 .edit-story-page__bush {
   position: absolute;
-  bottom: 40px;
-  background: linear-gradient(180deg, #9CCC65 0%, #8BC34A 100%);
-  border-radius: 50% 50% 45% 45%;
-  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.1);
+  bottom: 30px;
+  background: linear-gradient(180deg, #A5D6A7 0%, #81C784 100%);
+  border-radius: 50% 50% 40% 40%;
 }
 
 .edit-story-page__bush--1 {
-  left: 25%;
+  left: 12%;
   width: 40px;
   height: 30px;
 }
 
 .edit-story-page__bush--2 {
-  right: 28%;
+  left: 28%;
   width: 35px;
-  height: 25px;
+  height: 26px;
 }
 
 .edit-story-page__bush--3 {
-  left: 35%;
+  right: 25%;
+  width: 38px;
+  height: 28px;
+}
+
+.edit-story-page__bush--4 {
+  right: 8%;
   width: 32px;
   height: 24px;
 }
 
-.edit-story-page__bush--4 {
-  right: 38%;
-  width: 28px;
-  height: 20px;
-}
-
-/* 꽃 - 잔디 위에 자연스럽게 위치 */
+/* 꽃 */
 .edit-story-page__flower {
   position: absolute;
-  bottom: 48px;
-  width: 12px;
-  height: 12px;
+  bottom: 55px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .edit-story-page__flower--1 {
-  left: 22%;
+  left: 10%;
   background: #F48FB1;
 }
 
 .edit-story-page__flower--2 {
-  right: 25%;
+  left: 32%;
   background: #FFD54F;
 }
 
 .edit-story-page__flower--3 {
-  left: 42%;
+  right: 30%;
   background: #CE93D8;
 }
 
 .edit-story-page__flower--4 {
-  right: 42%;
+  right: 12%;
   background: #81D4FA;
 }
 
@@ -1000,27 +999,37 @@
   }
 
   .edit-story-page__landscape {
-    height: 100px;
+    height: 160px;
   }
 
   .edit-story-page__grass {
-    height: 55px;
+    height: 90px;
   }
 
   .edit-story-page__tree {
-    bottom: 28px;
+    bottom: 36px;
+  }
+
+  .edit-story-page__tree::after {
+    width: 55px;
+    height: 65px;
+  }
+
+  .edit-story-page__tree::before {
+    width: 14px;
+    height: 26px;
   }
 
   .edit-story-page__bush {
-    bottom: 32px;
+    bottom: 28px;
   }
 
   .edit-story-page__house {
-    bottom: 30px;
+    bottom: 45px;
   }
 
   .edit-story-page__flower {
-    bottom: 38px;
+    bottom: 50px;
   }
 
   .edit-story-page__cloud--3,
@@ -1199,31 +1208,29 @@
   }
 
   .edit-story-page__landscape {
-    height: 80px;
+    height: 140px;
   }
 
   .edit-story-page__grass {
-    height: 50px;
+    height: 80px;
   }
 
   .edit-story-page__tree {
-    bottom: 25px;
-    transform: scale(0.85);
+    bottom: 30px;
+    transform: scale(0.9);
   }
 
   .edit-story-page__bush {
-    bottom: 28px;
-    transform: scale(0.85);
+    bottom: 26px;
   }
 
   .edit-story-page__house {
-    bottom: 26px;
-    transform: scale(0.85);
+    bottom: 38px;
+    transform: scale(0.9);
   }
 
   .edit-story-page__flower {
-    bottom: 34px;
-    transform: scale(0.85);
+    bottom: 42px;
   }
 
   .edit-story-page__tree--2,
@@ -1402,31 +1409,31 @@
   }
 
   .edit-story-page__landscape {
-    height: 60px;
+    height: 120px;
   }
 
   .edit-story-page__grass {
-    height: 40px;
+    height: 70px;
   }
 
   .edit-story-page__tree {
-    bottom: 18px;
-    transform: scale(0.7);
+    bottom: 24px;
+    transform: scale(0.75);
   }
 
   .edit-story-page__bush {
     bottom: 22px;
-    transform: scale(0.7);
+    transform: scale(0.8);
   }
 
   .edit-story-page__house {
-    bottom: 20px;
-    transform: scale(0.7);
+    bottom: 30px;
+    transform: scale(0.75);
   }
 
   .edit-story-page__flower {
-    bottom: 28px;
-    transform: scale(0.7);
+    bottom: 36px;
+    transform: scale(0.85);
   }
 
   .edit-story-page__tree--1 {
