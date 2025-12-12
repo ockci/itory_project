@@ -152,24 +152,9 @@ export default function EditStoryPage({
   const currentChoiceData = stageChoices[currentStageId]
   const currentSelections = selections[currentStageId] || []
 
-  // 새로고침 시 상태 복원
+  // 컴포넌트 마운트 시 이전 상태 초기화 (새로 시작할 때 항상 처음부터)
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) {
-      try {
-        const state = JSON.parse(saved)
-        setCurrentStage(state.currentStage || 0)
-        setSelections(state.selections || {})
-        setShowStageResult(state.showStageResult || false)
-
-        if (state.currentStage > 0 || state.showStageResult) {
-          setIsLoading(false)
-          setIsVideoCompleted(true)
-        }
-      } catch (e) {
-        console.error('상태 복원 실패:', e)
-      }
-    }
+    localStorage.removeItem(STORAGE_KEY)
   }, [])
 
   // 상태 변경 시 localStorage에 저장

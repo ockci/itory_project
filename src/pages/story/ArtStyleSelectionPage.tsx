@@ -78,8 +78,6 @@ export default function ArtStyleSelectionPage({
   const handleConfirm = () => {
     const selected = styleOptions[currentIndex]
     onSelectStyle(selected.id)
-    // 새로운 동화 만들기 시작 시 이전 진행 상태 초기화
-    localStorage.removeItem('itory_edit_story_state')
     onNavigate('edit-story')
   }
 
